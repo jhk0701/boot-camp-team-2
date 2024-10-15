@@ -19,10 +19,13 @@ namespace Utility
             {
                 target.datas[i] = new PlacementData()
                 {
-                    stat = brickInst[i].Stat,
+                    stat = brickInst[i].stat,
                     position = brickInst[i].transform.position,
                     size = brickInst[i].transform.localScale
                 };
+                
+                if(target.datas[i].stat.durability == 0)
+                    target.datas[i].stat.durability = 1;
             }
         }
 

@@ -20,8 +20,7 @@ public struct BrickStat
 [RequireComponent(typeof(SpriteRenderer))]
 public class Brick : MonoBehaviour, IBreakable
 {
-    
-    public BrickStat Stat {get; protected set;}
+    public BrickStat stat;
     [SerializeField] int durability = 1;
     public int Durability
     { 
@@ -51,31 +50,33 @@ public class Brick : MonoBehaviour, IBreakable
 
     void Start()
     {
-        Durability = Stat.durability;
+        Durability = stat.durability;
     }
 
-    public void Initialize(Vector2 pos, Vector2 size, BrickStat stat, Color col)
+    public void Initialize(Vector2 pos, Vector2 size, BrickStat brickStat, Color col)
     {
-        sprite.color = col;
         transform.position = pos;
         transform.localScale = size;
-        Stat = stat;
+        stat = brickStat;
+
+        if(stat.type.Equals(BrickType.Unbreakable))
+            sprite.color = Color.gray;
+        else
+            sprite.color = col;
     }
 
     public void Initialize(PlacementData data, Color col)
     {
-        sprite.color = col;
-        transform.position = data.position;
-        transform.localScale = data.size;
-        Stat = data.stat;
+        Initialize(data.position, data.size, data.stat, col);
     }
+
 
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
     public virtual void Hit()
     {
-        if(Stat.type.Equals(BrickType.Unbreakable)) 
+        if(stat.type.Equals(BrickType.Unbreakable)) 
             return;
 
         Durability--;
