@@ -7,15 +7,14 @@ using Random = UnityEngine.Random;
 
 public class BrickManager : MonoBehaviour
 {
+    [SerializeField] Color[] brickColors;
     // 벽돌 배치 데이터
     [SerializeField] BrickPlacement placement;
     // 벽돌 프리팹
     [SerializeField] Brick prefabBrick;
     public int CurrentCount { get; private set; }
-
-    [SerializeField] Color[] brickColors;
-
     public event Action OnAllBrickBroken;
+
 
     void Start()
     {
