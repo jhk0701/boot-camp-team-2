@@ -58,7 +58,7 @@ namespace Utility
                 Vector2 size = new Vector2(1f, 0.5f);
                 
                 Color col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-                b.Initialize(pos, size, col,  new BrickStat { durability = 1, type = BrickType.Normal });
+                b.Initialize(pos, size, new BrickStat { durability = 1, type = BrickType.Normal }, col);
 
                 brickInst.Add(b);
             }

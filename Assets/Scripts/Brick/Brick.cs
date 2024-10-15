@@ -54,7 +54,7 @@ public class Brick : MonoBehaviour, IBreakable
         Durability = Stat.durability;
     }
 
-    public void Initialize(Vector2 pos, Vector2 size, Color col, BrickStat stat)
+    public void Initialize(Vector2 pos, Vector2 size, BrickStat stat, Color col)
     {
         sprite.color = col;
         transform.position = pos;
