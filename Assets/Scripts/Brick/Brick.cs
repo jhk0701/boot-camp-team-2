@@ -21,7 +21,7 @@ public struct BrickStat
 public class Brick : MonoBehaviour, IBreakable
 {
     
-    public BrickStat stat;
+    public BrickStat Stat {get; protected set;}
     [SerializeField] int durability = 1;
     public int Durability
     { 
@@ -51,13 +51,23 @@ public class Brick : MonoBehaviour, IBreakable
 
     void Start()
     {
-        Durability = stat.durability;
+        Durability = Stat.durability;
     }
 
-    public void Initialize(Vector2 pos, Color col, BrickStat stat)
+    public void Initialize(Vector2 pos, Vector2 size, Color col, BrickStat stat)
     {
         sprite.color = col;
         transform.position = pos;
+        transform.localScale = size;
+        Stat = stat;
+    }
+
+    public void Initialize(PlacementData data, Color col)
+    {
+        sprite.color = col;
+        transform.position = data.position;
+        transform.localScale = data.size;
+        Stat = data.stat;
     }
 
     /// <summary>
@@ -65,7 +75,7 @@ public class Brick : MonoBehaviour, IBreakable
     /// </summary>
     public virtual void Hit()
     {
-        if(stat.type.Equals(BrickType.Unbreakable)) 
+        if(Stat.type.Equals(BrickType.Unbreakable)) 
             return;
 
         Durability--;

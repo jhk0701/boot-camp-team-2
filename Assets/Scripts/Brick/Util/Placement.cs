@@ -19,9 +19,9 @@ namespace Utility
             {
                 target.datas[i] = new PlacementData()
                 {
-                    stat = brickInst[i].stat,
+                    stat = brickInst[i].Stat,
                     position = brickInst[i].transform.position,
-                    size = brickInst[i].transform.lossyScale
+                    size = brickInst[i].transform.localScale
                 };
             }
         }
@@ -55,9 +55,10 @@ namespace Utility
                 float x = i % 5 - 2f + ((i / 5) % 2 == 0 ? -0.25f : 0.25f);
                 float y = (i / 5 * -0.5f) + 4.5f;
                 Vector2 pos = new Vector2(x, y);
+                Vector2 size = new Vector2(1f, 0.5f);
                 
                 Color col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-                b.Initialize(pos, col, new BrickStat { durability = 1, type = BrickType.Normal });
+                b.Initialize(pos, size, col,  new BrickStat { durability = 1, type = BrickType.Normal });
 
                 brickInst.Add(b);
             }
