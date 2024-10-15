@@ -7,10 +7,13 @@ using Random = UnityEngine.Random;
 
 public class BrickManager : MonoBehaviour
 {
+    // 벽돌 배치 데이터
     [SerializeField] BrickPlacement placement;
-    [SerializeField] Brick brick;
-
+    // 벽돌 프리팹
+    [SerializeField] Brick prefabBrick;
     public int CurrentCount { get; private set; }
+
+    [SerializeField] Color[] brickColors;
 
     public event Action OnAllBrickBroken;
 
@@ -23,15 +26,12 @@ public class BrickManager : MonoBehaviour
     {
         for (int i = 0; i < placement.datas.Length; i++)
         {
-            Brick b = Instantiate(brick, transform);
-            
-            // TODO : 완전 자동보단 정해진 색중에서 골라써보기
-            Color col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-                        
-            b.Initialize(placement.datas[i], col);
+            Brick b = Instantiate(prefabBrick, transform);
+                                    
+            b.Initialize(placement.datas[i], brickColors[Random.Range(0, brickColors.Length)]);
             b.OnBrickBroken += CountBrokenBrick;
 
-            if(!b.Stat.type.Equals(BrickType.Unbreakable))
+            if(!b.stat.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;
         }
     }
