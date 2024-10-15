@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80841216}
   - component: {fileID: 80841217}
+  - component: {fileID: 80841218}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -168,8 +169,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf2c82f8769e3c448d85a6ef2982316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCount: 30
+  placement: {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
   brick: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+--- !u!114 &80841218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80841215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17d24d7fbcc30a4b911188d68a97ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brick: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+  brickInst: []
+  target: {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

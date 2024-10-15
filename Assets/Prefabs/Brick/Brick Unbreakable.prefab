@@ -61,6 +61,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+      propertyPath: stat.type
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
       propertyPath: durability
       value: 1
       objectReference: {fileID: 0}
