@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public enum BrickType
 {
@@ -10,18 +9,26 @@ public enum BrickType
     Normal = 0,
 }
 
+[Serializable]
+public struct BrickStat
+{
+    public int durability;
+    public BrickType type;
+} 
+
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Brick : MonoBehaviour, IBreakable
-{    
-    public BrickType type;
-    [SerializeField] int durability;
+{
+    
+    public BrickStat stat;
+    [SerializeField] int durability = 1;
     public int Durability
     { 
         get { return durability; }
         protected set
         {
-            if (Durability == 0)
+            if (durability == 0)
                 return;
 
             durability = value;
@@ -31,9 +38,8 @@ public class Brick : MonoBehaviour, IBreakable
         } 
     }
 
-
-    SpriteRenderer sprite;
-    Collider2D collider;
+    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] Collider2D collider;
 
     public event Action OnBrickBroken;
 
@@ -45,10 +51,10 @@ public class Brick : MonoBehaviour, IBreakable
 
     void Start()
     {
-        Durability = durability;
+        Durability = stat.durability;
     }
 
-    public void Initialize(Vector2 pos, Color col)
+    public void Initialize(Vector2 pos, Color col, BrickStat stat)
     {
         sprite.color = col;
         transform.position = pos;
@@ -59,7 +65,7 @@ public class Brick : MonoBehaviour, IBreakable
     /// </summary>
     public virtual void Hit()
     {
-        if(type.Equals(BrickType.Unbreakable)) 
+        if(stat.type.Equals(BrickType.Unbreakable)) 
             return;
 
         Durability--;

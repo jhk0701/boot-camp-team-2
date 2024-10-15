@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 
 public class BrickManager : MonoBehaviour
 {
-    [SerializeField] int totalCount = 10;
+    [SerializeField] BrickPlacement placement;
     [SerializeField] Brick brick;
+
     public int CurrentCount { get; private set; }
 
     public event Action OnAllBrickBroken;
@@ -21,7 +22,7 @@ public class BrickManager : MonoBehaviour
     public void Generate()
     {
         // TODO : 미리 작성된 배치를 읽어오는 기능 추가
-        for (int i = 0; i < totalCount; i++)
+        for (int i = 0; i < placement.datas.Length; i++)
         {
             Brick b = Instantiate(brick, transform);
             
@@ -34,9 +35,9 @@ public class BrickManager : MonoBehaviour
             Color col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
             
             b.OnBrickBroken += CountBrokenBrick;
-            b.Initialize(pos, col);
+            b.Initialize(pos, col, new BrickStat { durability = 1, type = BrickType.Normal });
 
-            if(!b.type.Equals(BrickType.Unbreakable))
+            if(!b.stat.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;
         }
     }
