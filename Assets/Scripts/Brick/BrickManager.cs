@@ -30,7 +30,7 @@ public class BrickManager : MonoBehaviour
             b.Initialize(placement.datas[i], brickColors[Random.Range(0, brickColors.Length)]);
             b.OnBrickBroken += CountBrokenBrick;
 
-            if(!b.stat.type.Equals(BrickType.Unbreakable))
+            if (!b.stat.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;
         }
     }

@@ -16,8 +16,7 @@ public struct BrickStat
     public BrickType type;
 } 
 
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(SpriteRenderer))]
+
 public class Brick : MonoBehaviour, IBreakable
 {
     public BrickStat stat;
@@ -40,11 +39,14 @@ public class Brick : MonoBehaviour, IBreakable
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] Collider2D collider;
 
+    public event Action OnBrickHitted;
     public event Action OnBrickBroken;
 
     void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        if (sprite == null)
+            sprite = GetComponentInChildren<SpriteRenderer>();
+
         collider = GetComponent<BoxCollider2D>();
     }
 
@@ -76,7 +78,9 @@ public class Brick : MonoBehaviour, IBreakable
     /// </summary>
     public virtual void Hit()
     {
-        if(stat.type.Equals(BrickType.Unbreakable)) 
+        OnBrickHitted?.Invoke();
+
+        if (stat.type.Equals(BrickType.Unbreakable)) 
             return;
 
         Durability--;
