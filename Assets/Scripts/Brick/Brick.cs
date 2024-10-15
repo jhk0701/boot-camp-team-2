@@ -44,6 +44,7 @@ public class Brick : MonoBehaviour, IBreakable
     SpriteRenderer sprite;
     Collider2D collider;
 
+    public event Action OnBrickBroken;
 
     void Awake()
     {
@@ -54,6 +55,7 @@ public class Brick : MonoBehaviour, IBreakable
     void Start()
     {
         Durability = stat.durability;
+
         // TODO : 완전 자동보단 정해진 색중에서 골라써보기
         sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
@@ -72,7 +74,11 @@ public class Brick : MonoBehaviour, IBreakable
     public virtual void Break()
     {
         collider.enabled = false;
-        Destroy(gameObject, 3f);
+        OnBrickBroken?.Invoke();
+
+        // 1초 뒤 제거
+        Destroy(gameObject, 1f);
+
         // TODO : 파괴 시 이펙트 추가
     }
 }
