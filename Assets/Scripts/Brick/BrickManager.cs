@@ -24,13 +24,20 @@ public class BrickManager : MonoBehaviour
         for (int i = 0; i < totalCount; i++)
         {
             Brick b = Instantiate(brick, transform);
+            
+            // 우선 정렬 배치
+            // TODO : Manager에서 정렬된 배치를 받는 경우 제거될 수 있음.
+            // TODO : Magic Nuber 제거
+            Vector2 pos = new Vector2(i % 5 - 2, i / 5 * -0.5f + 4.5f);
+            
+            // TODO : 완전 자동보단 정해진 색중에서 골라써보기
+            Color col = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            
             b.OnBrickBroken += CountBrokenBrick;
+            b.Initialize(pos, col);
 
-            if(!b.stat.type.Equals(BrickType.Unbreakable))
+            if(!b.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;
-
-            // 우선 랜덤 배치
-            b.transform.position = new Vector2(Random.Range(-2, 2), Random.Range(-1, 5) * 0.5f);
         }
     }
 

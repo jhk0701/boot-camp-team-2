@@ -10,20 +10,12 @@ public enum BrickType
     Normal = 0,
 }
 
-[Serializable]
-public class BrickStat
-{
-    public int durability;
-    public BrickType type;
-}
-
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Brick : MonoBehaviour, IBreakable
-{
-    public BrickStat stat;
-
-    int durability;
+{    
+    public BrickType type;
+    [SerializeField] int durability;
     public int Durability
     { 
         get { return durability; }
@@ -32,14 +24,13 @@ public class Brick : MonoBehaviour, IBreakable
             if (Durability == 0)
                 return;
 
-            Durability = value;
-            if(Durability < 0)
-            {
-                Durability = 0;
+            durability = value;
+
+            if (Durability <= 0)
                 Break();
-            }
         } 
     }
+
 
     SpriteRenderer sprite;
     Collider2D collider;
@@ -54,10 +45,13 @@ public class Brick : MonoBehaviour, IBreakable
 
     void Start()
     {
-        Durability = stat.durability;
+        Durability = durability;
+    }
 
-        // TODO : 완전 자동보단 정해진 색중에서 골라써보기
-        sprite.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+    public void Initialize(Vector2 pos, Color col)
+    {
+        sprite.color = col;
+        transform.position = pos;
     }
 
     /// <summary>
@@ -65,7 +59,7 @@ public class Brick : MonoBehaviour, IBreakable
     /// </summary>
     public virtual void Hit()
     {
-        if(stat.type.Equals(BrickType.Unbreakable)) 
+        if(type.Equals(BrickType.Unbreakable)) 
             return;
 
         Durability--;
