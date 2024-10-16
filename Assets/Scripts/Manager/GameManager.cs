@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,6 +56,12 @@ public class GameManager : MonoBehaviour
     private void HandleAllBricksBroken()
     {
         SetState(GameState.Win);
+    }
+
+    public void StartGameScene()
+    {
+        SetState(GameState.GameScene);
+        SceneManager.LoadScene(1);
     }
 
 }

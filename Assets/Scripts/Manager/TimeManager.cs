@@ -21,16 +21,10 @@ public class TimeManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnEnable()
+    private void Start()
     {
         GameManager.Instance.OnStateChanged += OnStateChanged;
-    }
 
-    private void OnDisable()
-    {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnStateChanged -= OnStateChanged;
     }
 
     private void OnStateChanged(GameManager.GameState newState)
