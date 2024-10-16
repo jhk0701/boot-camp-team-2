@@ -18,13 +18,23 @@ public class GameUIManager : MonoBehaviour
     private int initialLives = 3;
 
     [SerializeField] Button retryButton;
+    [SerializeField] Button[] homeButtons;
+    [SerializeField] Button nextLevel;
+
     [SerializeField] GameObject loseGamePanel;
+    [SerializeField] GameObject winGamePanel;
 
     void Start()
     {
         InitializeUI();
         loseGamePanel.SetActive(false); // 초기에는 비활성화
+        winGamePanel.SetActive(false); // 초기에는 비활성화
         retryButton.onClick.AddListener(RetryGame);
+        foreach (var button in homeButtons)
+        {
+            button.onClick.AddListener(LoadHome);
+        }
+        nextLevel.onClick.AddListener(NextLevel);
     }
 
     // UI 초기화 메서드
@@ -47,10 +57,37 @@ public class GameUIManager : MonoBehaviour
         loseGamePanel.SetActive(true); // 게임 오버 UI 활성화
     }
 
+    public void ShowWinGameUI()
+    {
+        winGamePanel.SetActive(true); // WIN UI 활성화
+    }
+
     public void RetryGame()
     {
-        // 게임을 재시작하는 로직
-        // 예: 현재 씬 재로드
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void LoadHome()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
+    public void NextLevel()
+    {
+        // 현재 씬의 빌드 인덱스를 가져와서 다음 씬(레벨)로 이동
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        // TODO: 다음 레벨이 있는지 확인 후, 로드
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+            Debug.Log("다음 스테이지 로드");
+        }
+        else
+        {
+            Debug.Log("더 이상 스테이지가 없습니다.");
+            // TODO: 게임 종료나 엔딩 화면 등을 처리할 수 있음
+        }
+    }
+
 }
