@@ -13,6 +13,7 @@ public class WinState : IGameState
     {
         // 승리 UI 활성화, 게임 멈춤 등
         gameManager.timeManager.StopTimer();
+        Debug.Log("WinState");
     }
 
     public void UpdateState()

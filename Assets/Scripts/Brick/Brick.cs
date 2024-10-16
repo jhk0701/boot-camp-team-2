@@ -74,7 +74,7 @@ public class Brick : MonoBehaviour, IBreakable
 
 
     /// <summary>
-    /// ë²½ëŒ ì²´ë ¥ ê¹ëŠ” ë©”ì„œë“œ
+    /// º®µ¹ Ã¼·Â ±ğ´Â ¸Ş¼­µå
     /// </summary>
     public virtual void Hit()
     {
@@ -91,9 +91,9 @@ public class Brick : MonoBehaviour, IBreakable
         collider.enabled = false;
         OnBrickBroken?.Invoke();
 
-        // 1ì´ˆ ë’¤ ì œê±°
+        // 1ÃÊ µÚ Á¦°Å
         Destroy(gameObject, 1f);
 
-        // TODO : íŒŒê´´ ì‹œ ì´í™íŠ¸ ì¶”ê°€
+        // TODO : ÆÄ±« ½Ã ÀÌÆåÆ® Ãß°¡
     }
 }

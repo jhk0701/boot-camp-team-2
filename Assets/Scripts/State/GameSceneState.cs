@@ -29,11 +29,11 @@ public class GameSceneState : IGameState
             gameManager.GameOver();
         }
 
-        //승리
-        if(gameManager.GetBrickCount() <=0)
-        {
-            gameManager.GameWin();
-        }
+        // 승리 => brick manager의 이벤트로 위임
+        // if (gameManager.GetBrickCount() <=0)
+        // {
+        //     gameManager.GameWin();
+        // }
 
         //TODO: 아이템 사용
     }

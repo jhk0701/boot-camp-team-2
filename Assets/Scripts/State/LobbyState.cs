@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LobbyState : IGameState
 {
-   
     private GameManager gameManager;
     public LobbyState(GameManager gameManager)
     {

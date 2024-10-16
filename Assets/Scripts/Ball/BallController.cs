@@ -28,6 +28,9 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Bounce(collision);
+
+        IBreakable breakable = collision.gameObject.GetComponent<IBreakable>();
+        breakable?.Hit();
     }
 
     private void Launch()
@@ -48,7 +51,7 @@ public class BallController : MonoBehaviour
 
     private void Bounce(Collision2D collision)
     {
-        if (collision.collider.gameObject.CompareTag("TopWall") || collision.collider.gameObject.CompareTag("DownWall"))
+        if (collision.collider.gameObject.CompareTag("TopWall") || collision.collider.gameObject.CompareTag("DownWall") || collision.collider.gameObject.CompareTag("Brick"))
         {
             rigidbody.velocity = new Vector2(tempVelocity.x, -tempVelocity.y);
         }
