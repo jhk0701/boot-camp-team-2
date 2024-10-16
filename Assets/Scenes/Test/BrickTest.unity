@@ -3856,36 +3856,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brick: {fileID: 0}
   brickInst:
-  - {fileID: 1567969767}
-  - {fileID: 846654265}
-  - {fileID: 81648003}
-  - {fileID: 707013024}
-  - {fileID: 1298086162}
-  - {fileID: 921797163}
-  - {fileID: 140605316}
-  - {fileID: 1650782484}
-  - {fileID: 1783615936}
-  - {fileID: 1197488563}
-  - {fileID: 1274026134}
-  - {fileID: 1787659946}
-  - {fileID: 2102660260}
-  - {fileID: 1507108152}
-  - {fileID: 499182855}
-  - {fileID: 882019693}
-  - {fileID: 1719004477}
-  - {fileID: 918391637}
-  - {fileID: 650309672}
-  - {fileID: 1166194454}
-  - {fileID: 1639123610}
-  - {fileID: 1080537384}
-  - {fileID: 150909336}
-  - {fileID: 1181813773}
-  - {fileID: 645304161}
-  - {fileID: 2026438650}
-  - {fileID: 1013088467}
-  - {fileID: 43672245}
-  - {fileID: 446407511}
-  target: {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}
+  - {fileID: 1580693582}
+  - {fileID: 252530798}
+  - {fileID: 1525230600}
+  - {fileID: 316449718}
+  - {fileID: 1767703913}
+  - {fileID: 77900555}
+  - {fileID: 917942156}
+  - {fileID: 798388125}
+  - {fileID: 1713156569}
+  - {fileID: 1350773937}
+  - {fileID: 2136706008}
+  - {fileID: 597667142}
+  - {fileID: 1418745554}
+  - {fileID: 1467132665}
+  - {fileID: 1556897437}
+  - {fileID: 1795512756}
+  - {fileID: 1320129854}
+  - {fileID: 220031770}
+  - {fileID: 1984539267}
+  - {fileID: 599635985}
+  - {fileID: 1958664392}
+  target: {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
 --- !u!1 &309795857
 GameObject:
   m_ObjectHideFlags: 0

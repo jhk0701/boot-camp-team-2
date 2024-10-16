@@ -12,4 +12,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc79ccdee3a1ddc4f9ec7dc43bc0aca7, type: 3}
   m_Name: Stage 1-3
   m_EditorClassIdentifier: 
-  datas: []
+  datas:
+  - stat:
+      durability: 3
+      type: 0
+    position: {x: 1, y: 3.5}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 0, y: 3}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: -0.75, y: 2.5}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: -1.25, y: 3}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 1.25, y: 3}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 0.75, y: 2.5}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 0.25, y: 2}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: -0.25, y: 1.5}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: -0.25, y: 2}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 0.24999999, y: 1.5}
+    size: {x: 0.5, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 0.000000014901161, y: 4}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: -1, y: 4}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 1
+      type: 0
+    position: {x: 1, y: 4}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 3
+      type: 0
+    position: {x: -1, y: 3.5}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 2
+      type: 0
+    position: {x: -1, y: 2}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 2
+      type: 0
+    position: {x: 1, y: 2}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 2
+      type: 0
+    position: {x: 0, y: 1}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 2
+      type: 0
+    position: {x: 2, y: 1}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 2
+      type: 0
+    position: {x: -2, y: 1}
+    size: {x: 1, y: 0.5}
+  - stat:
+      durability: 5
+      type: 0
+    position: {x: -1, y: 1.25}
+    size: {x: 1, y: 1}
+  - stat:
+      durability: 5
+      type: 0
+    position: {x: 1, y: 1.25}
+    size: {x: 1, y: 1}
