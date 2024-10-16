@@ -949,6 +949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brick Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: placement
+      value: 
+      objectReference: {fileID: 11400000, guid: 353872fa4ce009c459f36b89e927304c, type: 2}
     - target: {fileID: 5081256539957542569, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
