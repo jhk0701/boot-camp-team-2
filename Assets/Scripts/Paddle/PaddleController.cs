@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PaddleMovement : MonoBehaviour
+public class PaddleController : MonoBehaviour
 {
     public float speed;
 

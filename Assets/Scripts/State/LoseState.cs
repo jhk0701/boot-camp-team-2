@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class LoseState : IGameState
@@ -23,6 +24,9 @@ public class LoseState : IGameState
     public void ExitState()
     {
         // UI 비활성화
+
+        // 임시로 로비 시작화면으로 가도록 했음
+        SceneManager.LoadScene(0);
     }
 
     
