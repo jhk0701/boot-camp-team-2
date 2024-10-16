@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 824616797}
   - component: {fileID: 824616796}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f2ee3c2a1bf7645a2a0424e4a0752b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeManager: {fileID: 824616796}
+  TimeManager: {fileID: 824616796}
 --- !u!1 &1208896608
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,8 +606,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2109845176}
-        m_TargetAssemblyTypeName: StartScene, Assembly-CSharp
+      - m_Target: {fileID: 824616797}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -672,7 +672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2109845176
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class BrickManager : MonoBehaviour
     {
         Generate();
         
-        OnAllBrickBroken += GameManager.Instance.GameWin;
+        //OnAllBrickBroken += GameManager.Instance.GameWin;
 
         // TODO : remove temp code
         OnAllBrickBroken += GetComponent<DummyGameScene>().OpenEndPanel;

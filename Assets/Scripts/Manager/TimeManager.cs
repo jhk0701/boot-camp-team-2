@@ -2,16 +2,73 @@
 
 public class TimeManager : MonoBehaviour
 {
-    public float maxTime = 60f; 
-    private float remainTime;
-    private float elapsedTime;
-    private bool isPlaying;
+    public static TimeManager Instance;
 
+    public float maxTime = 60f; 
+    private float remainTime; 
+    private float elapsedTime = 0f;
+    private bool isPlaying; 
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnStateChanged += OnStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged -= OnStateChanged;
+    }
+
+    private void OnStateChanged(GameManager.GameState newState)
+    {
+        switch (newState)
+        {
+            case GameManager.GameState.GameScene:
+                StartTimer();
+                break;
+            case GameManager.GameState.Pause:
+                PauseTimer();
+                break;
+            case GameManager.GameState.Lobby:
+            case GameManager.GameState.Win:
+            case GameManager.GameState.Lose:
+                StopTimer();
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        if (isPlaying)
+        {
+            remainTime -= Time.deltaTime;
+            elapsedTime += Time.deltaTime;
+
+            if (remainTime <= 0)
+            {
+                GameManager.Instance.SetState(GameManager.GameState.Lose);
+            }
+        }
+    }
 
     public void StartTimer()
     {
-        elapsedTime = 0f;
         remainTime = maxTime;
+        elapsedTime = 0f;
         isPlaying = true;
     }
 
@@ -30,28 +87,13 @@ public class TimeManager : MonoBehaviour
         isPlaying = true;
     }
 
-    private void Update()
-    {
-        if (isPlaying)
-        {
-            remainTime -= Time.deltaTime;
-            
-            elapsedTime += Time.deltaTime;
-        }
-    }
-
     public float GetRemainingTime()
     {
         return remainTime;
     }
 
-    public float GetElaspedTime()
+    public float GetElapsedTime()
     {
         return elapsedTime;
-    }
-
-    public bool CheckRemainTime()
-    {
-        return remainTime <= 0 ? true : false;
     }
 }
