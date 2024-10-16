@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 80841216}
   - component: {fileID: 80841217}
   - component: {fileID: 80841218}
+  - component: {fileID: 80841219}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -177,7 +178,6 @@ MonoBehaviour:
   - {r: 0.86706704, g: 0.2688679, b: 1, a: 1}
   - {r: 1, g: 0.042452812, b: 0.06920009, a: 1}
   placement: {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
-  prefabBrick: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
 --- !u!114 &80841218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +193,20 @@ MonoBehaviour:
   brick: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
   brickInst: []
   target: {fileID: 11400000, guid: 105b4f71f4e533f44a71c13de1fc1b45, type: 2}
+--- !u!114 &80841219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80841215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e968cfd930d054faa0c61daa793f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 0}
 --- !u!1001 &126199721
 PrefabInstance:
   m_ObjectHideFlags: 0
