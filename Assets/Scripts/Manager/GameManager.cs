@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
 
     //State °ü¸®
     private IGameState currentState;
-    private LobbyState lobbyState;
-    private GameSceneState gameSceneState;
-    private PauseState pauseState;
-    private WinState winState;
-    private LoseState loseState;
+    public LobbyState lobbyState { get; private set; }
+    public GameSceneState gameSceneState { get; private set; }
+    public PauseState pauseState { get; private set; }
+    public WinState winState { get; private set; }
+    public LoseState loseState { get; private set; }
 
     private int lifeCount;
     private int brickCount;
