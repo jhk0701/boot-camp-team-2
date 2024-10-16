@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private int lifeCount;
     private int brickCount;
     public TimeManager timeManager;
+    public LevelManager levelManager;
 
     private void Awake()
     {

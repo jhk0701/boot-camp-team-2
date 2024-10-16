@@ -18,7 +18,7 @@ public struct BrickStat
 } 
 
 // 벽돌의 기능 : 공에 맞아 부서지기
-public class Brick : MonoBehaviour, IBreakable
+public class Brick : MonoBehaviour
 {
     public BrickStat stat;
     [SerializeField] int durability = 1;

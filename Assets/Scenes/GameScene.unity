@@ -345,8 +345,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4546506906986918734}
-        m_TargetAssemblyTypeName: DummyGameScene, Assembly-CSharp
+      - m_Target: {fileID: 4546506906986918733}
+        m_TargetAssemblyTypeName: InGameManager, Assembly-CSharp
         m_MethodName: BackToStart
         m_Mode: 1
         m_Arguments:
@@ -947,8 +947,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2740906429721327795, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: m_Name
-      value: Brick Manager
+      value: In Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: gameEnd
+      value: 
+      objectReference: {fileID: 155367553}
     - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: placement
       value: 
@@ -996,29 +1000,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2740906429721327795, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4546506906986918734}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
---- !u!1 &4546506906986918733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2740906429721327795, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+--- !u!114 &4546506906986918733 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
   m_PrefabInstance: {fileID: 4546506906986918732}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4546506906986918734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546506906986918733}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 357e75913cf97174f88445560af4d9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cf2c82f8769e3c448d85a6ef2982316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 155367553}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

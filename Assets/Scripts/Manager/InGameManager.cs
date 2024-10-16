@@ -1,21 +1,24 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class BrickManager : MonoBehaviour
+public class InGameManager : MonoBehaviour
 {
     [SerializeField] BrickPlacement placement;     // 벽돌 배치 데이터
-    IBrickFactory brickFactory;     // 새로운 벽돌 추가 => 위임
+    BrickFactory brickFactory;     // 새로운 벽돌 추가 => 위임
     
-    // 벽돌 관리
     public int CurrentCount { get; private set; }
     public event Action OnAllBrickBroken;
+    
+    // 종료 화면
+    [SerializeField] GameObject gameEnd;
+
 
 
     void Awake()
     {
-        brickFactory = GetComponent<IBrickFactory>();
+        brickFactory = GetComponent<BrickFactory>();
     }
-
 
     void Start()
     {
@@ -24,9 +27,9 @@ public class BrickManager : MonoBehaviour
         Generate();
         
         OnAllBrickBroken += GameManager.Instance.GameWin;
-        // TODO : remove temp code
-        OnAllBrickBroken += GetComponent<DummyGameScene>().OpenEndPanel;
+        OnAllBrickBroken += OpenGameEnd;
     }
+
 
     // 받아온 데이터로 벽돌 만들기
     void Generate()
@@ -53,4 +56,17 @@ public class BrickManager : MonoBehaviour
             OnAllBrickBroken?.Invoke();
         }
     }
+
+
+    public void OpenGameEnd()
+    {
+        gameEnd.SetActive(true);
+    }
+
+    public void BackToStart()
+    {
+        SceneManager.LoadScene(0);
+        GameManager.Instance.SetState(GameManager.Instance.lobbyState);
+    }
+    
 }

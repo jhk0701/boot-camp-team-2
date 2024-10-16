@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class BrickFactory : MonoBehaviour, IBrickFactory
+public class BrickFactory : MonoBehaviour
 {
     // 벽돌 생성 기능
     [SerializeField] Color[] brickColors;

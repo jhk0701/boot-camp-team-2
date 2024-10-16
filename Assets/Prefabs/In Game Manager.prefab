@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3391552982520481798}
   - component: {fileID: 8036703288110474358}
   m_Layer: 0
-  m_Name: Brick Manager
+  m_Name: In Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
