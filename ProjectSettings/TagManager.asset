@@ -9,6 +9,7 @@ TagManager:
   - LeftWall
   - RightWall
   - Paddle
+  - Brick
   layers:
   - Default
   - TransparentFX
