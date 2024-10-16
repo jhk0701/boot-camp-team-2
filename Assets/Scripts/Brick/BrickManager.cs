@@ -8,11 +8,12 @@ using Random = UnityEngine.Random;
 public class BrickManager : MonoBehaviour
 {
     [SerializeField] Color[] brickColors;
-    // ë²½ëŒ ë°°ì¹˜ ë°ì´í„°
+    // º®µ¹ ¹èÄ¡ µ¥ÀÌÅÍ
     [SerializeField] BrickPlacement placement;
-    // ë²½ëŒ í”„ë¦¬íŒ¹
+    // º®µ¹ ÇÁ¸®ÆÕ
     [SerializeField] Brick prefabBrick;
     public int CurrentCount { get; private set; }
+
     public event Action OnAllBrickBroken;
 
 
@@ -20,6 +21,10 @@ public class BrickManager : MonoBehaviour
     {
         Generate();
         
+        OnAllBrickBroken += GameManager.Instance.GameWin;
+
+        // TODO : remove temp code
+        OnAllBrickBroken += GetComponent<DummyGameScene>().OpenEndPanel;
     }
 
     public void Generate()
@@ -39,8 +44,9 @@ public class BrickManager : MonoBehaviour
     void CountBrokenBrick()
     {
         CurrentCount--;
+        Debug.Log($"Current count :{CurrentCount}");
 
-        // ëª¨ë“  ë²½ëŒì´ ë¶€ì„œì§.
+        // ¸ğµç º®µ¹ÀÌ ºÎ¼­Áü.
         if(CurrentCount == 0)
         {   
             OnAllBrickBroken?.Invoke();
