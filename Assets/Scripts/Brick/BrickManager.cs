@@ -7,14 +7,23 @@ using Random = UnityEngine.Random;
 
 public class BrickManager : MonoBehaviour
 {
+    // 벽돌 배치 기능
     [SerializeField] Color[] brickColors;
     // 벽돌 배치 데이터
     [SerializeField] BrickPlacement placement;
-    // 벽돌 프리팹
-    [SerializeField] Brick prefabBrick;
+    // 새로운 벽돌 추가 => 위임
+    // [SerializeField] Brick prefabBrick;
+    IBrickFactory brickFactory;
+    
+    // 벽돌 관리
     public int CurrentCount { get; private set; }
-
     public event Action OnAllBrickBroken;
+
+
+    void Awake()
+    {
+        brickFactory = GetComponent<IBrickFactory>();
+    }
 
 
     void Start()
@@ -31,7 +40,7 @@ public class BrickManager : MonoBehaviour
     {
         for (int i = 0; i < placement.datas.Length; i++)
         {
-            Brick b = Instantiate(prefabBrick, transform);
+            Brick b = Instantiate(brickFactory.Create(placement.datas[i].stat.type), transform);
                                     
             b.Initialize(placement.datas[i], brickColors[Random.Range(0, brickColors.Length)]);
             b.OnBrickBroken += CountBrokenBrick;
