@@ -1,19 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-using Random = UnityEngine.Random;
 
 public class BrickManager : MonoBehaviour
 {
-    // 벽돌 배치 기능
-    [SerializeField] Color[] brickColors;
-    // 벽돌 배치 데이터
-    [SerializeField] BrickPlacement placement;
-    // 새로운 벽돌 추가 => 위임
-    // [SerializeField] Brick prefabBrick;
-    IBrickFactory brickFactory;
+    [SerializeField] BrickPlacement placement;     // 벽돌 배치 데이터
+    IBrickFactory brickFactory;     // 새로운 벽돌 추가 => 위임
     
     // 벽돌 관리
     public int CurrentCount { get; private set; }
@@ -28,21 +19,22 @@ public class BrickManager : MonoBehaviour
 
     void Start()
     {
+        CurrentCount = 0;
+        
         Generate();
         
         OnAllBrickBroken += GameManager.Instance.GameWin;
-
         // TODO : remove temp code
         OnAllBrickBroken += GetComponent<DummyGameScene>().OpenEndPanel;
     }
 
-    public void Generate()
+    // 받아온 데이터로 벽돌 만들기
+    void Generate()
     {
-        for (int i = 0; i < placement.datas.Length; i++)
+        foreach (PlacementData data in placement.datas)
         {
-            Brick b = Instantiate(brickFactory.Create(placement.datas[i].stat.type), transform);
-                                    
-            b.Initialize(placement.datas[i], brickColors[Random.Range(0, brickColors.Length)]);
+            Brick b = brickFactory.Create(data);
+            
             b.OnBrickBroken += CountBrokenBrick;
 
             if (!b.stat.type.Equals(BrickType.Unbreakable))
