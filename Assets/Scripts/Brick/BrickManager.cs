@@ -19,6 +19,7 @@ public class BrickManager : MonoBehaviour
     void Start()
     {
         Generate();
+        
     }
 
     public void Generate()
