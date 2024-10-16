@@ -10,6 +10,6 @@ public struct Stage
 [CreateAssetMenu(fileName = "Level", menuName = "BrickGenerator/Level")]
 public class Level : ScriptableObject
 {
-    public string name;
+    public string levelName;
     public Stage[] stages;
 }
