@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3493671232553733451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4772982782143458411}
+  - component: {fileID: 222993159780369}
+  - component: {fileID: 1067466897818093305}
+  - component: {fileID: 7151573518123225535}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4772982782143458411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493671232553733451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &222993159780369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493671232553733451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f2ee3c2a1bf7645a2a0424e4a0752b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeManager: {fileID: 1067466897818093305}
+  levelManager: {fileID: 7151573518123225535}
+--- !u!114 &1067466897818093305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493671232553733451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d417e0882b5f941ba2703ee35b9490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 60
+--- !u!114 &7151573518123225535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493671232553733451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98cefe1d8344b5341bf71ef08dea9389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - levelName: Lv 1
+    isCleared: 0
+    Stages:
+    - {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
+    - {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
+    - {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
+    - {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}
+  - levelName: Lv 2
+    isCleared: 0
+    Stages:
+    - {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
+    - {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
+    - {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
+    - {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}
+  - levelName: Lv 3
+    isCleared: 0
+    Stages:
+    - {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
+    - {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
+    - {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
+    - {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}

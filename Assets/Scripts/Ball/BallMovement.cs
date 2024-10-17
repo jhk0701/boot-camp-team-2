@@ -13,15 +13,14 @@ public class BallMovement : MonoBehaviour
 
     // 임시로 패널 불러서 종료하기 위함
     public event Action OnTouchBottom;
-    private void Awake()
-    {
-        GameManager.Instance.SetBallMovement(this);
-    }
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         Paddle = GameObject.Find("Paddle");
+
+        // 게임매니저 변경으로 임시 주석처리
+        // OnTouchBottom += GameManager.Instance.GameOver;
     }
 
     private void Update()
@@ -62,6 +61,7 @@ public class BallMovement : MonoBehaviour
     private void TouchBottom()
     {
         OnTouchBottom?.Invoke();
+
         // 라이프 생기면 남은 라이프에 따라 리셋 정도만 시켜주기
         Reset();
     }

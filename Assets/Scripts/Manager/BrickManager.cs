@@ -23,7 +23,6 @@ public class BrickManager : MonoBehaviour
     void Awake()
     {
         brickFactory = GetComponent<BrickFactory>();
-        GameManager.Instance.SetBrickManager(this);
     }
 
     void Start()
@@ -32,6 +31,7 @@ public class BrickManager : MonoBehaviour
         
         Generate();
         
+        // OnAllBrickBroken += GameManager.Instance.GameWin;
         OnAllBrickBroken += OpenGameEnd;
     }
 
@@ -45,6 +45,8 @@ public class BrickManager : MonoBehaviour
         foreach (PlacementData data in placement.datas)
         {
             Brick b = brickFactory.Create(data);
+            
+            // b.OnBrickBroken += CountBrokenBrick;
 
             if (!b.stat.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;

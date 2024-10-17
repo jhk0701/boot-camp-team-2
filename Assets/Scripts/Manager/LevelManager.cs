@@ -21,6 +21,4 @@ public class LevelManager : MonoBehaviour
     {
         return levels[SelectedLevel].Stages[SelectedStage];
     }
-
-
 }

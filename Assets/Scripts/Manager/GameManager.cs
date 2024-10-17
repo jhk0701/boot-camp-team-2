@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,15 +16,11 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentState { get; private set; }
 
-    public event Action<GameState> OnStateChanged;
-    public event Action OnLifeUpdate;
+    public delegate void StateChanged(GameState newState);
+    public event StateChanged OnStateChanged; // 상태 변경 이벤트
 
     private BrickManager brickManager;
-    private BallMovement ballMovement;
     public LevelManager levelManager;
-    private StateManager stateManager;
-
-    private int lives = 3;
 
 
     private void Awake()
@@ -39,56 +34,35 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        levelManager = GetComponent<LevelManager>();
-        stateManager = StateManager.Instance;
     }
-   
+
     private void Start()
     {
-        StateManager.Instance.SetState(StateManager.GameState.Start);
+        SetState(GameState.Lobby);
+
+        brickManager = FindObjectOfType<BrickManager>();
+        if (brickManager != null)
+        {
+            brickManager.OnAllBrickBroken += HandleAllBricksBroken;
+        }
     }
 
-
-    public void SetBallMovement(BallMovement ball)
+    public void SetState(GameState newState)
     {
-        ballMovement = ball;
-        ballMovement.OnTouchBottom += HandleOnTouchBottom;
+        CurrentState = newState;
+        OnStateChanged?.Invoke(newState); 
     }
 
-    public void SetBrickManager(BrickManager manager)
-    {
-        brickManager = manager;
-        brickManager.OnAllBrickBroken += HandleAllBricksBroken;
-    }
 
     private void HandleAllBricksBroken()
     {
-        stateManager.SetState(StateManager.GameState.Start);
-    }
-
-    private void HandleOnTouchBottom()
-    {
-        lives--;
-        OnLifeUpdate?.Invoke();
-        Debug.Log("lives Lost : -1");
-
-        if (lives <= 0)
-        {
-            stateManager.SetState(StateManager.GameState.Start);
-        }
+        SetState(GameState.Win);
     }
 
     public void StartGameScene()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        SetState(GameState.GameScene);
         SceneManager.LoadScene(1);
-    }
-
-    public void StartLobby()
-    {   
-        stateManager.SetState(StateManager.GameState.Start);
-        SceneManager.LoadScene(0);
     }
 
 }

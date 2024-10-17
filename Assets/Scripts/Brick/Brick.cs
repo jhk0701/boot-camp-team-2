@@ -7,7 +7,7 @@ public enum BrickType
 {
     Normal = 0,
     Unbreakable,
-    Item
+    Item,
 }
 
 [Serializable]
@@ -22,7 +22,7 @@ public struct BrickStat
 public class Brick : MonoBehaviour
 {    
     BrickManager manager;
-    BrickAnimation animationController;
+    BrickAnimation animation;
 
     public BrickStat stat;
     [SerializeField] int durability = 1;
@@ -45,7 +45,7 @@ public class Brick : MonoBehaviour
     void Awake()
     {
         manager = transform.parent.GetComponent<BrickManager>();
-        animationController = GetComponent<BrickAnimation>();
+        animation = GetComponent<BrickAnimation>();
     }
 
     void Start()
@@ -60,7 +60,7 @@ public class Brick : MonoBehaviour
     {
         // OnBrickHitted?.Invoke();
         manager.CallOnBrickHitted(this);
-        animationController.Hit();
+        animation.Hit();
 
         if (stat.type.Equals(BrickType.Unbreakable)) 
             return;
