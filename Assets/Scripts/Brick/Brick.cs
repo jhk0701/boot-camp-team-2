@@ -22,8 +22,9 @@ public struct BrickStat
 public class Brick : MonoBehaviour
 {    
     BrickManager manager;
-    BrickAnimation animationController;
 
+    BrickAnimation animationController;
+    private string playerName;
     public BrickStat stat;
     [SerializeField] int durability = 1;
     public int Durability
@@ -37,7 +38,7 @@ public class Brick : MonoBehaviour
             durability = value;
 
             if (Durability <= 0)
-                Break();
+                Break(playerName);
         } 
     }
 
@@ -56,8 +57,10 @@ public class Brick : MonoBehaviour
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public void Hit()
+    public void Hit(string playerName)
     {
+        this.playerName = playerName;
+
         // OnBrickHitted?.Invoke();
         manager.CallOnBrickHitted(this);
         animationController.Hit();
@@ -68,11 +71,11 @@ public class Brick : MonoBehaviour
         Durability--;
     }
 
-    public void Break()
+    public void Break(string playerName)
     {
         GetComponent<Collider2D>().enabled = false;
         // OnBrickBroken?.Invoke();
-        manager.CallOnBrickBroken(this);
+        manager.CallOnBrickBroken(playerName);
 
         // 1초 뒤 제거
         Destroy(gameObject, 1f);

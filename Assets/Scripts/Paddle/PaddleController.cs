@@ -9,9 +9,13 @@ public class PaddleController : MonoBehaviour
     private float xMinPosition = -2.25f;
     private Vector3 startPosition;
 
+    public string playerName;
+
+
     void Start()
     {
         startPosition = transform.position;
+        playerName  = ScoreManager.Instance.player1Name;
     }
 
 
