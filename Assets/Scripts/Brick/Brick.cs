@@ -16,9 +16,13 @@ public struct BrickStat
     public BrickType type;
 } 
 
+// 벽돌의 기능 : 공에 맞아 부서지기
+[RequireComponent(typeof(BrickAnimation))]
+public class Brick : MonoBehaviour
+{    
+    BrickManager manager;
+    BrickAnimation animation;
 
-public class Brick : MonoBehaviour, IBreakable
-{
     public BrickStat stat;
     [SerializeField] int durability = 1;
     public int Durability
@@ -36,18 +40,11 @@ public class Brick : MonoBehaviour, IBreakable
         } 
     }
 
-    [SerializeField] SpriteRenderer sprite;
-    [SerializeField] Collider2D collider;
-
-    public event Action OnBrickHitted;
-    public event Action OnBrickBroken;
 
     void Awake()
     {
-        if (sprite == null)
-            sprite = GetComponentInChildren<SpriteRenderer>();
-
-        collider = GetComponent<BoxCollider2D>();
+        manager = transform.parent.GetComponent<BrickManager>();
+        animation = GetComponent<BrickAnimation>();
     }
 
     void Start()
@@ -55,30 +52,14 @@ public class Brick : MonoBehaviour, IBreakable
         Durability = stat.durability;
     }
 
-    public void Initialize(Vector2 pos, Vector2 size, BrickStat brickStat, Color col)
-    {
-        transform.position = pos;
-        transform.localScale = size;
-        stat = brickStat;
-
-        if(stat.type.Equals(BrickType.Unbreakable))
-            sprite.color = Color.gray;
-        else
-            sprite.color = col;
-    }
-
-    public void Initialize(PlacementData data, Color col)
-    {
-        Initialize(data.position, data.size, data.stat, col);
-    }
-
-
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public virtual void Hit()
+    public void Hit()
     {
-        OnBrickHitted?.Invoke();
+        // OnBrickHitted?.Invoke();
+        manager.CallOnBrickHitted(this);
+        animation.Hit();
 
         if (stat.type.Equals(BrickType.Unbreakable)) 
             return;
@@ -86,10 +67,11 @@ public class Brick : MonoBehaviour, IBreakable
         Durability--;
     }
 
-    public virtual void Break()
+    public void Break()
     {
-        collider.enabled = false;
-        OnBrickBroken?.Invoke();
+        GetComponent<Collider2D>().enabled = false;
+        // OnBrickBroken?.Invoke();
+        manager.CallOnBrickBroken(this);
 
         // 1초 뒤 제거
         Destroy(gameObject, 1f);

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public struct PlacementData
+public class PlacementData
 {
     public BrickStat stat;
     public Vector2 position;
