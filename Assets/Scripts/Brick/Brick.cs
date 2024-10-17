@@ -8,21 +8,15 @@ public enum BrickType
     Flow,
     Penalty,
 }
-
-[Serializable]
-public struct BrickStat
-{
-} 
-
 // 벽돌의 기능 : 공에 맞아 부서지기
 [RequireComponent(typeof(BrickAnimation))]
 public class Brick : MonoBehaviour
 {    
     BrickManager manager;
     BrickAnimation brickAnimation;
-
-    [SerializeField] int durability;
+    private string playerName;
     public BrickType type;
+    [SerializeField] int durability;
     public int Durability
     { 
         get { return durability; }
@@ -34,7 +28,7 @@ public class Brick : MonoBehaviour
             durability = value;
 
             if (Durability <= 0)
-                Break();
+                Break(playerName);
         } 
     }
 
@@ -48,10 +42,11 @@ public class Brick : MonoBehaviour
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public void Hit()
+    public void Hit(string playerName)
     {
-        manager.CallOnBrickHitted(this); // 매니저에 이벤트 호출
+        this.playerName = playerName;
 
+        manager.CallOnBrickHitted(this);
         brickAnimation.Hit();
 
         if (type.Equals(BrickType.Unbreak)) 
@@ -60,11 +55,10 @@ public class Brick : MonoBehaviour
         Durability--;
     }
 
-    public void Break()
+    public void Break(string playerName)
     {
         GetComponent<Collider2D>().enabled = false;
-        // OnBrickBroken?.Invoke();
-        manager.CallOnBrickBroken(this);
+        manager.CallOnBrickBroken(playerName);
 
         // 1초 뒤 제거
         Destroy(gameObject, 1f);

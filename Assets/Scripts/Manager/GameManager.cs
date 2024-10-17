@@ -6,24 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
 
-    public enum GameState
-    {
-        Lobby,
-        GameScene,
-        Pause,
-        Win,
-        Lose
-    }
 
-    public GameState CurrentState { get; private set; }
-
-    public event Action<GameState> OnStateChanged;
     public event Action OnLifeUpdate;
 
     private BrickManager brickManager;
     private BallMovement ballMovement;
     public LevelManager levelManager;
     private StateManager stateManager;
+
+    public string player1Name;
+    public string player2Name;
 
     private int lives = 3;
 
@@ -46,7 +38,7 @@ public class GameManager : MonoBehaviour
    
     private void Start()
     {
-        StateManager.Instance.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.Start);
     }
 
 
@@ -64,31 +56,40 @@ public class GameManager : MonoBehaviour
 
     private void HandleAllBricksBroken()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.Win);
     }
 
     private void HandleOnTouchBottom()
     {
         lives--;
         OnLifeUpdate?.Invoke();
-        Debug.Log("lives Lost : -1");
 
         if (lives <= 0)
         {
-            stateManager.SetState(StateManager.GameState.Start);
+            stateManager.SetState(StateManager.GameState.Lose);
         }
     }
 
     public void StartGameScene()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.GameScene);
         SceneManager.LoadScene(1);
     }
 
-    public void StartLobby()
+    public void BackToLobby()
     {   
         stateManager.SetState(StateManager.GameState.Start);
         SceneManager.LoadScene(0);
     }
 
+
+    public int GetCurrentLevel()
+    {
+        return levelManager.SelectedLevel;
+    }
+
+    public int GetCurrentStage()
+    {
+        return levelManager.SelectedStage;
+    }
 }

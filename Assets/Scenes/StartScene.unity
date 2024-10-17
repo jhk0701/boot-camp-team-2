@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 824616798}
   - component: {fileID: 824616799}
   - component: {fileID: 824616800}
+  - component: {fileID: 824616801}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -345,6 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 824616798}
+  player1Name: 
+  player2Name: 
 --- !u!114 &824616798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +407,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 832776191}
+--- !u!114 &824616801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824616794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f73406a49aa964aa0f0046e49bb434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreBoardUIPrefab: {fileID: 5890497514960149445, guid: 223da60fa8ec90e47a02f6a04ea813b8, type: 3}
+  player1Name: 
+  player2Name: 
 --- !u!1 &832776189
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +627,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0

@@ -12,18 +12,29 @@ public class BrickManager : MonoBehaviour
     public int CurrentCount { get; private set; }
 
     public event Action<Brick> OnBrickHitted;
-    public event Action<Brick> OnBrickBroken;
+    public event Action<string> OnBrickBroken;
     public event Action OnAllBrickBroken;
     
     // 종료 화면
     [SerializeField] GameObject gameEnd;
 
-
+    public static BrickManager Instance;
 
     void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         brickFactory = GetComponent<BrickFactory>();
         GameManager.Instance.SetBrickManager(this);
+        ScoreManager.Instance.SetBrickManager(this);
     }
 
     void Start()
@@ -68,11 +79,16 @@ public class BrickManager : MonoBehaviour
         OnBrickHitted?.Invoke(brick);
     }
 
-    public void CallOnBrickBroken(Brick brick)
+    public void CallOnBrickBroken(string playerName)
     {
-        OnBrickBroken?.Invoke(brick);
+        OnBrickBroken?.Invoke(playerName);
         CountBrokenBrick();
     }
+    //public void CallOnBrickBroken(Brick brick)
+    //{
+    //    OnBrickBroken?.Invoke(brick);
+    //    CountBrokenBrick();
+    //}
 
 
     public void OpenGameEnd()
