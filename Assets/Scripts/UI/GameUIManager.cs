@@ -7,29 +7,44 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    public Text levelText;
-    public Text timeText;
-    public Text scoreText;
-    public Text livesText;
+    private Text levelText;
+    private Text timeText;
+    private Text scoreText;
+    private Text livesText;
 
     // 초기 값 (예시 값으로 초기화)
-    private int initialLevel = 1;
-    private float initialTime = 0f;
-    private int initialScore = 0;
-    private int initialLives = 3;
+    private int initialLevel = 5;
+    private float initialTime = 99f;
+    private int initialScore = 5;
+    private int initialLives = 5;
 
     [SerializeField] Button retryButton;
     [SerializeField] Button[] homeButtons;
     [SerializeField] Button nextLevel;
 
+    [SerializeField] GameObject statusDisplay;
     [SerializeField] GameObject loseGamePanel;
     [SerializeField] GameObject winGamePanel;
 
     void Start()
     {
-        InitializeUI();
-        loseGamePanel.SetActive(false); // 초기에는 비활성화
-        winGamePanel.SetActive(false); // 초기에는 비활성화
+
+        levelText = statusDisplay.transform.Find("LevelInfo").GetComponent<Text>();
+        timeText = statusDisplay.transform.Find("TimeInfo").GetComponent<Text>();
+        scoreText = statusDisplay.transform.Find("ScoreInfo").GetComponent<Text>();
+        livesText = statusDisplay.transform.Find("LivesInfo").GetComponent<Text>();
+
+        InitializeUI();//예시값
+
+        Canvas canvas = FindObjectOfType<Canvas>();
+        Instantiate(statusDisplay, canvas.transform);
+        Instantiate(loseGamePanel, canvas.transform);
+        Instantiate(winGamePanel, canvas.transform);
+
+        statusDisplay.SetActive(false);
+        loseGamePanel.SetActive(false);     //LOSE패널 비활성화
+        winGamePanel.SetActive(false);      //WINE패널 비활성화
+        
         retryButton.onClick.AddListener(RetryGame);
         foreach (var button in homeButtons)
         {
@@ -65,6 +80,7 @@ public class GameUIManager : MonoBehaviour
 
     public void HandleOnScoreUpdate(int score)
     {
+        statusDisplay.SetActive(true);
         scoreText.text = score.ToString();
     }
 
@@ -80,30 +96,24 @@ public class GameUIManager : MonoBehaviour
 
     public void RetryGame()
     {
+        //다시 시작
+        loseGamePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadHome()
     {
+        //Start씬으로
+        statusDisplay.SetActive(false);
+        loseGamePanel.SetActive(false);
+        winGamePanel.SetActive(false);
         SceneManager.LoadScene("StartScene");
     }
     public void NextLevel()
     {
-        // 현재 씬의 빌드 인덱스를 가져와서 다음 씬(레벨)로 이동
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-
-        // TODO: 다음 레벨이 있는지 확인 후, 로드
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(nextSceneIndex);
-            Debug.Log("다음 스테이지 로드");
-        }
-        else
-        {
-            Debug.Log("더 이상 스테이지가 없습니다.");
-            // TODO: 게임 종료나 엔딩 화면 등을 처리할 수 있음
-        }
+        //다음레벨
+        winGamePanel.SetActive(false);
+        Debug.Log("다음레벨로가는 함수 적용필요");
     }
 
 }
