@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public event StateChanged OnStateChanged; // 상태 변경 이벤트
 
     private BrickManager brickManager;
+    public LevelManager levelManager;
 
 
     private void Awake()
