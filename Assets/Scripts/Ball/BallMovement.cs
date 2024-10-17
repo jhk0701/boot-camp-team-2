@@ -11,6 +11,7 @@ public class BallMovement : MonoBehaviour
     public GameObject Paddle;
     private bool moving = false;
 
+    public int playerNumber; 
     public string lastHitByPlayerName;
 
 
@@ -24,16 +25,30 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        Paddle = GameObject.Find("Paddle_Player1");
+
+        PaddleController[] paddles = FindObjectsOfType<PaddleController>();
+        foreach (var paddle in paddles)
+        {
+            if (paddle.playerNumber == playerNumber)
+            {
+                Paddle = paddle.gameObject;
+                break;
+            }
+        }
         lastHitByPlayerName = "";
     }
 
     private void Update()
     {
-        if ((moving is false) && (Input.GetKeyDown(KeyCode.Space)))
+        if (moving is false)
         {
-            moving = true;
-            Launch();
+            //Local MultiPlay Code
+            if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
+                (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
+            {
+                moving = true;
+                Launch();
+            }
         }
     }
 
