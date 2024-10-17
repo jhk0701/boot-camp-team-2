@@ -208,7 +208,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 2821937}
 --- !u!61 &2821937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -339,7 +338,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 5215604}
 --- !u!61 &5215604
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -618,7 +616,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 43672246}
 --- !u!61 &43672246
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -865,7 +862,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 58835509}
 --- !u!61 &58835509
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1112,7 +1108,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 77900556}
 --- !u!61 &77900556
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1327,7 +1322,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 80756898}
 --- !u!61 &80756898
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1458,7 +1452,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 81648004}
 --- !u!61 &81648004
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1621,7 +1614,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 85512258}
 --- !u!61 &85512258
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2044,7 +2036,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 140605317}
 --- !u!61 &140605317
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2175,7 +2166,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 150909337}
 --- !u!61 &150909337
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2306,7 +2296,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 153902336}
 --- !u!61 &153902336
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2469,7 +2458,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 159114007}
 --- !u!61 &159114007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2762,7 +2750,6 @@ MonoBehaviour:
     durability: 2
     type: 0
   durability: 1
-  collider: {fileID: 220031771}
 --- !u!61 &220031771
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2893,7 +2880,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 220988654}
 --- !u!61 &220988654
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3056,7 +3042,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 235938410}
 --- !u!61 &235938410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3251,7 +3236,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 252530799}
 --- !u!61 &252530799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3564,7 +3548,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 283815040}
 --- !u!61 &283815040
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3695,7 +3678,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 287456954}
 --- !u!61 &287456954
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3856,28 +3838,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brick: {fileID: 0}
   brickInst:
-  - {fileID: 1580693582}
-  - {fileID: 252530798}
-  - {fileID: 1525230600}
-  - {fileID: 316449718}
-  - {fileID: 1767703913}
-  - {fileID: 77900555}
-  - {fileID: 917942156}
-  - {fileID: 798388125}
-  - {fileID: 1713156569}
-  - {fileID: 1350773937}
-  - {fileID: 2136706008}
-  - {fileID: 597667142}
-  - {fileID: 1418745554}
-  - {fileID: 1467132665}
-  - {fileID: 1556897437}
-  - {fileID: 1795512756}
-  - {fileID: 1320129854}
-  - {fileID: 220031770}
-  - {fileID: 1984539267}
-  - {fileID: 599635985}
-  - {fileID: 1958664392}
-  target: {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
+  - {fileID: 6518174127128840593}
+  - {fileID: 80756897}
+  - {fileID: 1065398601}
+  - {fileID: 2821936}
+  - {fileID: 989183554}
+  - {fileID: 1364487213}
+  - {fileID: 1142463959}
+  - {fileID: 1313913745}
+  - {fileID: 153902335}
+  - {fileID: 220988653}
+  - {fileID: 159114006}
+  - {fileID: 283815039}
+  - {fileID: 2091821266}
+  - {fileID: 453279164}
+  - {fileID: 5215603}
+  - {fileID: 1800257589}
+  - {fileID: 287456953}
+  - {fileID: 235938409}
+  - {fileID: 655839854}
+  - {fileID: 584538879}
+  - {fileID: 408406806}
+  - {fileID: 565822556}
+  - {fileID: 1575078347}
+  - {fileID: 1723497050}
+  - {fileID: 1250824051}
+  - {fileID: 58835508}
+  - {fileID: 1563361650}
+  - {fileID: 1534415743}
+  - {fileID: 1122487860}
+  - {fileID: 85512257}
+  target: {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
 --- !u!1 &309795857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,7 +3986,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 316449719}
 --- !u!61 &316449719
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5012,7 +5002,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 408406807}
 --- !u!61 &408406807
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5869,7 +5858,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 446407512}
 --- !u!61 &446407512
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6000,7 +5988,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 453279165}
 --- !u!61 &453279165
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6488,7 +6475,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 499182856}
 --- !u!61 &499182856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7255,7 +7241,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 565822557}
 --- !u!61 &565822557
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7450,7 +7435,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 584538880}
 --- !u!61 &584538880
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7739,7 +7723,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 597667143}
 --- !u!61 &597667143
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7870,7 +7853,6 @@ MonoBehaviour:
     durability: 5
     type: 0
   durability: 1
-  collider: {fileID: 599635986}
 --- !u!61 &599635986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8429,7 +8411,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 645304162}
 --- !u!61 &645304162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8560,7 +8541,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 650309673}
 --- !u!61 &650309673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8757,7 +8737,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 655839855}
 --- !u!61 &655839855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9522,7 +9501,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 707013025}
 --- !u!61 &707013025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10037,7 +10015,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 798388126}
 --- !u!61 &798388126
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10368,7 +10345,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 846654266}
 --- !u!61 &846654266
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10699,7 +10675,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 882019694}
 --- !u!61 &882019694
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10926,7 +10901,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 917942157}
 --- !u!61 &917942157
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11057,7 +11031,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 918391638}
 --- !u!61 &918391638
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11346,7 +11319,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 921797164}
 --- !u!61 &921797164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11683,7 +11655,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 989183555}
 --- !u!61 &989183555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11912,7 +11883,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1013088468}
 --- !u!61 &1013088468
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12267,7 +12237,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1065398602}
 --- !u!61 &1065398602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12566,7 +12535,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1080537385}
 --- !u!61 &1080537385
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13079,7 +13047,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1122487861}
 --- !u!61 &1122487861
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13294,7 +13261,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1142463960}
 --- !u!61 &1142463960
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13425,7 +13391,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1166194455}
 --- !u!61 &1166194455
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13588,7 +13553,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1181813774}
 --- !u!61 &1181813774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13835,7 +13799,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1197488564}
 --- !u!61 &1197488564
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14252,7 +14215,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1250824052}
 --- !u!61 &1250824052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14415,7 +14377,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1274026135}
 --- !u!61 &1274026135
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14928,7 +14889,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1298086163}
 --- !u!61 &1298086163
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15175,7 +15135,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1313913746}
 --- !u!61 &1313913746
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15306,7 +15265,6 @@ MonoBehaviour:
     durability: 2
     type: 0
   durability: 1
-  collider: {fileID: 1320129855}
 --- !u!61 &1320129855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15535,7 +15493,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1350773938}
 --- !u!61 &1350773938
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15750,7 +15707,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1364487214}
 --- !u!61 &1364487214
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16161,7 +16117,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1418745555}
 --- !u!61 &1418745555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16560,7 +16515,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1467132666}
 --- !u!61 &1467132666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16955,7 +16909,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1507108153}
 --- !u!61 &1507108153
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17202,7 +17155,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1525230601}
 --- !u!61 &1525230601
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17333,7 +17285,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1534415744}
 --- !u!61 &1534415744
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17548,7 +17499,6 @@ MonoBehaviour:
     durability: 2
     type: 0
   durability: 1
-  collider: {fileID: 1556897438}
 --- !u!61 &1556897438
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17795,7 +17745,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1563361651}
 --- !u!61 &1563361651
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17926,7 +17875,6 @@ MonoBehaviour:
     durability: 5
     type: 0
   durability: 1
-  collider: {fileID: 1567969768}
 --- !u!61 &1567969768
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18089,7 +18037,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1575078348}
 --- !u!61 &1575078348
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18220,7 +18167,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1580693583}
 --- !u!61 &1580693583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18615,7 +18561,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1639123611}
 --- !u!61 &1639123611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18844,7 +18789,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1650782485}
 --- !u!61 &1650782485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19566,7 +19510,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1713156570}
 --- !u!61 &1713156570
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19697,7 +19640,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1719004478}
 --- !u!61 &1719004478
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19828,7 +19770,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1723497051}
 --- !u!61 &1723497051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20299,7 +20240,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1767703914}
 --- !u!61 &1767703914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20494,7 +20434,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1783615937}
 --- !u!61 &1783615937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20625,7 +20564,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 1787659947}
 --- !u!61 &1787659947
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20840,7 +20778,6 @@ MonoBehaviour:
     durability: 2
     type: 0
   durability: 1
-  collider: {fileID: 1795512757}
 --- !u!61 &1795512757
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20971,7 +20908,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 1800257590}
 --- !u!61 &1800257590
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21960,7 +21896,6 @@ MonoBehaviour:
     durability: 5
     type: 0
   durability: 1
-  collider: {fileID: 1958664393}
 --- !u!61 &1958664393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22343,7 +22278,6 @@ MonoBehaviour:
     durability: 2
     type: 0
   durability: 1
-  collider: {fileID: 1984539268}
 --- !u!61 &1984539268
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22624,7 +22558,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 2026438651}
 --- !u!61 &2026438651
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23347,7 +23280,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 2091821267}
 --- !u!61 &2091821267
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23478,7 +23410,6 @@ MonoBehaviour:
     durability: 3
     type: 0
   durability: 1
-  collider: {fileID: 2102660261}
 --- !u!61 &2102660261
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23753,7 +23684,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 2136706009}
 --- !u!61 &2136706009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24077,7 +24007,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  collider: {fileID: 2401945687336086398}
 --- !u!4 &7201257476695327323
 Transform:
   m_ObjectHideFlags: 0
