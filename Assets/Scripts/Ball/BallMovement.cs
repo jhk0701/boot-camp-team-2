@@ -19,8 +19,10 @@ public class BallMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         Paddle = GameObject.Find("Paddle");
 
+
+
         // 임시로 패널 불러서 종료하기 위함
-        OnTouchBottom += GetComponent<DummyGameScene>().OpenEndPanel;
+        OnTouchBottom += GameManager.Instance.GameOver;
     }
 
     private void Update()
@@ -37,7 +39,7 @@ public class BallMovement : MonoBehaviour
         //Bounce(collision);
         if (collision.collider.gameObject.CompareTag("DownWall"))
         {
-            touchBottom();
+            TouchBottom();
         }
 
         IBreakable breakable = collision.gameObject.GetComponent<IBreakable>();
@@ -60,15 +62,16 @@ public class BallMovement : MonoBehaviour
         transform.position = new Vector2(ResetPosition.x, ResetPosition.y + 0.175f);
     }
 
-    private void touchBottom()
+    private void TouchBottom()
     {
+        // 임시로 패널 불러서 종료하기 위함
         OnTouchBottom?.Invoke();
 
         // TODO : 라이프 줄어들도록 한다. 게임매니저에 라이프 다운이 있어야 할듯함
         // 그리고 현재 라이프 값이 null이라 오류 발생
         //if (GameManager.Instance.GetLifeCount() == 0)
         //{
-        //    GameManager.Instance.GameOver();
+        //      OnTouchBottom?.Invoke();
         //}
         Reset();
     }

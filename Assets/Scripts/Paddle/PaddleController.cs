@@ -20,17 +20,17 @@ public class PaddleController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             movement += 1f;
-            movePaddle();
+            MovePaddle();
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             movement -= 1f;
-            movePaddle();
+            MovePaddle();
         }
     }
 
-    void movePaddle()
+    void MovePaddle()
     {
         transform.position += (new Vector3(movement * speed, 0)).normalized * Time.deltaTime * speed;
 
