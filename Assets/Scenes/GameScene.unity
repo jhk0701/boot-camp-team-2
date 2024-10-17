@@ -721,6 +721,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2401220610153803613, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 47b5f70a5b227f645aca78d1334c0970, type: 2}
     - target: {fileID: 3030908586997288573, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -772,6 +776,10 @@ PrefabInstance:
     - target: {fileID: 4056851630431820453, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: m_Name
       value: Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402936717229873448, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

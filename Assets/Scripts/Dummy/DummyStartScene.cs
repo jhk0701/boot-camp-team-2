@@ -9,7 +9,8 @@ namespace Dummy
     {
         public void StartGame()
         {
-            GameManager.Instance.SetState(GameManager.Instance.gameSceneState);
+            //GameManager.Instance.SetState(GameManager.Instance.GameSceneState);
+            SceneManager.LoadScene(1);
         }
     }
 

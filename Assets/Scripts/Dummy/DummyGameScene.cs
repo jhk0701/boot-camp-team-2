@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DummyGameScene : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class DummyGameScene : MonoBehaviour
 
     public void BackToStart()
     {
-        GameManager.Instance.SetState(GameManager.Instance.lobbyState);
+        SceneManager.LoadScene(0);
+        //GameManager.Instance.SetState(GameManager.Instance.LobbyState);
     }
     
 }
