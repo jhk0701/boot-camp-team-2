@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 824616797}
   - component: {fileID: 824616796}
   - component: {fileID: 824616798}
+  - component: {fileID: 824616799}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -329,7 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d417e0882b5f941ba2703ee35b9490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 60
 --- !u!114 &824616797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,10 +366,10 @@ MonoBehaviour:
   - levelName: Lv 2
     isCleared: 0
     Stages:
-    - {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
-    - {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
-    - {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
-    - {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}
+    - {fileID: 11400000, guid: 01333a5c4cd2c9149b490a41e97de685, type: 2}
+    - {fileID: 11400000, guid: 566aec409054c5d4686105f9e7141992, type: 2}
+    - {fileID: 11400000, guid: 07c130b9bb5418d46a3e999ff18195f5, type: 2}
+    - {fileID: 11400000, guid: e6b6a6888d127b2438b96c68ca4128e7, type: 2}
   - levelName: Lv 3
     isCleared: 0
     Stages:
@@ -377,6 +377,18 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
     - {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
     - {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}
+--- !u!114 &824616799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824616794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366911b0e01c5a0449c69e6783935c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208896608
 GameObject:
   m_ObjectHideFlags: 0

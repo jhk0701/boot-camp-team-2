@@ -59,5 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5364c53ab478004daf013b3164d6cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickColors: []
-  prefabs: []
+  brickColors:
+  - {r: 0.75294125, g: 0.019607844, b: 0.09411766, a: 1}
+  - {r: 0.9843138, g: 0.8196079, b: 0.039215688, a: 1}
+  - {r: 0.61371624, g: 1, b: 0.043137252, a: 1}
+  - {r: 1, g: 0.6179246, b: 0.94964546, a: 1}
+  - {r: 0.13679248, g: 0.9157847, b: 1, a: 1}
+  - {r: 0.1372549, g: 0.40984696, b: 1, a: 1}
+  prefabs:
+  - {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+  - {fileID: 2177059756596934908, guid: 045322c8db02cdf4e9afb7284e1a86ee, type: 3}
+  - {fileID: 671084688440272442, guid: 76b2717e2dda35644bc81df41bed1027, type: 3}
