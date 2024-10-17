@@ -11,6 +11,9 @@ public class BallMovement : MonoBehaviour
     public GameObject Paddle;
     private bool moving = false;
 
+    public string lastHitByPlayerName;
+
+
     // 임시로 패널 불러서 종료하기 위함
     public event Action OnTouchBottom;
     private void Awake()
@@ -22,6 +25,7 @@ public class BallMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         Paddle = GameObject.Find("Paddle");
+        lastHitByPlayerName = "";
     }
 
     private void Update()
@@ -39,10 +43,24 @@ public class BallMovement : MonoBehaviour
         {
             TouchBottom();
         }
-
-        Brick brick = collision.gameObject.GetComponent<Brick>();
-        brick?.Hit();
+        else if (collision.gameObject.CompareTag("Paddle"))
+        {
+            PaddleController paddle = collision.gameObject.GetComponent<PaddleController>();
+            lastHitByPlayerName = paddle.playerName;
+            Debug.Log($"Ball was hit by {lastHitByPlayerName}");
+        }
+        else if (collision.gameObject.CompareTag("Brick"))
+        {
+            Brick brick = collision.gameObject.GetComponent<Brick>();
+            if (brick != null)
+            {
+                brick.Hit(lastHitByPlayerName);
+                ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
+                Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
+            }
+        }
     }
+
 
     private void Launch()
     {

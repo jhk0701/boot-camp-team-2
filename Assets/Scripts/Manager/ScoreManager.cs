@@ -3,32 +3,53 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 [Serializable]
-public struct ScoreData
+public class StageScore
 {
-    public int score;
-    public string playerName;
-    public string date;
+    public int stageNumber;
+    public int currentScore;
+    public int highScore;
 }
+
+[Serializable]
+public class LevelScore
+{
+    public int levelNumber;
+    public List<StageScore> stageScores = new List<StageScore>();
+}
+
+[Serializable]
+public class ScoreData
+{
+    public string playerName;
+    public List<LevelScore> levelScores = new List<LevelScore>();
+}
+
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    private BrickManager brickManager;
+    private LevelManager levelManager;
     private GameManager gameManager;
-    private List<ScoreData> scoreList = new List<ScoreData>();
+    private BrickManager brickManager;
+    private BallMovement ballMovement;
+
+    private List<ScoreData> playerScores = new List<ScoreData>();
 
     private string filePath;
 
-    // 플레이어 이름과 점수를 저장할 딕셔너리
-    private Dictionary<string, int> playerScores = new Dictionary<string, int>();
+    // 현재 레벨과 스테이지
+    private int currentLevel;
+    private int currentStage;
 
-    // 게임 매니저에서 가져올 플레이어 이름
-    private string player1Name;
-    private string player2Name;
+    // 플레이어 이름
+    public string player1Name;
+    public string player2Name;
 
-    public event Action<string, int> OnScoreUpdate; 
+    // 스코어 업데이트 이벤트 (플레이어 이름과 새로운 스코어 전달)
+    public event Action<string, int> OnScoreUpdate;
 
     private void Awake()
     {
@@ -36,7 +57,28 @@ public class ScoreManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            filePath = Application.persistentDataPath + "/scores.json"; // 점수 데이터 파일 경로 설정
+
+            filePath = Application.persistentDataPath + "/scores.json";
+            LoadScores();
+
+            levelManager = GetComponent<LevelManager>();
+            gameManager = GetComponent<GameManager>();
+            if (gameManager != null)
+            {
+                //player1Name = gameManager.player1Name;
+                //player2Name = gameManager.player2Name;
+                player1Name = "Player1";
+                player2Name = "Player2";
+            }
+            else
+            {
+                player1Name = "Player1";
+                player2Name = "Player2";
+            }
+
+            // 각 플레이어의 데이터를 로드하거나 생성
+            LoadOrCreatePlayerData(player1Name);
+            LoadOrCreatePlayerData(player2Name);
         }
         else
         {
@@ -46,29 +88,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameManager.Instance;
-        if (gameManager != null)
-        {
-            //TODO:
-            //player1Name = gameManager.player1Name;
-            //player2Name = gameManager.player2Name;
-            player1Name = "Player1";
-            player2Name = "Player2";
-        }
-        else
-        {
-            player1Name = "Player1";
-            player2Name = "Player2";
-        }
-
-        // 각 플레이어의 기존 점수를 불러오기
-        LoadPlayerScore(player1Name);
-        LoadPlayerScore(player2Name);
-
-        LoadScores(); // 점수 데이터 로드
-
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
-
     }
 
     private void HandleOnStateChanged(StateManager.GameState gameState)
@@ -76,122 +96,202 @@ public class ScoreManager : MonoBehaviour
         switch (gameState)
         {
             case StateManager.GameState.Start:
+                ResetCurrentScores();
                 break;
             case StateManager.GameState.GameScene:
+                LevelManager levelManager = GameManager.Instance.levelManager;
+                currentLevel = levelManager.SelectedLevel;
+                currentStage = levelManager.SelectedStage;
                 break;
             case StateManager.GameState.Pause:
                 break;
             case StateManager.GameState.Win:
             case StateManager.GameState.Lose:
-                // 각 플레이어의 점수 저장
-                SaveScore(player1Name);
-                SaveScore(player2Name);
+                // 각 플레이어의 최고 스코어 업데이트
+                CheckAndUpdateHighScore(player1Name);
+                CheckAndUpdateHighScore(player2Name);
+
+                // 스코어 저장
+                SaveScores();
                 break;
         }
     }
 
-    public void SetBrickManager(BrickManager brick)
+    public void SetBrickManager(BrickManager manager)
     {
-        brickManager = brick;
+        brickManager = manager;
         brickManager.OnBrickBroken += HandleBrickBroken;
     }
 
-    private void HandleBrickBroken(Brick brick)
+    private void HandleBrickBroken(string playerName)
     {
-        // 예시로 현재는 Player1에게만 점수를 추가합니다.
-        // 실제로는 어떤 플레이어가 벽돌을 깼는지에 따라 로직을 수정해야 합니다.
-        AddScore(player1Name, 10); // 벽돌이 깨질 때마다 10점 추가
-        Debug.Log($"AddScore +10 for {player1Name}, Current Score : {GetCurrentScore(player1Name)}");
+        // 어떤 플레이어가 벽돌을 깼는지 식별
+        AddScore(playerName, 10);
+
+        Debug.Log($"AddScore +10 for {playerName}, Current Score: {GetCurrentScore(playerName)}");
     }
 
     public void AddScore(string playerName, int points)
     {
-        if (points > 0)
-        {
-            if (!playerScores.ContainsKey(playerName))
-            {
-                playerScores[playerName] = 0;
-            }
+        if (points <= 0)
+            return;
 
-            playerScores[playerName] += points;
-            OnScoreUpdate?.Invoke(playerName, playerScores[playerName]);
+        // 플레이어 데이터 찾기
+        ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
+        if (playerData == null)
+        {
+            Debug.LogError($"Player {playerName} not found in playerScores");
+            return;
         }
+
+        // 레벨 스코어 가져오기 또는 생성
+        LevelScore levelScore = playerData.levelScores.Find(l => l.levelNumber == currentLevel);
+        if (levelScore == null)
+        {
+            levelScore = new LevelScore { levelNumber = currentLevel };
+            playerData.levelScores.Add(levelScore);
+        }
+
+        // 스테이지 스코어 가져오기 또는 생성
+        StageScore stageScore = levelScore.stageScores.Find(s => s.stageNumber == currentStage);
+        if (stageScore == null)
+        {
+            stageScore = new StageScore { stageNumber = currentStage };
+            levelScore.stageScores.Add(stageScore);
+        }
+
+        // 현재 스코어 업데이트
+        stageScore.currentScore += points;
+
+        // 스코어 업데이트 이벤트 호출
+        OnScoreUpdate?.Invoke(playerName, stageScore.currentScore);
     }
 
     public int GetCurrentScore(string playerName)
     {
-        if (playerScores.ContainsKey(playerName))
+        return GetCurrentScore(playerName, currentLevel, currentStage);
+    }
+
+    public int GetHighScore(string playerName)
+    {
+        return GetHighScore(playerName, currentLevel, currentStage);
+    }
+
+    public int GetCurrentScore(string playerName, int level, int stage)
+    {
+        ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
+        if (playerData == null)
+            return 0;
+
+        LevelScore levelScore = playerData.levelScores.Find(l => l.levelNumber == level);
+        if (levelScore != null)
         {
-            return playerScores[playerName];
+            StageScore stageScore = levelScore.stageScores.Find(s => s.stageNumber == stage);
+            if (stageScore != null)
+            {
+                return stageScore.currentScore;
+            }
         }
+
         return 0;
     }
 
-    private void LoadPlayerScore(string playerName)
+    public int GetHighScore(string playerName, int level, int stage)
     {
-        // 기존에 동일한 playerName을 가진 점수가 있는지 확인
-        ScoreData existingScore = scoreList.Find(score => score.playerName == playerName);
+        ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
+        if (playerData == null)
+            return 0;
 
-        if (existingScore.playerName != null)
+        LevelScore levelScore = playerData.levelScores.Find(l => l.levelNumber == level);
+        if (levelScore != null)
         {
-            // 기존 점수를 로드하여 딕셔너리에 저장
-            playerScores[playerName] = existingScore.score;
-            Debug.Log($"Loaded score for {playerName}: {existingScore.score}");
+            StageScore stageScore = levelScore.stageScores.Find(s => s.stageNumber == stage);
+            if (stageScore != null)
+            {
+                return stageScore.highScore;
+            }
         }
-        else
+
+        return 0;
+    }
+
+    private void CheckAndUpdateHighScore(string playerName)
+    {
+        ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
+        if (playerData == null)
+            return;
+
+        LevelScore levelScore = playerData.levelScores.Find(l => l.levelNumber == currentLevel);
+        if (levelScore != null)
         {
-            // 점수가 없으면 0으로 초기화
-            playerScores[playerName] = 0;
-            Debug.Log($"No existing score for {playerName}, starting at 0");
+            StageScore stageScore = levelScore.stageScores.Find(s => s.stageNumber == currentStage);
+            if (stageScore != null)
+            {
+                if (stageScore.currentScore > stageScore.highScore)
+                {
+                    stageScore.highScore = stageScore.currentScore;
+                    Debug.Log($"New high score for {playerName} at Level {currentLevel}, Stage {currentStage}: {stageScore.highScore}");
+                }
+            }
         }
     }
 
-    public void SaveScore(string playerName)
+    private void LoadOrCreatePlayerData(string playerName)
     {
-        // 새로운 점수 데이터를 생성
-        ScoreData newScore = new ScoreData
+        ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
+        if (playerData == null)
         {
-            score = GetCurrentScore(playerName),
-            playerName = playerName,
-            date = DateTime.Now.ToString("yyyy-MM-dd")
-        };
-
-        // 기존에 동일한 playerName을 가진 점수가 있는지 확인
-        int existingIndex = scoreList.FindIndex(score => score.playerName == playerName);
-
-        if (existingIndex >= 0)
-        {
-            // 같은 이름이 이미 있으면, 기존 점수를 업데이트
-            scoreList[existingIndex] = newScore;
-            Debug.Log($"Score updated for {playerName}: {newScore.score} on {newScore.date}");
+            // 새로운 플레이어 데이터 생성
+            playerData = new ScoreData
+            {
+                playerName = playerName
+            };
+            playerScores.Add(playerData);
+            Debug.Log($"Created new ScoreData for player {playerName}");
         }
         else
         {
-            // 같은 이름이 없으면 새 점수를 추가
-            scoreList.Add(newScore);
-            Debug.Log($"New score saved: {newScore.score} by {newScore.playerName} on {newScore.date}");
+            Debug.Log($"Loaded existing ScoreData for player {playerName}");
         }
+    }
 
-        // 점수를 내림차순으로 정렬 (점수가 높을수록 좋은 순서)
-        scoreList.Sort((a, b) => b.score.CompareTo(a.score));
-
-        // 리스트를 JSON으로 직렬화
-        string json = JsonConvert.SerializeObject(scoreList, Formatting.Indented);
-        File.WriteAllText(filePath, json); // JSON 데이터를 파일에 저장
+    public void SaveScores()
+    {
+        string json = JsonConvert.SerializeObject(playerScores, Formatting.Indented);
+        File.WriteAllText(filePath, json);
+        Debug.Log("Scores saved to " + filePath);
     }
 
     public void LoadScores()
     {
         if (File.Exists(filePath))
         {
-            string json = File.ReadAllText(filePath); // 파일에서 JSON 데이터 읽기
-            scoreList = JsonConvert.DeserializeObject<List<ScoreData>>(json); // JSON 데이터를 List<ScoreData>로 변환
+            string json = File.ReadAllText(filePath);
+            playerScores = JsonConvert.DeserializeObject<List<ScoreData>>(json);
+            Debug.Log("Scores loaded from " + filePath);
+        }
+        else
+        {
+            Debug.Log("No existing score file found, starting with empty scores");
+            playerScores = new List<ScoreData>();
         }
     }
 
-    public List<ScoreData> GetTopScores(int count = 3)
+    // 현재 스코어를 초기화 (새 게임 시작 시)
+    public void ResetCurrentScores()
     {
-        // 상위 count개의 점수 반환
-        return scoreList.GetRange(0, Mathf.Min(count, scoreList.Count));
+        foreach (var playerData in playerScores)
+        {
+            LevelScore levelScore = playerData.levelScores.Find(l => l.levelNumber == currentLevel);
+            if (levelScore != null)
+            {
+                StageScore stageScore = levelScore.stageScores.Find(s => s.stageNumber == currentStage);
+                if (stageScore != null)
+                {
+                    stageScore.currentScore = 0;
+                }
+            }
+        }
     }
+
 }

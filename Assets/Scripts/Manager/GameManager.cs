@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public LevelManager levelManager;
     private StateManager stateManager;
 
+    public string player1Name;
+    public string player2Name;
+
     private int lives = 3;
 
 
@@ -60,12 +63,10 @@ public class GameManager : MonoBehaviour
     {
         lives--;
         OnLifeUpdate?.Invoke();
-        Debug.Log($"lives Lost : -1!, Current Life: {lives}");
 
         if (lives <= 0)
         {
             stateManager.SetState(StateManager.GameState.Lose);
-            Debug.Log("목숨 0개, 패배 전환");
         }
     }
 
@@ -81,4 +82,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+
+    public int GetCurrentLevel()
+    {
+        return levelManager.SelectedLevel;
+    }
+
+    public int GetCurrentStage()
+    {
+        return levelManager.SelectedStage;
+    }
 }
