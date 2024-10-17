@@ -6,18 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
 
-    public enum GameState
-    {
-        Lobby,
-        GameScene,
-        Pause,
-        Win,
-        Lose
-    }
 
-    public GameState CurrentState { get; private set; }
-
-    public event Action<GameState> OnStateChanged;
     public event Action OnLifeUpdate;
 
     private BrickManager brickManager;
@@ -46,7 +35,7 @@ public class GameManager : MonoBehaviour
    
     private void Start()
     {
-        StateManager.Instance.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.Start);
     }
 
 
@@ -64,28 +53,29 @@ public class GameManager : MonoBehaviour
 
     private void HandleAllBricksBroken()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.Win);
     }
 
     private void HandleOnTouchBottom()
     {
         lives--;
         OnLifeUpdate?.Invoke();
-        Debug.Log("lives Lost : -1");
+        Debug.Log($"lives Lost : -1!, Current Life: {lives}");
 
         if (lives <= 0)
         {
-            stateManager.SetState(StateManager.GameState.Start);
+            stateManager.SetState(StateManager.GameState.Lose);
+            Debug.Log("목숨 0개, 패배 전환");
         }
     }
 
     public void StartGameScene()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.GameScene);
         SceneManager.LoadScene(1);
     }
 
-    public void StartLobby()
+    public void BackToLobby()
     {   
         stateManager.SetState(StateManager.GameState.Start);
         SceneManager.LoadScene(0);

@@ -34,7 +34,9 @@ public class StateManager : MonoBehaviour
 
     public void SetState(GameState newState)
     {
+        Debug.Log($"이전 상태 {CurrentState}");
         CurrentState = newState;
         OnStateChanged?.Invoke(newState);
+        Debug.Log($"현재 상태 {CurrentState}");
     }
 }

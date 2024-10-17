@@ -24,6 +24,7 @@ public class BrickManager : MonoBehaviour
     {
         brickFactory = GetComponent<BrickFactory>();
         GameManager.Instance.SetBrickManager(this);
+        ScoreManager.Instance.SetBrickManager(this);
     }
 
     void Start()
