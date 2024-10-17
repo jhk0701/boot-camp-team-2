@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Manager/StateManager.cs.meta
-guid: 5478d145cd740ae48a4800754a8f8cf9
-========
-guid: 741957f4bc6d74842b6aa9478ea61728
->>>>>>>> dev:Assets/Scripts/Start Scene/LevelGroup.cs.meta
+guid: e5364c53ab478004daf013b3164d6cde
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
