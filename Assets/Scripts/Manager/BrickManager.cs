@@ -46,7 +46,7 @@ public class BrickManager : MonoBehaviour
         {
             Brick b = brickFactory.Create(data);
 
-            if (!b.stat.type.Equals(BrickType.Unbreak))
+            if (!b.type.Equals(BrickType.Unbreak))
                 CurrentCount++;
         }
     }

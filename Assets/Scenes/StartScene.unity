@@ -375,7 +375,7 @@ MonoBehaviour:
   - levelName: Lv 3
     isCleared: 0
     Stages:
-    - {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
+    - {fileID: 11400000, guid: 955aae30c962c2f47befe3deed53600a, type: 2}
     - {fileID: 11400000, guid: 56f6232deccc76a44ae4de8744f43a09, type: 2}
     - {fileID: 11400000, guid: 0402033236f0ba641860ff2c02fcc6c2, type: 2}
     - {fileID: 11400000, guid: 5eca483894f800640b4d313638f2bc66, type: 2}

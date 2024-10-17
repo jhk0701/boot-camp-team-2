@@ -4,12 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TopWall
   - DownWall
-  - LeftWall
-  - RightWall
   - Paddle
   - Brick
+  - Ball
+  - Wall
   layers:
   - Default
   - TransparentFX

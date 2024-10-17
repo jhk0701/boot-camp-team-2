@@ -12,7 +12,7 @@ public class BrickAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-
+    
     public void Hit()
     {
         animator.SetTrigger(HIT);

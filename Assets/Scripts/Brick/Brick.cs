@@ -5,7 +5,6 @@ public enum BrickType
 {
     Normal = 0,
     Unbreak,
-    Item,
     Flow,
     Penalty,
 }
@@ -13,8 +12,6 @@ public enum BrickType
 [Serializable]
 public struct BrickStat
 {
-    public int durability;
-    public BrickType type;
 } 
 
 // 벽돌의 기능 : 공에 맞아 부서지기
@@ -22,10 +19,10 @@ public struct BrickStat
 public class Brick : MonoBehaviour
 {    
     BrickManager manager;
-    BrickAnimation animationController;
+    BrickAnimation brickAnimation;
 
-    public BrickStat stat;
-    [SerializeField] int durability = 1;
+    [SerializeField] int durability;
+    public BrickType type;
     public int Durability
     { 
         get { return durability; }
@@ -45,12 +42,12 @@ public class Brick : MonoBehaviour
     void Awake()
     {
         manager = transform.parent.GetComponent<BrickManager>();
-        animationController = GetComponent<BrickAnimation>();
+        brickAnimation = GetComponent<BrickAnimation>();
     }
 
     void Start()
     {
-        Durability = stat.durability;
+        Durability = durability;
     }
 
     /// <summary>
@@ -58,11 +55,10 @@ public class Brick : MonoBehaviour
     /// </summary>
     public virtual void Hit()
     {
-        // OnBrickHitted?.Invoke();
-        manager.CallOnBrickHitted(this);
-        animationController.Hit();
+        manager.CallOnBrickHitted(this); // 매니저에 이벤트 호출
+        brickAnimation.Hit();
 
-        if (stat.type.Equals(BrickType.Unbreak)) 
+        if (type.Equals(BrickType.Unbreak)) 
             return;
 
         Durability--;

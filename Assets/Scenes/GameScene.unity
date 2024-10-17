@@ -781,6 +781,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8402936717229873448, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1007,7 +1011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.data[0]
@@ -1016,11 +1020,15 @@ PrefabInstance:
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 671084688440272442, guid: 76b2717e2dda35644bc81df41bed1027, type: 3}
+      objectReference: {fileID: 2177059756596934908, guid: 045322c8db02cdf4e9afb7284e1a86ee, type: 3}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 2177059756596934908, guid: 045322c8db02cdf4e9afb7284e1a86ee, type: 3}
+      objectReference: {fileID: 2839407065568531863, guid: bbb82d1e47f74cf4daa14293939a765e, type: 3}
+    - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: prefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2468646393606229488, guid: b00c637c1ced011459ea2a836626d10a, type: 3}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: brickColors.Array.size
       value: 9

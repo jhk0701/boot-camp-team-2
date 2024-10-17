@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -39,9 +40,12 @@ public class BallMovement : MonoBehaviour
         {
             TouchBottom();
         }
-
-        Brick brick = collision.gameObject.GetComponent<Brick>();
-        brick?.Hit();
+        
+        if (collision.collider.gameObject.CompareTag("Brick"))
+        {
+            Brick brick = collision.gameObject.GetComponent<Brick>();
+            brick.Hit();
+        }
     }
 
     private void Launch()

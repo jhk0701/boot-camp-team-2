@@ -50,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2263515222942441196, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
       propertyPath: m_Name
-      value: Brick Variant
+      value: Brick Penalty
       objectReference: {fileID: 0}
     - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
       propertyPath: stat.type
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

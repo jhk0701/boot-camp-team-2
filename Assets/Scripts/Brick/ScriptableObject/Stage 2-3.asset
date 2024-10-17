@@ -13,188 +13,151 @@ MonoBehaviour:
   m_Name: Stage 2-3
   m_EditorClassIdentifier: 
   datas:
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 0.5, y: 3}
     size: {x: 1, y: 1}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 1.25, y: 3.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 1.25, y: 2.75}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 1.75, y: 3.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 1.7499999, y: 3.75}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: -0.25, y: 3.75}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 0.2499999, y: 3.75}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: 0.9999999, y: 3.75}
     size: {x: 1, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: -0.25, y: 3.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 1
-      type: 1
+  - durability: 1
+    type: 1
     position: {x: -0.25, y: 2.75}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1, y: 2}
     size: {x: 1, y: 1}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1.75, y: 2}
     size: {x: 0.5, y: 1}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -0.000000014901161, y: 1.9999999}
     size: {x: 1, y: 1}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -1, y: 1.9999999}
     size: {x: 1, y: 1}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -2, y: 2.5}
     size: {x: 1, y: 1}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -2, y: 1.5}
     size: {x: 1, y: 1}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -0.75, y: 1.2499999}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 1
+    type: 0
     position: {x: -1.25, y: 0.24999988}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 1
+    type: 0
     position: {x: -1.25, y: 0.7499999}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 1
+    type: 0
     position: {x: -0.74999994, y: 0.24999987}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 1
+    type: 0
     position: {x: -0.74999994, y: 0.7499999}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 0.5, y: 1.25}
     size: {x: 1, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1.75, y: 1.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1.7499999, y: 0.75}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1.25, y: 1.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1.2499999, y: 0.74999994}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 1
+    type: 0
     position: {x: 1.2499999, y: 0.24999994}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -0.25, y: 1.2499999}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -1.25, y: 1.2499999}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -1, y: 2.75}
     size: {x: 1, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -1, y: 3.25}
     size: {x: 1, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -1, y: 3.75}
     size: {x: 1, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -0.75, y: 4.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: -0.25, y: 4.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 0.24999991, y: 4.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 0.7499999, y: 4.25}
     size: {x: 0.5, y: 0.5}
-  - stat:
-      durability: 5
-      type: 0
+  - durability: 3
+    type: 0
     position: {x: 1.2499999, y: 4.25}
     size: {x: 0.5, y: 0.5}

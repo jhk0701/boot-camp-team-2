@@ -13,7 +13,7 @@ public class BrickFactory : MonoBehaviour
         brickDictionary = new Dictionary<BrickType, Brick>();
 
         for (int i = 0; i < prefabs.Length; i++)
-            brickDictionary.Add(prefabs[i].stat.type, prefabs[i]);
+            brickDictionary.Add(prefabs[i].type, prefabs[i]);
     }
 
     public Brick Create(BrickType type)
@@ -23,15 +23,15 @@ public class BrickFactory : MonoBehaviour
 
     public Brick Create(PlacementData data)
     {
-        Brick instance = Create(data.stat.type);
+        Brick instance = Create(data.type);
 
         instance.transform.position = data.position;
         instance.transform.localScale = data.size;
-        instance.stat = data.stat;
+        instance.type = data.type;
 
         SpriteRenderer sprite = instance.GetComponentInChildren<SpriteRenderer>();
 
-        if(data.stat.type.Equals(BrickType.Unbreak))
+        if(data.type.Equals(BrickType.Unbreak))
             sprite.color = Color.gray;
         else
             sprite.color = brickColors[Random.Range(0, brickColors.Length)];
