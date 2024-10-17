@@ -24,7 +24,7 @@ public class GameSceneState : IGameState
         }
 
         //패배
-        if(gameManager.timeManager.CheckRemainTime() || gameManager.GetLifeCount() <= 0)
+        if (gameManager.timeManager.CheckRemainTime() || gameManager.GetLifeCount() <= 0)
         {
             gameManager.GameOver();
         }

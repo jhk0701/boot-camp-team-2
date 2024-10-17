@@ -17,8 +17,8 @@ public struct BrickStat
     public BrickType type;
 } 
 
-
-public class Brick : MonoBehaviour, IBreakable
+// 벽돌의 기능 : 공에 맞아 부서지기
+public class Brick : MonoBehaviour
 {
     public BrickStat stat;
     [SerializeField] int durability = 1;
@@ -37,7 +37,6 @@ public class Brick : MonoBehaviour, IBreakable
         } 
     }
 
-    [SerializeField] SpriteRenderer sprite;
     [SerializeField] Collider2D collider;
 
     public event Action OnBrickHitted;
@@ -45,9 +44,6 @@ public class Brick : MonoBehaviour, IBreakable
 
     void Awake()
     {
-        if (sprite == null)
-            sprite = GetComponentInChildren<SpriteRenderer>();
-
         collider = GetComponent<BoxCollider2D>();
     }
 
@@ -55,24 +51,6 @@ public class Brick : MonoBehaviour, IBreakable
     {
         Durability = stat.durability;
     }
-
-    public void Initialize(Vector2 pos, Vector2 size, BrickStat brickStat, Color col)
-    {
-        transform.position = pos;
-        transform.localScale = size;
-        stat = brickStat;
-
-        if(stat.type.Equals(BrickType.Unbreakable))
-            sprite.color = Color.gray;
-        else
-            sprite.color = col;
-    }
-
-    public void Initialize(PlacementData data, Color col)
-    {
-        Initialize(data.position, data.size, data.stat, col);
-    }
-
 
     /// <summary>
     /// 벽돌 체력 깎는 메서드

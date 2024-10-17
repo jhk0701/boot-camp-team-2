@@ -29,8 +29,8 @@ public class BallController : MonoBehaviour
     {
         Bounce(collision);
 
-        IBreakable breakable = collision.gameObject.GetComponent<IBreakable>();
-        breakable?.Hit();
+        Brick brick = collision.gameObject.GetComponent<Brick>();
+        brick?.Hit();
     }
 
     private void Launch()
