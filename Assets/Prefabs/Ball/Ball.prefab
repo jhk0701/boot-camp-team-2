@@ -47,7 +47,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -71,7 +71,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4056851630431820453}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 47b5f70a5b227f645aca78d1334c0970, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cbd4ba843b046428994bc3411dff59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 5
   rigidbody: {fileID: 8402936717229873448}
-  Paddle: {fileID: 0}
+  Paddle: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
 --- !u!1 &9175103110434709914
 GameObject:
   m_ObjectHideFlags: 0

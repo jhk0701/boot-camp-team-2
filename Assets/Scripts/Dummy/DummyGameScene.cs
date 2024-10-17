@@ -16,7 +16,7 @@ public class DummyGameScene : MonoBehaviour
     public void BackToStart()
     {
         SceneManager.LoadScene(0);
-        GameManager.Instance.SetState(GameManager.Instance.lobbyState);
+        //GameManager.Instance.SetState(GameManager.Instance.LobbyState);
     }
     
 }

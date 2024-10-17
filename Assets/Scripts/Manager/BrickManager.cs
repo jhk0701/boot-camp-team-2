@@ -2,12 +2,17 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InGameManager : MonoBehaviour
+[RequireComponent(typeof(BrickFactory))]
+public class BrickManager : MonoBehaviour
 {
-    [SerializeField] BrickPlacement placement;     // 벽돌 배치 데이터
+    // 테스트용으로 변수를 남겨둠. 직접 할당해서 쓸 수 있도록
+    [SerializeField] BrickPlacement placement;
     BrickFactory brickFactory;     // 새로운 벽돌 추가 => 위임
     
     public int CurrentCount { get; private set; }
+
+    public event Action<Brick> OnBrickHitted;
+    public event Action<Brick> OnBrickBroken;
     public event Action OnAllBrickBroken;
     
     // 종료 화면
@@ -34,11 +39,14 @@ public class InGameManager : MonoBehaviour
     // 받아온 데이터로 벽돌 만들기
     void Generate()
     {
+        if(placement == null)
+            placement = GameManager.Instance.levelManager.GetStage();
+        
         foreach (PlacementData data in placement.datas)
         {
             Brick b = brickFactory.Create(data);
             
-            b.OnBrickBroken += CountBrokenBrick;
+            // b.OnBrickBroken += CountBrokenBrick;
 
             if (!b.stat.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;
@@ -55,6 +63,17 @@ public class InGameManager : MonoBehaviour
         {   
             OnAllBrickBroken?.Invoke();
         }
+    }
+
+    public void CallOnBrickHitted(Brick brick)
+    {
+        OnBrickHitted?.Invoke(brick);
+    }
+
+    public void CallOnBrickBroken(Brick brick)
+    {
+        OnBrickBroken?.Invoke(brick);
+        CountBrokenBrick();
     }
 
 
