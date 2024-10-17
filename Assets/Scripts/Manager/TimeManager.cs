@@ -4,8 +4,6 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance;
 
-    public float maxTime = 60f; 
-    private float remainTime; 
     private float elapsedTime = 0f;
     private bool isPlaying; 
 
@@ -23,23 +21,22 @@ public class TimeManager : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.Instance.OnStateChanged += OnStateChanged;
-
+        StateManager.Instance.OnStateChanged += HandleOnStateChanged;
     }
 
-    private void OnStateChanged(GameManager.GameState newState)
+    private void HandleOnStateChanged(StateManager.GameState newState)
     {
         switch (newState)
         {
-            case GameManager.GameState.GameScene:
-                StartTimer();
+            case StateManager.GameState.GameScene:
+                ResumeTimer();
                 break;
-            case GameManager.GameState.Pause:
+            case StateManager.GameState.Pause:
                 PauseTimer();
                 break;
-            case GameManager.GameState.Lobby:
-            case GameManager.GameState.Win:
-            case GameManager.GameState.Lose:
+            case StateManager.GameState.Start:
+            case StateManager.GameState.Win:
+            case StateManager.GameState.Lose:
                 StopTimer();
                 break;
         }
@@ -49,19 +46,12 @@ public class TimeManager : MonoBehaviour
     {
         if (isPlaying)
         {
-            remainTime -= Time.deltaTime;
             elapsedTime += Time.deltaTime;
-
-            if (remainTime <= 0)
-            {
-                GameManager.Instance.SetState(GameManager.GameState.Lose);
-            }
         }
     }
 
     public void StartTimer()
     {
-        remainTime = maxTime;
         elapsedTime = 0f;
         isPlaying = true;
     }
@@ -74,18 +64,14 @@ public class TimeManager : MonoBehaviour
     public void PauseTimer()
     {
         isPlaying = false;
+        Time.timeScale = 0f;
     }
 
     public void ResumeTimer()
     {
+        Time.timeScale = 1f;
         isPlaying = true;
     }
-
-    public float GetRemainingTime()
-    {
-        return remainTime;
-    }
-
     public float GetElapsedTime()
     {
         return elapsedTime;
