@@ -26,7 +26,7 @@ public class Brick : MonoBehaviour
     public int Durability
     { 
         get { return durability; }
-        protected set
+        set
         {
             if (durability == 0)
                 return;
@@ -45,17 +45,13 @@ public class Brick : MonoBehaviour
         brickAnimation = GetComponent<BrickAnimation>();
     }
 
-    void Start()
-    {
-        Durability = durability;
-    }
-
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public virtual void Hit()
+    public void Hit()
     {
         manager.CallOnBrickHitted(this); // 매니저에 이벤트 호출
+
         brickAnimation.Hit();
 
         if (type.Equals(BrickType.Unbreak)) 

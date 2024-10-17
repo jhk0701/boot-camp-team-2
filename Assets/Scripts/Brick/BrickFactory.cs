@@ -28,6 +28,7 @@ public class BrickFactory : MonoBehaviour
         instance.transform.position = data.position;
         instance.transform.localScale = data.size;
         instance.type = data.type;
+        instance.Durability = data.durability;
 
         SpriteRenderer sprite = instance.GetComponentInChildren<SpriteRenderer>();
 

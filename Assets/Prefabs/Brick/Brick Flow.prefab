@@ -53,6 +53,10 @@ PrefabInstance:
       value: Brick Flow
       objectReference: {fileID: 0}
     - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
       propertyPath: stat.type
       value: 2
       objectReference: {fileID: 0}
