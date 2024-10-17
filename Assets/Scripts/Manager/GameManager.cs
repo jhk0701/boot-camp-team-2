@@ -1,33 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance; 
 
-    public static GameManager Instance;
+    public enum GameState
+    {
+        Lobby,
+        GameScene,
+        Pause,
+        Win,
+        Lose
+    }
 
-    //State 관리
-    private IGameState currentState;
-    public LobbyState lobbyState { get; private set; }
-    public GameSceneState gameSceneState { get; private set; }
-    public PauseState pauseState { get; private set; }
-    public WinState winState { get; private set; }
-    public LoseState loseState { get; private set; }
+    public GameState CurrentState { get; private set; }
 
-    private int lifeCount;
-    private int brickCount;
-    public TimeManager timeManager;
-    public LevelManager levelManager;
+    public delegate void StateChanged(GameState newState);
+    public event StateChanged OnStateChanged; // 상태 변경 이벤트
+
+    private BrickManager brickManager;
+
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -35,60 +35,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Start()
     {
-        lobbyState = new LobbyState(this);
-        gameSceneState = new GameSceneState(this);
-        pauseState = new PauseState(this);
-        loseState = new LoseState(this);
-        winState = new WinState(this);
+        SetState(GameState.Lobby);
 
-        SetState(lobbyState);
+        brickManager = FindObjectOfType<BrickManager>();
+        if (brickManager != null)
+        {
+            brickManager.OnAllBrickBroken += HandleAllBricksBroken;
+        }
     }
 
-    private void Update()
+    public void SetState(GameState newState)
     {
-        currentState?.UpdateState(); 
+        CurrentState = newState;
+        OnStateChanged?.Invoke(newState); 
     }
 
-    public int GetLifeCount()
+
+    private void HandleAllBricksBroken()
     {
-        return lifeCount;
+        SetState(GameState.Win);
     }
 
-    public int GetBrickCount()
+    public void StartGameScene()
     {
-        return brickCount;
+        SetState(GameState.GameScene);
+        SceneManager.LoadScene(1);
     }
-
-
-    public void SetState(IGameState newState)
-    {
-        //State가 바뀌면 이전 State에서는 나가기
-        currentState?.ExitState(); 
-        
-        //현재 씬 변경
-        currentState = newState;
-
-        currentState.EnterState();
-    }
-
-
-    public void PauseGame()
-    {
-        SetState(pauseState);
-    }
-
-    public void GameOver()
-    {
-        SetState(loseState);
-    }
-
-    public void GameWin()
-    {
-        SetState(winState);
-    }
-
 
 }
