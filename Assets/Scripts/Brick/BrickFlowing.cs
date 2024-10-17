@@ -18,7 +18,7 @@ public class BrickFlowing : MonoBehaviour
             Vector2 point = collision.GetContact(0).point;
             Vector2 dir = ((Vector2)transform.position - point).normalized;
 
-            rb.AddForce(dir * 2f, ForceMode2D.Impulse);
+            rb.AddForce(dir * 1.5f, ForceMode2D.Impulse);
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {

@@ -45,6 +45,12 @@ public class BallMovement : MonoBehaviour
         {
             Brick brick = collision.gameObject.GetComponent<Brick>();
             brick.Hit();
+
+            if(brick.type.Equals(BrickType.Flow))
+            {
+                Vector2 dir = ((Vector2)transform.position - collision.GetContact(0).point).normalized;
+                rigidbody.AddForce(dir * 3f, ForceMode2D.Impulse);
+            }
         }
     }
 
