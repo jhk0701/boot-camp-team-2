@@ -36,14 +36,13 @@ public class BallMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Bounce(collision);
         if (collision.collider.gameObject.CompareTag("DownWall"))
         {
             TouchBottom();
         }
 
-        IBreakable breakable = collision.gameObject.GetComponent<IBreakable>();
-        breakable?.Hit();
+        Brick brick = collision.gameObject.GetComponent<Brick>();
+        brick?.Hit();
     }
 
     private void Launch()
@@ -58,7 +57,6 @@ public class BallMovement : MonoBehaviour
         rigidbody.velocity = Vector2.zero;
         moving = false;
         Vector3 ResetPosition = Paddle.transform.position;
-
         transform.position = new Vector2(ResetPosition.x, ResetPosition.y + 0.175f);
     }
 

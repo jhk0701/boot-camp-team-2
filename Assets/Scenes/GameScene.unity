@@ -767,7 +767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3081444669498505840, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: speed
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3081444669498505840, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: Paddle
