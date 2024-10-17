@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -35,6 +36,9 @@ public class GameUIManager : MonoBehaviour
             button.onClick.AddListener(LoadHome);
         }
         nextLevel.onClick.AddListener(NextLevel);
+
+        //구독
+        //ScoreManager.OnScoreUpdate += HandleOnScoreUpdate;
     }
 
     // UI 초기화 메서드
@@ -50,6 +54,11 @@ public class GameUIManager : MonoBehaviour
         timeText.text = playTime.ToString("F2");
         scoreText.text = score.ToString();
         livesText.text = lives.ToString();
+    }
+
+    public void HandleOnScoreUpdate(int score)
+    {
+        scoreText.text = score.ToString();
     }
 
     public void ShowLoseGameUI()
