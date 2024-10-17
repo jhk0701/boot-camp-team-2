@@ -1,13 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum BrickType
 {
     Normal = 0,
-    Unbreakable,
-    Item
+    Unbreak,
+    Item,
+    Flow,
+    Penalty,
 }
 
 [Serializable]
@@ -56,13 +56,13 @@ public class Brick : MonoBehaviour
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public void Hit()
+    public virtual void Hit()
     {
         // OnBrickHitted?.Invoke();
         manager.CallOnBrickHitted(this);
         animationController.Hit();
 
-        if (stat.type.Equals(BrickType.Unbreakable)) 
+        if (stat.type.Equals(BrickType.Unbreak)) 
             return;
 
         Durability--;
