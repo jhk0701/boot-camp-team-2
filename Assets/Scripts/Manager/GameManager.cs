@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public event StateChanged OnStateChanged; // 상태 변경 이벤트
 
     private BrickManager brickManager;
+    public LevelManager levelManager;
 
 
     private void Awake()
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        levelManager = GetComponent<LevelManager>();
     }
 
     private void Start()
@@ -62,6 +65,12 @@ public class GameManager : MonoBehaviour
     {
         SetState(GameState.GameScene);
         SceneManager.LoadScene(1);
+    }
+
+    public void StartLobby()
+    {   
+        SetState(GameState.Lobby);
+        SceneManager.LoadScene(0);
     }
 
 }

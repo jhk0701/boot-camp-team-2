@@ -31,7 +31,7 @@ public class BrickManager : MonoBehaviour
         
         Generate();
         
-        OnAllBrickBroken += GameManager.Instance.GameWin;
+        // OnAllBrickBroken += GameManager.Instance.GameWin;
         OnAllBrickBroken += OpenGameEnd;
     }
 
@@ -45,8 +45,6 @@ public class BrickManager : MonoBehaviour
         foreach (PlacementData data in placement.datas)
         {
             Brick b = brickFactory.Create(data);
-            
-            // b.OnBrickBroken += CountBrokenBrick;
 
             if (!b.stat.type.Equals(BrickType.Unbreakable))
                 CurrentCount++;
@@ -85,7 +83,7 @@ public class BrickManager : MonoBehaviour
     public void BackToStart()
     {
         SceneManager.LoadScene(0);
-        GameManager.Instance.SetState(GameManager.Instance.lobbyState);
+        // GameManager.Instance.SetState(GameManager.Instance.lobbyState);
     }
     
 }
