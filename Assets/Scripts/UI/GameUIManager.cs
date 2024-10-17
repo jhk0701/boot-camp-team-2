@@ -39,6 +39,13 @@ public class GameUIManager : MonoBehaviour
 
         //구독
         //ScoreManager.OnScoreUpdate += HandleOnScoreUpdate;
+        float asdf = TimeManager.Instance.GetElapsedTime();
+        Debug.Log($"asdf : {asdf}");
+    }
+
+    private void Update()
+    {
+        //timeText.text = TimeManager.Instance.GetElapsedTime().ToString();
     }
 
     // UI 초기화 메서드
