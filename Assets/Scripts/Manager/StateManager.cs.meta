@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Manager/StateManager.cs.meta
 guid: 366911b0e01c5a0449c69e6783935c14
-========
-guid: 741957f4bc6d74842b6aa9478ea61728
->>>>>>>> dev:Assets/Scripts/Start Scene/LevelGroup.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
-  executionOrder: 0
+  executionOrder: 100
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

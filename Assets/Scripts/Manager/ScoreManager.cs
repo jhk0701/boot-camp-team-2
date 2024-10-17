@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using Newtonsoft.Json; // Newtonsoft.Json 네임스페이스 추가
-//using System.Xml;
+using Newtonsoft.Json; 
 
 [Serializable]
 public struct ScoreData
@@ -16,7 +15,7 @@ public struct ScoreData
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    private List<ScoreData> scoreList = new List<ScoreData>(); // 리스트로 바로 사용
+    private List<ScoreData> scoreList = new List<ScoreData>(); 
 
     private string filePath;
 
@@ -45,7 +44,7 @@ public class ScoreManager : MonoBehaviour
         BrickManager brickManager = FindObjectOfType<BrickManager>();
         if (brickManager != null)
         {
-            //brickManager.OnBrickBroken += HandleBrickBroken;
+            brickManager.OnBrickBroken+= HandleBrickBroken;
         }
     }
 
@@ -66,7 +65,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void HandleBrickBroken()
+    private void HandleBrickBroken(Brick brick)
     {
         AddScore(10); // 벽돌이 깨질 때마다 10점 추가 (예시로 10점 추가)
     }
