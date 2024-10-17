@@ -31,7 +31,6 @@ public class LevelSelection : MonoBehaviour
                     levelManager.SelectedLevel = level;
                     levelManager.SelectedStage = stage;
 
-                    // GameManager.Instance.SetState(GameManager.Instance.gameSceneState);
                     GameManager.Instance.StartGameScene();
                 });
             }

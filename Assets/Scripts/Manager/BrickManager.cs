@@ -23,6 +23,7 @@ public class BrickManager : MonoBehaviour
     void Awake()
     {
         brickFactory = GetComponent<BrickFactory>();
+        GameManager.Instance.SetBrickManager(this);
     }
 
     void Start()
@@ -31,7 +32,6 @@ public class BrickManager : MonoBehaviour
         
         Generate();
         
-        // OnAllBrickBroken += GameManager.Instance.GameWin;
         OnAllBrickBroken += OpenGameEnd;
     }
 
