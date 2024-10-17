@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct Level
+public class Level
 {
     public string levelName;
+    public bool isCleared;
     public BrickPlacement[] Stages;
 }
 
