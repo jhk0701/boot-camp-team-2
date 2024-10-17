@@ -11,10 +11,7 @@ public class BrickFactory : MonoBehaviour
     void Awake()
     {
         brickDictionary = new Dictionary<BrickType, Brick>();
-    }
 
-    void Start()
-    {
         for (int i = 0; i < prefabs.Length; i++)
             brickDictionary.Add(prefabs[i].stat.type, prefabs[i]);
     }
