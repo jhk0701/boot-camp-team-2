@@ -1,5 +1,5 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSceneState : IGameState
 {
@@ -12,7 +12,7 @@ public class GameSceneState : IGameState
 
     public void EnterState()
     {
-
+        SceneManager.LoadScene(1);
     }
 
     public void UpdateState()

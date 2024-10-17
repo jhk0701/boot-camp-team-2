@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class BrickAnimation : MonoBehaviour
 {
-    readonly int HIT = Animator.StringToHash("Hit");
-
-    Brick brick;
     Animator animator;
 
-    void Awake()
-    {
-        brick = GetComponent<Brick>();
-        animator = GetComponent<Animator>();
-    }
+    readonly int HIT = Animator.StringToHash("Hit");
 
-    void Start()
+    public void Hit()
     {
-        brick.OnBrickHitted += () => { animator.SetTrigger(HIT); };
+        animator.SetTrigger(HIT);
     }
-
     
 }

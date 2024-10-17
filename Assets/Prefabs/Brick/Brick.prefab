@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 1830343477542416437}
   - component: {fileID: 2401945686288559911}
   - component: {fileID: 6518174126091800008}
-  - component: {fileID: 2230498429606142908}
   - component: {fileID: 7232831386059706821}
+  - component: {fileID: 7909084947783315975}
   m_Layer: 0
   m_Name: Brick
   m_TagString: Brick
@@ -129,20 +129,6 @@ MonoBehaviour:
     durability: 1
     type: 0
   durability: 1
-  sprite: {fileID: 0}
-  collider: {fileID: 2401945686288559911}
---- !u!114 &2230498429606142908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263515222942441196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd5863bc57785ca4c8089cf48eb443eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &7232831386059706821
 Animator:
   serializedVersion: 5
@@ -164,6 +150,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7909084947783315975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263515222942441196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5863bc57785ca4c8089cf48eb443eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4853321291186791244
 GameObject:
   m_ObjectHideFlags: 0
