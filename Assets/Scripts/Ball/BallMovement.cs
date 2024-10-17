@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +10,10 @@ public class BallMovement : MonoBehaviour
     public Rigidbody2D rigidbody;
     public GameObject Paddle;
     private bool moving = false;
+
+    public int playerNumber; 
+    public string lastHitByPlayerName;
+
 
     // 임시로 패널 불러서 종료하기 위함
     public event Action OnTouchBottom;
@@ -22,15 +25,30 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        Paddle = GameObject.Find("Paddle");
+
+        PaddleController[] paddles = FindObjectsOfType<PaddleController>();
+        foreach (var paddle in paddles)
+        {
+            if (paddle.playerNumber == playerNumber)
+            {
+                Paddle = paddle.gameObject;
+                break;
+            }
+        }
+        lastHitByPlayerName = "";
     }
 
     private void Update()
     {
-        if ((moving is false) && (Input.GetKeyDown(KeyCode.Space)))
+        if (moving is false)
         {
-            moving = true;
-            Launch();
+            //Local MultiPlay Code
+            if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
+                (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
+            {
+                moving = true;
+                Launch();
+            }
         }
     }
 
@@ -40,19 +58,24 @@ public class BallMovement : MonoBehaviour
         {
             TouchBottom();
         }
-        
-        if (collision.collider.gameObject.CompareTag("Brick"))
+        else if (collision.gameObject.CompareTag("Paddle"))
+        {
+            PaddleController paddle = collision.gameObject.GetComponent<PaddleController>();
+            lastHitByPlayerName = paddle.playerName;
+            Debug.Log($"Ball was hit by {lastHitByPlayerName}");
+        }
+        else if (collision.gameObject.CompareTag("Brick"))
         {
             Brick brick = collision.gameObject.GetComponent<Brick>();
-            brick.Hit();
-
-            if(brick.type.Equals(BrickType.Flow))
+            if (brick != null)
             {
-                Vector2 dir = ((Vector2)transform.position - collision.GetContact(0).point).normalized;
-                rigidbody.AddForce(dir * 3f, ForceMode2D.Impulse);
+                brick.Hit(lastHitByPlayerName);
+                ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
+                Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
             }
         }
     }
+
 
     private void Launch()
     {
