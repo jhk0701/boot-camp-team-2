@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -39,9 +40,18 @@ public class BallMovement : MonoBehaviour
         {
             TouchBottom();
         }
+        
+        if (collision.collider.gameObject.CompareTag("Brick"))
+        {
+            Brick brick = collision.gameObject.GetComponent<Brick>();
+            brick.Hit();
 
-        Brick brick = collision.gameObject.GetComponent<Brick>();
-        brick?.Hit();
+            if(brick.type.Equals(BrickType.Flow))
+            {
+                Vector2 dir = ((Vector2)transform.position - collision.GetContact(0).point).normalized;
+                rigidbody.AddForce(dir * 3f, ForceMode2D.Impulse);
+            }
+        }
     }
 
     private void Launch()

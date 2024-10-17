@@ -4,7 +4,8 @@ using UnityEngine;
 [Serializable]
 public class PlacementData
 {
-    public BrickStat stat;
+    public int durability;
+    public BrickType type;
     public Vector2 position;
     public Vector2 size;
 }

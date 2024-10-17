@@ -175,16 +175,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paddle
       objectReference: {fileID: 0}
+    - target: {fileID: 7094987711920074502, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 135012302}
   m_SourcePrefab: {fileID: 100100000, guid: 4070521705432094681e8a8033f7fa24, type: 3}
 --- !u!1 &135012301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
   m_PrefabInstance: {fileID: 135012300}
   m_PrefabAsset: {fileID: 0}
+--- !u!70 &135012302
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135012301}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.08, y: 0.22}
+  m_Direction: 1
 --- !u!1 &155367553
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +823,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8402936717229873448, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -940,6 +986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 9135198289924798764, guid: 2564d1b340abae141b16a6db8e732546, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1007,7 +1057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.data[0]
@@ -1016,11 +1066,15 @@ PrefabInstance:
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 671084688440272442, guid: 76b2717e2dda35644bc81df41bed1027, type: 3}
+      objectReference: {fileID: 2177059756596934908, guid: 045322c8db02cdf4e9afb7284e1a86ee, type: 3}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: prefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 2177059756596934908, guid: 045322c8db02cdf4e9afb7284e1a86ee, type: 3}
+      objectReference: {fileID: 2839407065568531863, guid: bbb82d1e47f74cf4daa14293939a765e, type: 3}
+    - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: prefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2468646393606229488, guid: b00c637c1ced011459ea2a836626d10a, type: 3}
     - target: {fileID: 6000177302136245303, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: brickColors.Array.size
       value: 9
