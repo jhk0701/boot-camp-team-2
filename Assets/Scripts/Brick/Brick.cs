@@ -5,9 +5,8 @@ using UnityEngine;
 
 public enum BrickType
 {
+    Unbreakable = -1,
     Normal = 0,
-    Unbreakable,
-    Item,
 }
 
 [Serializable]

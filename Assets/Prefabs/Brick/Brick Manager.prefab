@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5081256539957542569}
   - component: {fileID: 3391552982520481798}
-  - component: {fileID: 8036703288110474358}
   m_Layer: 0
   m_Name: Brick Manager
   m_TagString: Untagged
@@ -54,19 +53,4 @@ MonoBehaviour:
   - {r: 0.86706704, g: 0.2688679, b: 1, a: 1}
   - {r: 1, g: 0.042452812, b: 0.06920009, a: 1}
   placement: {fileID: 11400000, guid: 6d075300908fe744cb114a6078ce3f39, type: 2}
---- !u!114 &8036703288110474358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2740906429721327795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e968cfd930d054faa0c61daa793f83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
-  - {fileID: 2177059756596934908, guid: 894def29d90e18045a1eb04e36acf268, type: 3}
-  - {fileID: 671084688440272442, guid: 5d27dc314b15c23459a701eb7f6ce8f7, type: 3}
+  prefabBrick: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
