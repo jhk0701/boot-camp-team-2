@@ -24,7 +24,7 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        Paddle = GameObject.Find("Paddle");
+        Paddle = GameObject.Find("Paddle_Player1");
         lastHitByPlayerName = "";
     }
 

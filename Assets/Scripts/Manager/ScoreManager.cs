@@ -37,6 +37,8 @@ public class ScoreManager : MonoBehaviour
     private BallMovement ballMovement;
 
     private List<ScoreData> playerScores = new List<ScoreData>();
+    public GameObject scoreBoardUIPrefab; // ScoreBoardUI 프리팹 참조
+    private GameObject instantiatedScoreBoardUI;
 
     private string filePath;
 
@@ -110,7 +112,12 @@ public class ScoreManager : MonoBehaviour
                 // 각 플레이어의 최고 스코어 업데이트
                 CheckAndUpdateHighScore(player1Name);
                 CheckAndUpdateHighScore(player2Name);
-
+                if (scoreBoardUIPrefab != null)
+                {
+                    instantiatedScoreBoardUI = Instantiate(scoreBoardUIPrefab);
+                    // 필요하다면 인스턴스 위치 및 부모 설정
+                    // instantiatedScoreBoardUI.transform.SetParent(someParentTransform, false);
+                }
                 // 스코어 저장
                 SaveScores();
                 break;

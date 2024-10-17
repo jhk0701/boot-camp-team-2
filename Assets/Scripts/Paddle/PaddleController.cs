@@ -4,50 +4,68 @@ public class PaddleController : MonoBehaviour
 {
     public float speed;
 
-    private float movement;
-    private float xMaxPosition = 2.25f;
-    private float xMinPosition = -2.25f;
-    private Vector3 startPosition;
-
+    public int playerNumber; 
     public string playerName;
 
+    private Vector3 startPosition;
+    private float movement;
 
     void Start()
     {
         startPosition = transform.position;
-        playerName  = ScoreManager.Instance.player1Name;
-    }
 
+        // 플레이어 번호에 따라 플레이어 이름 설정
+        if (playerNumber == 1)
+        {
+            playerName = ScoreManager.Instance.player1Name;
+        }
+        else if (playerNumber == 2)
+        {
+            playerName = ScoreManager.Instance.player2Name;
+        }
+    }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        // 플레이어 번호에 따라 다른 입력 키를 사용하여 패들 이동
+        if (playerNumber == 1)
         {
-            movement += 1f;
-            MovePaddle();
+            if (Input.GetKey(KeyCode.A))
+            {
+                movement -= 1f;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                movement += 1f;
+            }
+        }
+        else if (playerNumber == 2)
+        {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                movement -= 1f;
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                movement += 1f;
+            }
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (movement != 0f)
         {
-            movement -= 1f;
             MovePaddle();
         }
     }
 
     void MovePaddle()
     {
-        transform.position += (new Vector3(movement * speed, 0)).normalized * Time.deltaTime * speed;
+        // 동일한 영역에서 겹쳐서 이동하도록 설정
+        Vector3 movementVector = new Vector3(movement * speed * Time.deltaTime, 0f, 0f);
+        transform.position += movementVector;
 
-        if(transform.position.x > xMaxPosition)
-        {
-            transform.position = new Vector3(xMaxPosition, transform.position.y);
-        }
-       
-        if(transform.position.x < xMinPosition)
-        {
-            transform.position = new Vector3(xMinPosition, transform.position.y);
-        }
-
+        // 이동 후 움직임 초기화
         movement = 0f;
     }
 
