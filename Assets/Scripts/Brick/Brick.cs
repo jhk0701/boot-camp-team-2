@@ -36,13 +36,18 @@ public class Brick : MonoBehaviour
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public void Hit(string playerName)
+    public void Hit(string playerName, bool forceBreak = false)
     {
         this.playerName = playerName;
 
         BrickManager.Instance.CallOnBrickHitted(this);
         OnBrickHit?.Invoke();
         
+        if (forceBreak)
+        {
+            Durability -= Durability;
+            return;
+        }
 
         if (type.Equals(BrickType.Unbreak)) 
             return;

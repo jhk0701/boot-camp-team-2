@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public BrickManager BrickManager { get; private set; }
     private BallMovement ballMovement;
     private StateManager stateManager;
+    public SoundManager soundManager;
 
     public string player1Name;
     public string player2Name;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
         LevelManager = GetComponent<LevelManager>();
         stateManager = StateManager.Instance;
+        soundManager = GetComponent<SoundManager>();
     }
    
     private void Start()
