@@ -12,7 +12,7 @@ public enum BrickType
 [RequireComponent(typeof(BrickAnimation))]
 public class Brick : MonoBehaviour
 {
-    private string playerName;
+    public string playerName;
     public BrickType type;
     [SerializeField] int durability;  
     public int Durability
@@ -26,7 +26,7 @@ public class Brick : MonoBehaviour
             durability = value;
 
             if (Durability <= 0)
-                Break(playerName);
+                Break();
         } 
     }
 
@@ -50,11 +50,11 @@ public class Brick : MonoBehaviour
         Durability--;
     }
 
-    public void Break(string playerName)
+    public void Break()
     {
         GetComponent<Collider2D>().enabled = false;
 
-        BrickManager.Instance.CallOnBrickBroken(playerName);
+        BrickManager.Instance.CallOnBrickBroken(this);
         OnBrickBreak?.Invoke();
 
         // 1초 뒤 제거

@@ -14,6 +14,12 @@ public class BallMovement : MonoBehaviour
 
     // 임시로 패널 불러서 종료하기 위함
     public event Action OnTouchBottom;
+
+
+    public static event Action<Vector3,int> OnPaddleHit;
+    public static event Action<Vector3> OnWallHit;
+
+
     private void Awake()
     {
         GameManager.Instance.SetBallMovement(this);
@@ -57,8 +63,10 @@ public class BallMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Paddle"))
         {
+
             PaddleController paddle = collision.gameObject.GetComponent<PaddleController>();
             lastHitByPlayerName = paddle.playerName;
+            OnPaddleHit?.Invoke(transform.position, paddle.playerNumber);
             Debug.Log($"Ball was hit by {lastHitByPlayerName}");
         }
         else if (collision.gameObject.CompareTag("Brick"))
@@ -69,7 +77,7 @@ public class BallMovement : MonoBehaviour
                 brick.Hit(lastHitByPlayerName);
 
                 if (isInvincible)
-                    brick.Break(lastHitByPlayerName);
+                    brick.Break();
 
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
@@ -85,6 +93,10 @@ public class BallMovement : MonoBehaviour
                 }
 
             }
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            OnWallHit?.Invoke(transform.position);
         }
     }
 

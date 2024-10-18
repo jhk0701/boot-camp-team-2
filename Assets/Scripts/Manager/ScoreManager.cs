@@ -29,9 +29,8 @@ public class ScoreManager : MonoBehaviour
     private BrickManager brickManager;
     private BallMovement ballMovement;
 
-    public GameObject scoreBoardUIPrefab; 
+    public GameObject scoreBoardUIPrefab;
     private GameObject instantiatedScoreBoardUI;
-
 
     private string filePath;
 
@@ -41,7 +40,6 @@ public class ScoreManager : MonoBehaviour
 
     public string player1Name;
     public string player2Name;
-
 
     //각 플레이어의 점수를 저장하는 리스트
     private List<ScoreData> playerScores = new List<ScoreData>();
@@ -108,11 +106,11 @@ public class ScoreManager : MonoBehaviour
                 break;
             case StateManager.GameState.Win:
             case StateManager.GameState.Lose:
-                
+
                 // 각 플레이어의 최고 스코어 갱신
                 CheckAndUpdateHighScore(player1Name);
                 CheckAndUpdateHighScore(player2Name);
-                
+
                 instantiatedScoreBoardUI = Instantiate(scoreBoardUIPrefab);
 
                 SaveScores();
@@ -123,11 +121,13 @@ public class ScoreManager : MonoBehaviour
     public void SetBrickManager(BrickManager manager)
     {
         brickManager = manager;
-        brickManager.OnBrickBroken += HandleBrickBroken;
+        BrickManager.OnBrickBroken += HandleBrickBroken;
     }
 
-    private void HandleBrickBroken(string playerName)
+    // HandleBrickBroken 메서드 수정: string playerName -> Brick brick
+    private void HandleBrickBroken(Brick brick)
     {
+        string playerName = brick.playerName;
         //TODO: 점수 차등으로 주기
 
         // 어떤 플레이어가 벽돌을 깼는지 식별
@@ -295,6 +295,4 @@ public class ScoreManager : MonoBehaviour
             }
         }
     }
-
-
 }
