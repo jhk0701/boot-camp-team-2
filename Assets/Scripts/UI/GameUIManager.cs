@@ -7,81 +7,52 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    private Text levelText;
-    private Text timeText;
-    private Text scoreText;
-    private Text livesText;
-
-    // 초기 값 (예시 값으로 초기화)
-    private int initialLevel = 5;
-    private float initialTime = 99f;
-    private int initialScore = 5;
-    private int initialLives = 5;
-
-    [SerializeField] Button retryButton;
-    [SerializeField] Button[] homeButtons;
-    [SerializeField] Button nextLevel;
-
+    [SerializeField] GameObject startGamePanel;
+    [SerializeField] GameObject winGamePanel;
     [SerializeField] GameObject statusDisplay;
     [SerializeField] GameObject loseGamePanel;
-    [SerializeField] GameObject winGamePanel;
 
     void Start()
     {
-
-        levelText = statusDisplay.transform.Find("LevelInfo").GetComponent<Text>();
-        timeText = statusDisplay.transform.Find("TimeInfo").GetComponent<Text>();
-        scoreText = statusDisplay.transform.Find("ScoreInfo").GetComponent<Text>();
-        livesText = statusDisplay.transform.Find("LivesInfo").GetComponent<Text>();
-
-        InitializeUI();//예시값
+        //구독
+        StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
         Canvas canvas = FindObjectOfType<Canvas>();
         Instantiate(statusDisplay, canvas.transform);
         Instantiate(loseGamePanel, canvas.transform);
-        Instantiate(winGamePanel, canvas.transform);
 
         statusDisplay.SetActive(false);
         loseGamePanel.SetActive(false);     //LOSE패널 비활성화
-        winGamePanel.SetActive(false);      //WINE패널 비활성화
-        
-        retryButton.onClick.AddListener(RetryGame);
-        foreach (var button in homeButtons)
-        {
-            button.onClick.AddListener(LoadHome);
-        }
-        nextLevel.onClick.AddListener(NextLevel);
-
-        //구독
-        //ScoreManager.OnScoreUpdate += HandleOnScoreUpdate;
+      
         float asdf = TimeManager.Instance.GetElapsedTime();
         Debug.Log($"asdf : {asdf}");
     }
 
-    private void Update()
+    private void HandleOnStateChanged(StateManager.GameState newState)
     {
-        //timeText.text = TimeManager.Instance.GetElapsedTime().ToString();
+        switch (newState)
+        {
+            case StateManager.GameState.GameScene:
+                ShowStatusUI();
+                break;
+            case StateManager.GameState.Pause:
+                //PauseUI();
+                break;
+            case StateManager.GameState.Start:
+                ShowStartUI();
+                break;
+            case StateManager.GameState.Win:
+                ShowWinGameUI();
+                break;
+            case StateManager.GameState.Lose:
+                ShowLoseGameUI();
+                break;
+        }
     }
 
-    // UI 초기화 메서드
-    public void InitializeUI()
+    public void ShowStatusUI()
     {
-        UpdateUI(initialLevel, initialTime, initialScore, initialLives);
-    }
-
-    public void UpdateUI(int level, float playTime, int score, int lives)
-    {
-
-        levelText.text = level.ToString();
-        timeText.text = playTime.ToString("F2");
-        scoreText.text = score.ToString();
-        livesText.text = lives.ToString();
-    }
-
-    public void HandleOnScoreUpdate(int score)
-    {
-        statusDisplay.SetActive(true);
-        scoreText.text = score.ToString();
+        statusDisplay.SetActive(true); // 게임 오버 UI 활성화
     }
 
     public void ShowLoseGameUI()
@@ -94,26 +65,8 @@ public class GameUIManager : MonoBehaviour
         winGamePanel.SetActive(true); // WIN UI 활성화
     }
 
-    public void RetryGame()
+    public void ShowStartUI()
     {
-        //다시 시작
-        loseGamePanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        winGamePanel.SetActive(true); // Start UI 활성화
     }
-
-    public void LoadHome()
-    {
-        //Start씬으로
-        statusDisplay.SetActive(false);
-        loseGamePanel.SetActive(false);
-        winGamePanel.SetActive(false);
-        SceneManager.LoadScene("StartScene");
-    }
-    public void NextLevel()
-    {
-        //다음레벨
-        winGamePanel.SetActive(false);
-        Debug.Log("다음레벨로가는 함수 적용필요");
-    }
-
 }
