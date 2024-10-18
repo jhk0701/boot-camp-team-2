@@ -13,9 +13,9 @@ public class BrickAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Hit()
+    void Start()
     {
-        animator.SetTrigger(HIT);
+        GetComponent<Brick>().OnBrickHit += ()=>{animator.SetTrigger(HIT);};
     }
     
 }

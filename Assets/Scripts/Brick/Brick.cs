@@ -1,35 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum BrickType
 {
     Normal = 0,
-    Unbreakable,
-    Item
+    Unbreak,
+    Flow,
+    Penalty,
 }
-
-[Serializable]
-public struct BrickStat
-{
-    public int durability;
-    public BrickType type;
-} 
-
 // 벽돌의 기능 : 공에 맞아 부서지기
 [RequireComponent(typeof(BrickAnimation))]
 public class Brick : MonoBehaviour
-{    
-    BrickManager manager;
-    BrickAnimation animationController;
-
-    public BrickStat stat;
-    [SerializeField] int durability = 1;
+{
+    public string playerName;
+    public BrickType type;
+    [SerializeField] int durability;  
     public int Durability
     { 
         get { return durability; }
-        protected set
+        set
         {
             if (durability == 0)
                 return;
@@ -41,28 +30,26 @@ public class Brick : MonoBehaviour
         } 
     }
 
-
-    void Awake()
-    {
-        manager = transform.parent.GetComponent<BrickManager>();
-        animationController = GetComponent<BrickAnimation>();
-    }
-
-    void Start()
-    {
-        Durability = stat.durability;
-    }
+    public event Action OnBrickHit;
+    public event Action OnBrickBreak;
 
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public void Hit()
+    public void Hit(string playerName, bool forceBreak = false)
     {
-        // OnBrickHitted?.Invoke();
-        manager.CallOnBrickHitted(this);
-        animationController.Hit();
+        this.playerName = playerName;
 
-        if (stat.type.Equals(BrickType.Unbreakable)) 
+        BrickManager.Instance.CallOnBrickHitted(this);
+        OnBrickHit?.Invoke();
+        
+        if (forceBreak)
+        {
+            Durability -= Durability;
+            return;
+        }
+
+        if (type.Equals(BrickType.Unbreak)) 
             return;
 
         Durability--;
@@ -71,8 +58,9 @@ public class Brick : MonoBehaviour
     public void Break()
     {
         GetComponent<Collider2D>().enabled = false;
-        // OnBrickBroken?.Invoke();
-        manager.CallOnBrickBroken(this);
+
+        BrickManager.Instance.CallOnBrickBroken(this);
+        OnBrickBreak?.Invoke();
 
         // 1초 뒤 제거
         Destroy(gameObject, 1f);

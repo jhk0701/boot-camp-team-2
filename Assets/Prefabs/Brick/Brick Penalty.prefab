@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5991229113622834162
+--- !u!1001 &8662480394956488760
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -50,18 +50,102 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2263515222942441196, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
       propertyPath: m_Name
-      value: Brick Item
+      value: Brick Penalty
       objectReference: {fileID: 0}
     - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: type
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6518174126091800008, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
       propertyPath: stat.type
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2263515222942441196, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2253934043040857087}
+    - targetCorrespondingSourceObject: {fileID: 2263515222942441196, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3020803056375562558}
   m_SourcePrefab: {fileID: 100100000, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+--- !u!1 &7448618568855756500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2263515222942441196, guid: 87c13cdb0519e464ba6509b7b5f060b1, type: 3}
+  m_PrefabInstance: {fileID: 8662480394956488760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &2253934043040857087
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448618568855756500}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0.5
+  m_AngularDrag: 1
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &3020803056375562558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448618568855756500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5470a5751f80d439e67840987d0b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeUpPercent: 1.3
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.8078902
+      outSlope: 3.8078902
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.09166667
+    - serializedVersion: 3
+      time: 0.47500002
+      value: 0.7334906
+      inSlope: -1.0806175
+      outSlope: -1.0806175
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.55
+      outWeight: 0.6111111
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.013318566
+      outSlope: 0.013318566
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.7083334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

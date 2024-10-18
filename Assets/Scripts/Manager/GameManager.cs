@@ -6,25 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
 
-    public enum GameState
-    {
-        Lobby,
-        GameScene,
-        Pause,
-        Win,
-        Lose
-    }
 
-    public GameState CurrentState { get; private set; }
-
-    public event Action<GameState> OnStateChanged;
     public event Action OnLifeUpdate;
 
-    private BrickManager brickManager;
+    public LevelManager LevelManager { get; private set; }
+    public BrickManager BrickManager { get; private set; }
     private BallMovement ballMovement;
-    public LevelManager levelManager;
     private StateManager stateManager;
     public SoundManager soundManager;
+
+    public string player1Name;
+    public string player2Name;
 
     private int lives = 3;
 
@@ -41,14 +33,14 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        levelManager = GetComponent<LevelManager>();
+        LevelManager = GetComponent<LevelManager>();
         stateManager = StateManager.Instance;
         soundManager = GetComponent<SoundManager>();
     }
    
     private void Start()
     {
-        StateManager.Instance.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.Start);
     }
 
 
@@ -60,34 +52,40 @@ public class GameManager : MonoBehaviour
 
     public void SetBrickManager(BrickManager manager)
     {
-        brickManager = manager;
-        brickManager.OnAllBrickBroken += HandleAllBricksBroken;
+        BrickManager = manager;
+        BrickManager.OnAllBrickBroken += HandleAllBricksBroken;
     }
 
     private void HandleAllBricksBroken()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.Win);
     }
 
     private void HandleOnTouchBottom()
     {
         lives--;
         OnLifeUpdate?.Invoke();
-        Debug.Log("lives Lost : -1");
 
         if (lives <= 0)
         {
-            stateManager.SetState(StateManager.GameState.Start);
+            stateManager.SetState(StateManager.GameState.Lose);
         }
     }
 
+    public void AddLife()
+    {
+        lives++;
+        OnLifeUpdate?.Invoke();
+    }
+
+
     public void StartGameScene()
     {
-        stateManager.SetState(StateManager.GameState.Start);
+        stateManager.SetState(StateManager.GameState.GameScene);
         SceneManager.LoadScene(1);
     }
 
-    public void StartLobby()
+    public void BackToLobby()
     {   
         stateManager.SetState(StateManager.GameState.Start);
         SceneManager.LoadScene(0);
