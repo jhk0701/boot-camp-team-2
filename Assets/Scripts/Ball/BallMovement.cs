@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallMovement : MonoBehaviour
@@ -12,8 +10,6 @@ public class BallMovement : MonoBehaviour
 
     public int playerNumber; 
     public string lastHitByPlayerName;
-
-    public Item UsingItem { get; set; }
 
 
     // 임시로 패널 불러서 종료하기 위함
@@ -71,12 +67,15 @@ public class BallMovement : MonoBehaviour
             if (brick != null)
             {
                 brick.Hit(lastHitByPlayerName);
+
+                if (isInvincible)
+                    brick.Break(lastHitByPlayerName);
+
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
                 
                 if(brick.type.Equals(BrickType.Flow))
                 {
-                    // 좀 더 변칙적인 움직임 필요 : 예상이 안되는 방향으로 튕겨나가게
                     ContactPoint2D contact = collision.GetContact(0);
                     
                     Vector2 dir = (contact.point - (Vector2)transform.position).normalized;
@@ -110,5 +109,21 @@ public class BallMovement : MonoBehaviour
         OnTouchBottom?.Invoke();
         // 라이프 생기면 남은 라이프에 따라 리셋 정도만 시켜주기
         Reset();
+    }
+
+    // TODO : 리팩토링하기
+    private bool isInvincible = false;
+    public void SetInvincibleOn(float time = 5f)
+    {
+        isInvincible = true;
+        if(IsInvoking("SetInvincibleOff"))
+            CancelInvoke("SetInvincibleOff");
+
+        Invoke("SetInvincibleOff", time);
+    }
+
+    void SetInvincibleOff()
+    {
+        isInvincible = false;
     }
 }

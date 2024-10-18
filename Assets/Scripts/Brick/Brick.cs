@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum BrickType
@@ -11,12 +12,9 @@ public enum BrickType
 [RequireComponent(typeof(BrickAnimation))]
 public class Brick : MonoBehaviour
 {
-    BrickAnimation brickAnimation;
-
     private string playerName;
     public BrickType type;
-    [SerializeField] int durability;
-    
+    [SerializeField] int durability;  
     public int Durability
     { 
         get { return durability; }
@@ -32,11 +30,8 @@ public class Brick : MonoBehaviour
         } 
     }
 
-
-    void Awake()
-    {
-        brickAnimation = GetComponent<BrickAnimation>();
-    }
+    public event Action OnBrickHit;
+    public event Action OnBrickBreak;
 
     /// <summary>
     /// 벽돌 체력 깎는 메서드
@@ -44,9 +39,10 @@ public class Brick : MonoBehaviour
     public void Hit(string playerName)
     {
         this.playerName = playerName;
+
+        BrickManager.Instance.CallOnBrickHitted(this);
+        OnBrickHit?.Invoke();
         
-        GameManager.Instance.BrickManager.CallOnBrickHitted(this);
-        brickAnimation.Hit();
 
         if (type.Equals(BrickType.Unbreak)) 
             return;
@@ -57,7 +53,9 @@ public class Brick : MonoBehaviour
     public void Break(string playerName)
     {
         GetComponent<Collider2D>().enabled = false;
-        GameManager.Instance.BrickManager.CallOnBrickBroken(playerName);
+
+        BrickManager.Instance.CallOnBrickBroken(playerName);
+        OnBrickBreak?.Invoke();
 
         // 1초 뒤 제거
         Destroy(gameObject, 1f);
