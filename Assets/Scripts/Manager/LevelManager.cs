@@ -1,13 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class Level
 {
     public string levelName;
-    public bool isCleared;
+    // public bool isCleared;
+    public int itemCount;
     public BrickPlacement[] Stages;
 }
 

@@ -15,7 +15,7 @@ public class LevelSelection : MonoBehaviour
 
     void SetStages()
     {
-        LevelManager levelManager = GameManager.Instance.levelManager;
+        LevelManager levelManager = GameManager.Instance.LevelManager;
         for (int i = 0; i < levelManager.levels.Length; i++)
         {
             LevelGroup group = Instantiate(levelGroup, contents);

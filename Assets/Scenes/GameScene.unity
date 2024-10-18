@@ -132,6 +132,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2899145302431353498, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+      propertyPath: ballMovement
+      value: 
+      objectReference: {fileID: 958761480}
+    - target: {fileID: 2899145302431353498, guid: 4070521705432094681e8a8033f7fa24, type: 3}
       propertyPath: playerNumber
       value: 1
       objectReference: {fileID: 0}
@@ -252,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &155367554
 RectTransform:
   m_ObjectHideFlags: 0
@@ -380,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball_Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 4056851630431820453, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8402936717229873448, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -389,6 +397,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+--- !u!114 &160222524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3081444669498505840, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+  m_PrefabInstance: {fileID: 160222523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cbd4ba843b046428994bc3411dff59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &352412740
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +1001,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+--- !u!114 &958761480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3081444669498505840, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+  m_PrefabInstance: {fileID: 958761479}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cbd4ba843b046428994bc3411dff59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208896608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1208896609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,6 +1123,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2899145302431353498, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+      propertyPath: ballMovement
+      value: 
+      objectReference: {fileID: 160222524}
+    - target: {fileID: 2899145302431353498, guid: 4070521705432094681e8a8033f7fa24, type: 3}
       propertyPath: playerNumber
       value: 2
       objectReference: {fileID: 0}
@@ -1139,6 +1173,10 @@ PrefabInstance:
     - target: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
       propertyPath: m_Name
       value: Paddle_Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7094987711920074502, guid: 4070521705432094681e8a8033f7fa24, type: 3}
       propertyPath: m_IsTrigger
@@ -1230,6 +1268,22 @@ PrefabInstance:
       propertyPath: placement
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: items.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: items.Array.data[0]
+      value: 
+      objectReference: {fileID: 2307044901155447332, guid: fb68bf503543aaf4697175a9fb4bcb26, type: 3}
+    - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: items.Array.data[1]
+      value: 
+      objectReference: {fileID: 1102996370709761275, guid: 38236958468348449bf0f95989139c18, type: 3}
+    - target: {fileID: 3391552982520481798, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
+      propertyPath: items.Array.data[2]
+      value: 
+      objectReference: {fileID: 6824786531467040821, guid: 957631869d826b34e80ee3f92643f1d0, type: 3}
     - target: {fileID: 5081256539957542569, guid: 735813f4cdc0e9d448cc9ec64700b6f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallMovement : MonoBehaviour
@@ -77,18 +75,21 @@ public class BallMovement : MonoBehaviour
             if (brick != null)
             {
                 brick.Hit(lastHitByPlayerName);
+
+                if (isInvincible)
+                    brick.Break(lastHitByPlayerName);
+
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
                 
                 if(brick.type.Equals(BrickType.Flow))
                 {
-                    // TODO : 반사되어 튕겨 나갈 때 기초 속도로 변경할 것임.
                     ContactPoint2D contact = collision.GetContact(0);
                     
                     Vector2 dir = (contact.point - (Vector2)transform.position).normalized;
                     Vector2 reflect = Vector2.Reflect(dir, contact.normal);
 
-                    rigidbody.velocity = new Vector2(reflect.x > 0 ? speed : -speed, reflect.y > 0 ? speed : -speed);
+                    rigidbody.velocity = new Vector2(reflect.x >= 0 ? speed : -speed, reflect.y >= 0 ? speed : -speed);
                 }
 
             }
@@ -120,5 +121,21 @@ public class BallMovement : MonoBehaviour
         OnTouchBottom?.Invoke();
         // 라이프 생기면 남은 라이프에 따라 리셋 정도만 시켜주기
         Reset();
+    }
+
+    // TODO : 리팩토링하기
+    private bool isInvincible = false;
+    public void SetInvincibleOn(float time = 5f)
+    {
+        isInvincible = true;
+        if(IsInvoking("SetInvincibleOff"))
+            CancelInvoke("SetInvincibleOff");
+
+        Invoke("SetInvincibleOff", time);
+    }
+
+    void SetInvincibleOff()
+    {
+        isInvincible = false;
     }
 }
