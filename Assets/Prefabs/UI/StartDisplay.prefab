@@ -429,7 +429,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 96378050767844b47bc191030ae38ff5, type: 3}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Home
+  m_Text: START
 --- !u!1 &7195231448447659678
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 9169492373054752970}
   - component: {fileID: 414194731473590302}
   - component: {fileID: 1606918941920552216}
-  - component: {fileID: 5387095217531695319}
+  - component: {fileID: 3427187017865432215}
   m_Layer: 5
   m_Name: StartDisplay
   m_TagString: Untagged
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5387095217531695319
+--- !u!114 &3427187017865432215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,11 +534,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7195231448447659678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19821224f89bad146ae5387d5a4cae63, type: 3}
+  m_Script: {fileID: 11500000, guid: d626851d29a538446ab900668a76fa56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retryButton: {fileID: 0}
-  homeButton: {fileID: 4630798797349041718}
+  startButton: {fileID: 4630798797349041718}
+  scoreListButton: {fileID: 1973413603086722923}
 --- !u!1 &8138699971074392707
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 697723416120882803}
   - component: {fileID: 4630798797349041718}
   m_Layer: 5
-  m_Name: Home
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
