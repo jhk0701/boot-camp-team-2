@@ -14,7 +14,7 @@ public class Brick : MonoBehaviour
 {    
     BrickManager manager;
     BrickAnimation brickAnimation;
-    private string playerName;
+    public string playerName;
     public BrickType type;
     [SerializeField] int durability;
     public int Durability
@@ -28,7 +28,7 @@ public class Brick : MonoBehaviour
             durability = value;
 
             if (Durability <= 0)
-                Break(playerName);
+                Break();
         } 
     }
 
@@ -55,10 +55,10 @@ public class Brick : MonoBehaviour
         Durability--;
     }
 
-    public void Break(string playerName)
+    public void Break()
     {
         GetComponent<Collider2D>().enabled = false;
-        manager.CallOnBrickBroken(playerName);
+        manager.CallOnBrickBroken(this);
 
         // 1초 뒤 제거
         Destroy(gameObject, 1f);

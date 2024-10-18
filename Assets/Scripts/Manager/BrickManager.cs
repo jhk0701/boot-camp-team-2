@@ -11,8 +11,8 @@ public class BrickManager : MonoBehaviour
     
     public int CurrentCount { get; private set; }
 
-    public event Action<Brick> OnBrickHitted;
-    public event Action<string> OnBrickBroken;
+    public static event Action<Brick> OnBrickHitted;
+    public static event Action<Brick> OnBrickBroken;
     public event Action OnAllBrickBroken;
     
     // 종료 화면
@@ -79,16 +79,11 @@ public class BrickManager : MonoBehaviour
         OnBrickHitted?.Invoke(brick);
     }
 
-    public void CallOnBrickBroken(string playerName)
+    public void CallOnBrickBroken(Brick brick)
     {
-        OnBrickBroken?.Invoke(playerName);
+        OnBrickBroken?.Invoke(brick);
         CountBrokenBrick();
     }
-    //public void CallOnBrickBroken(Brick brick)
-    //{
-    //    OnBrickBroken?.Invoke(brick);
-    //    CountBrokenBrick();
-    //}
 
 
     public void OpenGameEnd()
