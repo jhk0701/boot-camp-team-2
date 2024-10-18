@@ -180,11 +180,11 @@ PrefabInstance:
       value: Paddle_Player1
       objectReference: {fileID: 0}
     - target: {fileID: 7094987711920074502, guid: 4070521705432094681e8a8033f7fa24, type: 3}
-      propertyPath: m_IsTrigger
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7094987711920074502, guid: 4070521705432094681e8a8033f7fa24, type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -252,7 +252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &155367554
 RectTransform:
   m_ObjectHideFlags: 0
@@ -379,6 +379,10 @@ PrefabInstance:
     - target: {fileID: 4056851630431820453, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: m_Name
       value: Ball_Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056851630431820453, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402936717229873448, guid: e03f0e944fa2fc246918f22dd175dead, type: 3}
       propertyPath: m_Mass
@@ -939,7 +943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1208896609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,6 +1082,10 @@ PrefabInstance:
     - target: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
       propertyPath: m_Name
       value: Paddle_Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7094987711920074502, guid: 4070521705432094681e8a8033f7fa24, type: 3}
       propertyPath: m_IsTrigger

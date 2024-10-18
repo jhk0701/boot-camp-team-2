@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
 
     public event Action OnLifeUpdate;
 
-    private BrickManager brickManager;
+    public LevelManager LevelManager { get; private set; }
+    public BrickManager BrickManager { get; private set; }
     private BallMovement ballMovement;
-    public LevelManager levelManager;
     private StateManager stateManager;
 
     public string player1Name;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        levelManager = GetComponent<LevelManager>();
+        LevelManager = GetComponent<LevelManager>();
         stateManager = StateManager.Instance;
     }
    
@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
 
     public void SetBrickManager(BrickManager manager)
     {
-        brickManager = manager;
-        brickManager.OnAllBrickBroken += HandleAllBricksBroken;
+        BrickManager = manager;
+        BrickManager.OnAllBrickBroken += HandleAllBricksBroken;
     }
 
     private void HandleAllBricksBroken()
@@ -70,6 +70,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddLife()
+    {
+        lives++;
+        OnLifeUpdate?.Invoke();
+    }
+
+
     public void StartGameScene()
     {
         stateManager.SetState(StateManager.GameState.GameScene);
@@ -82,14 +89,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-
-    public int GetCurrentLevel()
-    {
-        return levelManager.SelectedLevel;
-    }
-
-    public int GetCurrentStage()
-    {
-        return levelManager.SelectedStage;
-    }
 }

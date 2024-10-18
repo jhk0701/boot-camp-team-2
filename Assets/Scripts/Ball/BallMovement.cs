@@ -13,6 +13,8 @@ public class BallMovement : MonoBehaviour
     public int playerNumber; 
     public string lastHitByPlayerName;
 
+    public Item UsingItem { get; set; }
+
 
     // 임시로 패널 불러서 종료하기 위함
     public event Action OnTouchBottom;
@@ -74,13 +76,13 @@ public class BallMovement : MonoBehaviour
                 
                 if(brick.type.Equals(BrickType.Flow))
                 {
-                    // TODO : 반사되어 튕겨 나갈 때 기초 속도로 변경할 것임.
+                    // 좀 더 변칙적인 움직임 필요 : 예상이 안되는 방향으로 튕겨나가게
                     ContactPoint2D contact = collision.GetContact(0);
                     
                     Vector2 dir = (contact.point - (Vector2)transform.position).normalized;
                     Vector2 reflect = Vector2.Reflect(dir, contact.normal);
 
-                    rigidbody.velocity = new Vector2(reflect.x > 0 ? speed : -speed, reflect.y > 0 ? speed : -speed);
+                    rigidbody.velocity = new Vector2(reflect.x >= 0 ? speed : -speed, reflect.y >= 0 ? speed : -speed);
                 }
 
             }
