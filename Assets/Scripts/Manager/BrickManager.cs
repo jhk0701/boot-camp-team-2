@@ -107,7 +107,9 @@ public class BrickManager : MonoBehaviour
     public void CallOnBrickBroken(Brick brick)
     {
         OnBrickBroken?.Invoke(brick);
-        CountBrokenBrick();
+
+        if (!brick.type.Equals(BrickType.Unbreak))
+            CountBrokenBrick();
     }
 
 

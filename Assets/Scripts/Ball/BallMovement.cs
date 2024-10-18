@@ -74,10 +74,7 @@ public class BallMovement : MonoBehaviour
             Brick brick = collision.gameObject.GetComponent<Brick>();
             if (brick != null)
             {
-                brick.Hit(lastHitByPlayerName);
-
-                if (isInvincible)
-                    brick.Break();
+                brick.Hit(lastHitByPlayerName, isInvincible);
 
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
