@@ -47,7 +47,7 @@ public class BrickManager : MonoBehaviour
         
         Generate();
         
-        OnAllBrickBroken += OpenGameEnd;
+        //OnAllBrickBroken += OpenGameEnd;
     }
 
 
