@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -72,6 +73,14 @@ public class BallMovement : MonoBehaviour
                 brick.Hit(lastHitByPlayerName);
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
+                
+                if(brick.type.Equals(BrickType.Flow))
+                {
+                    // TODO : 반사각 계산 후 기초 속도로 변경할 것임.
+                    Vector2 dir = ((Vector2)transform.position - collision.GetContact(0).point).normalized;
+                    rigidbody.AddForce(dir * 3f, ForceMode2D.Impulse);
+                }
+
             }
         }
     }
