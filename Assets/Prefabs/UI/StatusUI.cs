@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class StatusUI : MonoBehaviour
 {
-    private Text levelText;
-    private Text timeText;
-    private Text scoreText;
-    private Text livesText;
+    public Text levelText;
+    public Text timeText;
+    public Text scoreText;
+    public Text livesText;
     
     // 초기 값 (예시 값으로 초기화)
     private int initialLevel = 5;
@@ -20,11 +20,6 @@ public class StatusUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelText = gameObject.transform.Find("LevelInfo").GetComponent<Text>();
-        timeText = gameObject.transform.Find("TimeInfo").GetComponent<Text>();
-        scoreText = gameObject.transform.Find("ScoreInfo").GetComponent<Text>();
-        livesText = gameObject.transform.Find("LivesInfo").GetComponent<Text>();
-
         InitializeUI();//예시값
 
         ScoreManager.Instance.OnUpdateScore += HandleOnScoreUpdate;

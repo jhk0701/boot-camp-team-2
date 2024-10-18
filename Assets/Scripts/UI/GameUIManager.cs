@@ -25,7 +25,6 @@ public class GameUIManager : MonoBehaviour
         loseGamePanel.SetActive(false);     //LOSE패널 비활성화
       
         float asdf = TimeManager.Instance.GetElapsedTime();
-        Debug.Log($"asdf : {asdf}");
     }
 
     private void HandleOnStateChanged(StateManager.GameState newState)
