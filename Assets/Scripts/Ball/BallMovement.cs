@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BallMovement : MonoBehaviour
 {
@@ -76,9 +74,13 @@ public class BallMovement : MonoBehaviour
                 
                 if(brick.type.Equals(BrickType.Flow))
                 {
-                    // TODO : 반사각 계산 후 기초 속도로 변경할 것임.
-                    Vector2 dir = ((Vector2)transform.position - collision.GetContact(0).point).normalized;
-                    rigidbody.AddForce(dir * 3f, ForceMode2D.Impulse);
+                    // TODO : 반사되어 튕겨 나갈 때 기초 속도로 변경할 것임.
+                    ContactPoint2D contact = collision.GetContact(0);
+                    
+                    Vector2 dir = (contact.point - (Vector2)transform.position).normalized;
+                    Vector2 reflect = Vector2.Reflect(dir, contact.normal);
+
+                    rigidbody.velocity = new Vector2(reflect.x > 0 ? speed : -speed, reflect.y > 0 ? speed : -speed);
                 }
 
             }
