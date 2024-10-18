@@ -86,7 +86,7 @@ public class BallMovement : MonoBehaviour
                 brick.Hit(lastHitByPlayerName, isInvincible);
 
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
-                Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
+                // Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
                 
                 if(brick.type.Equals(BrickType.Flow))
                 {

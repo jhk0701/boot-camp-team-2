@@ -48,8 +48,7 @@ public class Brick : MonoBehaviour
             Durability -= Durability;
             return;
         }
-
-        if (type.Equals(BrickType.Unbreak)) 
+        else if (type.Equals(BrickType.Unbreak)) 
             return;
 
         Durability--;
@@ -62,9 +61,6 @@ public class Brick : MonoBehaviour
         BrickManager.Instance.CallOnBrickBroken(this);
         OnBrickBreak?.Invoke();
 
-        // 1초 뒤 제거
-        Destroy(gameObject, 1f);
-
-        // TODO : 파괴 시 이펙트 추가
+        Destroy(gameObject);
     }
 }
