@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private BallMovement ballMovement;
     public LevelManager levelManager;
     private StateManager stateManager;
+    public SoundManager soundManager;
 
     private int lives = 3;
 
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
 
         levelManager = GetComponent<LevelManager>();
         stateManager = StateManager.Instance;
+        soundManager = GetComponent<SoundManager>();
     }
    
     private void Start()
