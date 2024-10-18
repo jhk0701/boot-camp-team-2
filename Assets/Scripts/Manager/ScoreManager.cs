@@ -98,7 +98,7 @@ public class ScoreManager : MonoBehaviour
                 break;
             case StateManager.GameState.GameScene:
 
-                LevelManager levelManager = GameManager.Instance.levelManager;
+                LevelManager levelManager = GameManager.Instance.LevelManager;
                 currentLevel = levelManager.SelectedLevel;
                 currentStage = levelManager.SelectedStage;
                 ResetCurrentScores();

@@ -51,7 +51,7 @@ public class BrickManager : MonoBehaviour
     void Generate()
     {
         if(placement == null)
-            placement = GameManager.Instance.levelManager.GetStage();
+            placement = GameManager.Instance.LevelManager.GetStage();
         
         foreach (PlacementData data in placement.datas)
         {

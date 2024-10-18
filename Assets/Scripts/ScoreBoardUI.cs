@@ -10,8 +10,8 @@ public class ScoreBoardUI : MonoBehaviour
     //초기 셋팅
     private void Start()
     {
-        int currentLevel = GameManager.Instance.levelManager.SelectedLevel;
-        int currentStage = GameManager.Instance.levelManager.SelectedStage;
+        int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
+        int currentStage = GameManager.Instance.LevelManager.SelectedStage;
 
         LevelAndStageText.text = $"Level: {currentLevel + 1} - Stage: {currentStage + 1}";
 
@@ -33,8 +33,8 @@ public class ScoreBoardUI : MonoBehaviour
     //OnScoreUpdate이 될때마다 업데이트 
     private void HandleUpdateScoreUI(string playerName, int score)
     {
-        int currentLevel = GameManager.Instance.levelManager.SelectedLevel;
-        int currentStage = GameManager.Instance.levelManager.SelectedStage;
+        int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
+        int currentStage = GameManager.Instance.LevelManager.SelectedStage;
 
         int highScore = ScoreManager.Instance.GetHighScore(playerName);
 
