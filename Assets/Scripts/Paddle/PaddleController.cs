@@ -10,6 +10,8 @@ public class PaddleController : MonoBehaviour
     private Vector3 startPosition;
     private float movement;
 
+    public BallMovement ballMovement;
+
     void Start()
     {
         startPosition = transform.position;

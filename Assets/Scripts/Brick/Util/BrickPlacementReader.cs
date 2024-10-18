@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utility
 {
-    public class Placement : MonoBehaviour
+    public class BrickPlacementReader : MonoBehaviour
     {
         // [SerializeField] Brick brick;
         // [SerializeField] List<Brick> brickInst;
@@ -14,7 +14,6 @@ namespace Utility
         [ContextMenu("Read Placement")]
         public void Read()
         {
-
             target.datas = null;
             target.datas = new PlacementData[model.childCount];
 
