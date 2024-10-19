@@ -36,7 +36,7 @@ public class Brick : MonoBehaviour
     /// <summary>
     /// 벽돌 체력 깎는 메서드
     /// </summary>
-    public void Hit(string playerName, bool forceBreak = false)
+    public void Hit (string playerName, int damage = 1, bool forceBreak = false)
     {
         this.playerName = playerName;
 
@@ -48,10 +48,10 @@ public class Brick : MonoBehaviour
             Durability -= Durability;
             return;
         }
-        else if (type.Equals(BrickType.Unbreak)) 
+        else if (type.Equals(BrickType.Unbreak))
             return;
 
-        Durability--;
+        Durability -= damage;
     }
 
     public void Break()

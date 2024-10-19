@@ -7,10 +7,13 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(BrickFactory))]
 public class BrickManager : MonoBehaviour
 {
+    public static BrickManager Instance;
+
     // 테스트용으로 변수를 남겨둠. 직접 할당해서 쓸 수 있도록
     [SerializeField] BrickPlacement placement;
     BrickFactory brickFactory;
-    
+    ItemManager itemManager;
+
     public int CurrentCount { get; private set; }
 
     public static event Action<Brick> OnBrickHitted;
@@ -22,7 +25,6 @@ public class BrickManager : MonoBehaviour
     [Header("Item list")]
     [SerializeField] Item[] items;
 
-    public static BrickManager Instance;
 
     void Awake()
     {
@@ -37,6 +39,8 @@ public class BrickManager : MonoBehaviour
         }
 
         brickFactory = GetComponent<BrickFactory>();
+        itemManager = GetComponent<ItemManager>();
+
         GameManager.Instance.SetBrickManager(this);
         ScoreManager.Instance.SetBrickManager(this);
     }

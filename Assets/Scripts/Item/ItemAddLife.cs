@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class ItemAddLife : Item
 {
-    public override void Use(GameObject paddle)
+    public override void Use()
     {
-        Debug.Log("ItemBreakAnyBlock used");
-        GameManager.Instance.AddLife();
+        Debug.Log("ItemAddLife used");
+        
+        GameManager.Instance.AddLife((int)effectValue);
+
+        EndEffect();
     }
 }

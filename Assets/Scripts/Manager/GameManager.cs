@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
 
-
     public event Action OnLifeUpdate;
 
     public LevelManager LevelManager { get; private set; }
@@ -18,6 +17,20 @@ public class GameManager : MonoBehaviour
     public string player2Name;
 
     private int lives = 3;
+    public int Lives 
+    {
+        get { return lives; }
+        private set
+        {
+            lives = value;
+            OnLifeUpdate?.Invoke();
+
+            if (lives <= 0)
+            {
+                stateManager.SetState(StateManager.GameState.Lose);
+            }
+        }
+    }
 
 
     private void Awake()
@@ -61,19 +74,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleOnTouchBottom()
     {
-        lives--;
-        OnLifeUpdate?.Invoke();
-
-        if (lives <= 0)
-        {
-            stateManager.SetState(StateManager.GameState.Lose);
-        }
+        Lives--;
     }
 
-    public void AddLife()
+    public void AddLife(int amount)
     {
-        lives++;
-        OnLifeUpdate?.Invoke();
+        Lives += amount;
     }
 
 

@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class ItemAddVelocityToBall : Item
 {
-    [SerializeField] [Range(1f,2f)] float amount = 1.5f;
-    public override void Use(GameObject paddle)
+    public override void Use()
     {
         Debug.Log("ItemAddVelocityToBall used");
-        PaddleController paddleController = paddle.GetComponent<PaddleController>();
-        if (paddleController != null)
+
+        PaddleController paddle = collidedObject.GetComponent<PaddleController>();
+        
+        if (paddle != null)
         {
-            Vector2 velocity = paddleController.ballMovement.rigidbody.velocity;
-            paddleController.ballMovement.rigidbody.velocity = velocity * amount;
+            Vector2 velocity = paddle.ballMovement.rigidbody.velocity;
+            paddle.ballMovement.rigidbody.velocity = velocity * effectValue;
         }
+
+        EndEffect();
     }
+
 }
