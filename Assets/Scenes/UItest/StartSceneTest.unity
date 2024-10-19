@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f2ee3c2a1bf7645a2a0424e4a0752b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
   player1Name: 
   player2Name: 
 --- !u!114 &824616798
@@ -410,7 +411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8498839ddf7b31e4f9047b67a590f08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 832776191}
+  audioSourceBgm: {fileID: 0}
+  audioSourceSfx: {fileID: 0}
+  paddleClip: {fileID: 0}
+  wallClip: {fileID: 0}
+  brickClip: {fileID: 0}
 --- !u!114 &824616801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f73406a49aa964aa0f0046e49bb434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreBoardUIPrefab: {fileID: 5890497514960149445, guid: 223da60fa8ec90e47a02f6a04ea813b8, type: 3}
+  scoreBoardUIPrefab: {fileID: 7728940523851878756, guid: 4b9b27573415ac043879c07dbedc9328, type: 3}
   player1Name: 
   player2Name: 
 --- !u!1 &832776189

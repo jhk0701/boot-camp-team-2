@@ -21,12 +21,15 @@ public class LoseUI : MonoBehaviour
     {
         //다음레벨
         gameObject.SetActive(false);
-        Debug.Log("재도전 함수필요");
+        //GameManager.Instance.StartGameScene();
+        //BrickManager.Instance.Generate();
+        //브릭 초기화 함수 필요
+        //점수 초기화 필요
     }
 
     public void LoadHome()
     {
         //Start씬으로
-        SceneManager.LoadScene("StartScene");
+        GameManager.Instance.BackToLobby();
     }
 }

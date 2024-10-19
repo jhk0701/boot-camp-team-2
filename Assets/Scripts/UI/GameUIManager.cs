@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
+    [SerializeField] Transform transFormUI;
+
     [SerializeField] GameObject startGamePanel;
     [SerializeField] GameObject winGamePanel;
     [SerializeField] GameObject statusDisplay;
@@ -15,16 +17,13 @@ public class GameUIManager : MonoBehaviour
     void Start()
     {
         //구독
+        ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
-        Canvas canvas = FindObjectOfType<Canvas>();
-        Instantiate(statusDisplay, canvas.transform);
-        Instantiate(loseGamePanel, canvas.transform);
-
-        statusDisplay.SetActive(false);
+        //초기화
+        statusDisplay.SetActive(true);
         loseGamePanel.SetActive(false);     //LOSE패널 비활성화
-      
-        float asdf = TimeManager.Instance.GetElapsedTime();
+        winGamePanel.SetActive(false);
     }
 
     private void HandleOnStateChanged(StateManager.GameState newState)
