@@ -3,16 +3,16 @@ using UnityEngine;
 
 public enum ItemTarget
 {
-    Player,
+    PlayerLife,
     Ball,
-    Paddle
+    Paddle,
+    TimeScale,
 }
 
 public enum ApplyingType
 {
     Add,
-    Multiply,
-    Overwrite
+    Multiply
 }
 
 [Serializable]
@@ -29,8 +29,6 @@ public class ItemEffect : ScriptableObject
     public ItemTarget target;
     public ApplyingType applyingType;
     public float effectDuration;
-    public GameObject effectObject;
+
+    public GameObject vfxObject;
 }
-
-
-

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoseUI : MonoBehaviour
 {
@@ -16,12 +17,8 @@ public class LoseUI : MonoBehaviour
     // Update is called once per frame
     public void Retry()
     {
-        //다음레벨
         gameObject.SetActive(false);
-        //GameManager.Instance.StartGameScene();
-        //BrickManager.Instance.Generate();
-        //브릭 초기화 함수 필요
-        //점수 초기화 필요
+        // SceneManager.LoadScene("GameScene");
     }
 
     public void LoadHome()

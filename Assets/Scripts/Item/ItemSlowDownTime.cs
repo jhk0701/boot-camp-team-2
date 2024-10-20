@@ -4,11 +4,10 @@ public class ItemSlowDownTime : Item
 {
     PaddleController paddle;
 
-    public override void Use()
+    protected override void Use()
     {
-        // 중복 적용 문제
-        if(Time.timeScale != 1f)
-            return; 
+        if (!Initialize())
+            return;
 
         UtilItemEffect utilEffect = itemEffect as UtilItemEffect;
 
@@ -19,15 +18,17 @@ public class ItemSlowDownTime : Item
             paddle.Speed /= utilEffect.effectValue;
         }
 
-        Invoke("EndEffect", utilEffect.effectDuration);
     }
 
-    public override void EndEffect()
+    public override void EndEffect(ItemEffect effect)
     {
+        if(effect != itemEffect) 
+            return;
+
         Time.timeScale = 1f;
 
         paddle.Speed *= (itemEffect as UtilItemEffect).effectValue;
 
-        base.EndEffect();
+        Destroy(gameObject);
     }
 }
