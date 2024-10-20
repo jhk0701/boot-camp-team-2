@@ -16,11 +16,11 @@ public class GameUIManager : MonoBehaviour
 
     void Start()
     {
-        //Íµ¨ÎèÖ
+        //±∏µ∂
         // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
-        //Ï¥àÍ∏∞Ìôî
+        //√ ±‚»≠
         statusDisplay.SetActive(true);
         loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
