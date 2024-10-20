@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum ItemTarget
@@ -7,13 +8,6 @@ public enum ItemTarget
     Paddle
 }
 
-public enum SpecType
-{
-    Speed,
-    Damage,
-    Size,
-}
-
 public enum ApplyingType
 {
     Add,
@@ -21,20 +15,22 @@ public enum ApplyingType
     Overwrite
 }
 
-public class CommonStat
+[Serializable]
+public class Stat
 {
     public float speed;
-    public float damage;
+    public int damage;
     public float size;
 }
 
-public class ItemBehaviour : MonoBehaviour
+[CreateAssetMenu(fileName = "ItemEffect", menuName ="Item/Item Effect")]
+public class ItemEffect : ScriptableObject
 {
     public ItemTarget target;
-    public SpecType specType;
     public ApplyingType applyingType;
-    
     public float effectDuration;
-    public float effectValue;
     public GameObject effectObject;
 }
+
+
+

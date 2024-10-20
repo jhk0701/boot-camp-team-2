@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     public LevelManager LevelManager { get; private set; }
     public BrickManager BrickManager { get; private set; }
+    public ItemManager ItemManager { get; private set; }
+
+
     private BallMovement ballMovement;
     private StateManager stateManager;
     public SoundManager soundManager;

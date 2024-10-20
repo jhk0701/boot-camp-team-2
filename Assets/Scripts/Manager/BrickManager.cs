@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(BrickFactory))]
 public class BrickManager : MonoBehaviour
 {
-    public static BrickManager Instance;
+    // public static BrickManager Instance;
+    // GameManager로 이전
 
     // 테스트용으로 변수를 남겨둠. 직접 할당해서 쓸 수 있도록
     [SerializeField] BrickPlacement placement;
@@ -27,16 +27,6 @@ public class BrickManager : MonoBehaviour
 
     void Awake()
     {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         brickFactory = GetComponent<BrickFactory>();
 
         GameManager.Instance.SetBrickManager(this);

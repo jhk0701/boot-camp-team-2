@@ -409,9 +409,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSourceBgm: {fileID: 832776191}
   audioSourceSfx: {fileID: 1667979404}
-  paddleClip: {fileID: 8300000, guid: c771d0d15a88dd249a70c77cfae03891, type: 3}
-  wallClip: {fileID: 8300000, guid: 66edcd7fd7c7016499254893f6681367, type: 3}
-  brickClip: {fileID: 8300000, guid: eb8c0534a28050b49a855a2045cbefe1, type: 3}
+  clips:
+  - {fileID: 8300000, guid: a4cf52e9a53ccc74d8b84b6f141715fe, type: 3}
+  - {fileID: 8300000, guid: 66edcd7fd7c7016499254893f6681367, type: 3}
+  - {fileID: 8300000, guid: eb8c0534a28050b49a855a2045cbefe1, type: 3}
+  - {fileID: 8300000, guid: 20c3f4e8ff1adc044836a3b910f42506, type: 3}
 --- !u!114 &824616801
 MonoBehaviour:
   m_ObjectHideFlags: 0

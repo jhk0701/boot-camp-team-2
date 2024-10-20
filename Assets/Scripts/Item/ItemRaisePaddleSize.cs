@@ -11,15 +11,15 @@ public class ItemRaisePaddleSize : Item
         paddle = collidedObject.GetComponent<PaddleController>();
         if(paddle != null)
         {
-            paddle.Size *= effectValue;
+            paddle.Size *= (itemEffect as PowerUpItemEffect).effectStat.size;
         }
 
-        Invoke("EndEffect", effectDuration);
+        Invoke("EndEffect", itemEffect.effectDuration);
     }
 
     public override void EndEffect()
     {
-        paddle.Size /= effectValue;
+        paddle.Size /= (itemEffect as PowerUpItemEffect).effectStat.size;
         base.EndEffect();
     }
 }

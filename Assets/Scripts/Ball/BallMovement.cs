@@ -1,17 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
     // 적용 대상 : 스펙
-    [SerializeField] private float speed = 5f;
-    public int Damage { get; set; } = 1;
+    [SerializeField] private Stat baseStat;
+    public Stat Stat 
+    { 
+        get { return baseStat; }
+    }
 
-    public Rigidbody2D rb2d;
-    public GameObject Paddle;
+    public Rigidbody2D RigidBody2d;
     // private bool moving = false;
     public bool IsMoving { get; set; } = false;
 
+    public PaddleController PlayerPaddle;
     public int playerNumber;
     public string lastHitByPlayerName;
 
@@ -28,16 +32,16 @@ public class BallMovement : MonoBehaviour
 
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        RigidBody2d = GetComponent<Rigidbody2D>();
 
-        if(Paddle == null)
+        if(PlayerPaddle == null)
         {
             PaddleController[] paddles = FindObjectsOfType<PaddleController>();
             foreach (var paddle in paddles)
             {
                 if (paddle.playerNumber == playerNumber)
                 {
-                    Paddle = paddle.gameObject;
+                    PlayerPaddle = paddle;
                     break;
                 }
             }
@@ -45,12 +49,14 @@ public class BallMovement : MonoBehaviour
 
         lastHitByPlayerName = "";
 
-        OnWallHit += (Vector3 vec) => {
-            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.wallClip);
+        OnWallHit += (Vector3 vec) => 
+        {
+            GameManager.Instance.soundManager.PlaySfx(SfxType.WallHit);
         };
 
-        OnPaddleHit += (Vector3 vec, int i) => {
-            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.paddleClip);
+        OnPaddleHit += (Vector3 vec, int i) => 
+        {
+            GameManager.Instance.soundManager.PlaySfx(SfxType.PaddleHit);
         };
     }
 
@@ -87,7 +93,7 @@ public class BallMovement : MonoBehaviour
 
             if (brick != null)
             {
-                brick.Hit(lastHitByPlayerName, Damage);
+                brick.Hit(lastHitByPlayerName, Stat.damage);
 
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 // Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
@@ -100,7 +106,7 @@ public class BallMovement : MonoBehaviour
                     // Vector2 dir = (contact.point - (Vector2)transform.position).normalized; // 입사각
                     // Vector2 reflect = Vector2.Reflect(dir, contact.normal); // 반사각 계산
 
-                    rb2d.velocity = new Vector2(dir.x >= 0 ? speed : -speed, dir.y >= 0 ? speed : -speed);
+                    RigidBody2d.velocity = new Vector2(dir.x >= 0 ? Stat.speed : -Stat.speed, dir.y >= 0 ? Stat.speed : -Stat.speed);
                 }
 
             }
@@ -117,13 +123,13 @@ public class BallMovement : MonoBehaviour
         if(direction == 0f)
             direction = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
         
-        rb2d.velocity = new Vector2(direction * speed, 1.0f * speed);
+        RigidBody2d.velocity = new Vector2(direction * Stat.speed, 1.0f * Stat.speed);
         IsMoving = true;
     }
 
     public void Reset()
     {
-        rb2d.velocity = Vector2.zero;
+        RigidBody2d.velocity = Vector2.zero;
         // moving = false;
         IsMoving = false;
         // Vector3 ResetPosition = Paddle.transform.position;

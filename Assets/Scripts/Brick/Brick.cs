@@ -35,7 +35,10 @@ public class Brick : MonoBehaviour
 
     void Start()
     {
-        OnBrickHit += ()=>{ GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.brickClip); };
+        OnBrickHit += () => 
+        { 
+            GameManager.Instance.soundManager.PlaySfx(SfxType.BrickHit); 
+        };
     }
 
     /// <summary>
@@ -45,7 +48,7 @@ public class Brick : MonoBehaviour
     {
         this.playerName = playerName;
 
-        BrickManager.Instance.CallOnBrickHitted(this);
+        GameManager.Instance.BrickManager.CallOnBrickHitted(this);
         OnBrickHit?.Invoke();
         
         if (forceBreak)
@@ -63,7 +66,7 @@ public class Brick : MonoBehaviour
     {
         GetComponent<Collider2D>().enabled = false;
 
-        BrickManager.Instance.CallOnBrickBroken(this);
+        GameManager.Instance.BrickManager.CallOnBrickBroken(this);
         OnBrickBreak?.Invoke();
 
         Destroy(gameObject);

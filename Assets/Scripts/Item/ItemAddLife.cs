@@ -6,7 +6,7 @@ public class ItemAddLife : Item
     {
         Debug.Log("ItemAddLife used");
         
-        GameManager.Instance.AddLife((int)effectValue);
+        GameManager.Instance.AddLife((int)(itemEffect as UtilItemEffect).effectValue);
 
         EndEffect();
     }

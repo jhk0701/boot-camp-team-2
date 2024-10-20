@@ -14,8 +14,8 @@ public class VFXManager : MonoBehaviour
         public int size;
     }
 
-    public List<VFXPool> Pools;  // °¢ VFX¿¡ ´ëÇÑ Ç® ¼³Á¤ ¸®½ºÆ®
-    private Dictionary<string, List<GameObject>> PoolDictionary; // Ç®À» °ü¸®ÇÏ´Â µñ¼Å³Ê¸®
+    public List<VFXPool> Pools;  // ê° VFXì— ëŒ€í•œ í’€ ì„¤ì • ë¦¬ìŠ¤íŠ¸
+    private Dictionary<string, List<GameObject>> PoolDictionary; // í’€ì„ ê´€ë¦¬í•˜ëŠ” ë”•ì…”ë„ˆë¦¬
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    // Ç® ÃÊ±âÈ­
+    // í’€ ì´ˆê¸°í™”
     private void InitializePool()
     {
         PoolDictionary = new Dictionary<string, List<GameObject>>();
@@ -54,7 +54,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    // Ç®¿¡¼­ VFX °¡Á®¿À±â
+    // í’€ì—ì„œ VFX ê°€ì ¸ì˜¤ê¸°
     public GameObject SpawnFromPool(string tag, Vector3 position)
     {
         if (!PoolDictionary.ContainsKey(tag))
@@ -65,12 +65,12 @@ public class VFXManager : MonoBehaviour
 
         GameObject objToSpawn = null;
 
-        // È°¼ºÈ­µÇÁö ¾ÊÀº ¿ÀºêÁ§Æ® Ã£±â
+        // í™œì„±í™”ë˜ì§€ ì•Šì€ ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
         for (int i = 0; i < PoolDictionary[tag].Count; i++)
         {
             if (PoolDictionary[tag][i] == null)
             {
-                // ÆÄ±«µÈ ¿ÀºêÁ§Æ®´Â Ç®¿¡¼­ Á¦°Å
+                // íŒŒê´´ëœ ì˜¤ë¸Œì íŠ¸ëŠ” í’€ì—ì„œ ì œê±°
                 PoolDictionary[tag].RemoveAt(i);
                 i--;
             }
@@ -81,7 +81,7 @@ public class VFXManager : MonoBehaviour
             }
         }
 
-        // »ç¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ®°¡ ¾øÀ¸¸é »õ·Î¿î ¿ÀºêÁ§Æ® »ı¼º
+        // ì‚¬ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ìœ¼ë©´ ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ ìƒì„±
         if (objToSpawn == null)
         {
             VFXPool pool = Pools.Find(p => p.tag == tag);
@@ -115,7 +115,7 @@ public class VFXManager : MonoBehaviour
         return objToSpawn;
     }
 
-    // »ç¿ë ÈÄ ´Ù½Ã ºñÈ°¼ºÈ­ (ÆÄÆ¼Å¬ Àç»ıÀÌ ¿Ï·áµÇ¸é)
+    // ì‚¬ìš© í›„ ë‹¤ì‹œ ë¹„í™œì„±í™” (íŒŒí‹°í´ ì¬ìƒì´ ì™„ë£Œë˜ë©´)
     private IEnumerator ReturnToPoolAfterDuration(GameObject obj)
     {
         ParticleSystem ps = obj.GetComponent<ParticleSystem>();
@@ -126,7 +126,7 @@ public class VFXManager : MonoBehaviour
         }
         else
         {
-            // ÆÄÆ¼Å¬ ½Ã½ºÅÛÀÌ ¾øÀ» °æ¿ì ±âº» ½Ã°£ ´ë±â
+            // íŒŒí‹°í´ ì‹œìŠ¤í…œì´ ì—†ì„ ê²½ìš° ê¸°ë³¸ ì‹œê°„ ëŒ€ê¸°
             yield return new WaitForSeconds(1f);
             obj.SetActive(false);
         }
@@ -140,7 +140,7 @@ public class VFXManager : MonoBehaviour
         BallMovement.OnWallHit += HandleWallHit;
     }
 
-    // °¢ ÀÌº¥Æ®¿¡ µû¶ó VFX Àç»ı
+    // ê° ì´ë²¤íŠ¸ì— ë”°ë¼ VFX ì¬ìƒ
     private void HandleBrickHit(Brick brick)
     {
         SpawnFromPool("BrickHitVFX", brick.transform.position);

@@ -5,6 +5,7 @@ public abstract class Item : MonoBehaviour
     protected GameObject collidedObject;
     public float effectDuration = 5f;
     public float effectValue = 1f;
+    public ItemEffect itemEffect;
 
     // 아이템에 따라 다른 효과. 행위가 각각 다름. 
     // 추상 메서드 사용하여 구체적인 사항을 자식 클래스에서 구현

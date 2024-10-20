@@ -110,9 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cbd4ba843b046428994bc3411dff59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStat:
+    speed: 5
+    damage: 1
+    size: 1
   speed: 5
-  rigidbody: {fileID: 8402936717229873448}
-  Paddle: {fileID: 3898639543683980574, guid: 4070521705432094681e8a8033f7fa24, type: 3}
+  RigidBody2d: {fileID: 0}
+  PlayerPaddle: {fileID: 0}
   playerNumber: 0
   lastHitByPlayerName: 
 --- !u!96 &2463082417183629162
@@ -158,7 +162,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.1
-  m_PreviewTimeScale: 0.2
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.2

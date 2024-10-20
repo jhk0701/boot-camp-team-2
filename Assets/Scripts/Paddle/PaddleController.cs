@@ -3,6 +3,12 @@ using UnityEngine;
 public class PaddleController : MonoBehaviour
 {
     // 적용 대상 : 스펙
+    [SerializeField] private Stat baseStat;
+    public Stat Stat 
+    { 
+        get { return baseStat; }
+    }
+
     // [SerializeField] private float speed = 5f;
     public float Speed { get; set; } = 5f;
     float size = 1f;

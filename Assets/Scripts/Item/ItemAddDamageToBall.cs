@@ -9,8 +9,8 @@ public class ItemAddDamageToBall : Item
         paddle = collidedObject.GetComponent<PaddleController>();
         if(paddle != null)
         {
-            originalDamage = paddle.ballMovement.Damage;
-            paddle.ballMovement.Damage += (int)effectValue;
+            originalDamage = paddle.ballMovement.Stat.damage;
+            paddle.ballMovement.Stat.damage += (int)effectValue;
         }
 
         Invoke("EndEffect", effectDuration);
@@ -18,7 +18,7 @@ public class ItemAddDamageToBall : Item
 
     public override void EndEffect()
     {
-        paddle.ballMovement.Damage = originalDamage;
+        paddle.ballMovement.Stat.damage = originalDamage;
         base.EndEffect();
     }
 }
