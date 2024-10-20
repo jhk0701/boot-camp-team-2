@@ -10,8 +10,8 @@ public class ItemAddVelocityToPaddle : Item
         
         if (paddle != null)
         {
-            Vector2 velocity = paddle.ballMovement.rigidbody.velocity;
-            paddle.ballMovement.rigidbody.velocity = velocity * effectValue;
+            Vector2 velocity = paddle.ballMovement.rb2d.velocity;
+            paddle.ballMovement.rb2d.velocity = velocity * effectValue;
         }
 
         EndEffect();

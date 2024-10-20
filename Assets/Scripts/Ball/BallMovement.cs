@@ -7,7 +7,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float speed = 5f;
     public int Damage { get; set; } = 1;
 
-    public Rigidbody2D rigidbody;
+    public Rigidbody2D rb2d;
     public GameObject Paddle;
     // private bool moving = false;
     public bool IsMoving { get; set; } = false;
@@ -28,9 +28,8 @@ public class BallMovement : MonoBehaviour
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
 
-        // 어...비용이 너무 큰 방식입니다.
         if(Paddle == null)
         {
             PaddleController[] paddles = FindObjectsOfType<PaddleController>();
@@ -92,7 +91,7 @@ public class BallMovement : MonoBehaviour
                     // Vector2 dir = (contact.point - (Vector2)transform.position).normalized; // 입사각
                     // Vector2 reflect = Vector2.Reflect(dir, contact.normal); // 반사각 계산
 
-                    rigidbody.velocity = new Vector2(dir.x >= 0 ? speed : -speed, dir.y >= 0 ? speed : -speed);
+                    rb2d.velocity = new Vector2(dir.x >= 0 ? speed : -speed, dir.y >= 0 ? speed : -speed);
                 }
 
             }
@@ -109,13 +108,13 @@ public class BallMovement : MonoBehaviour
         if(direction == 0f)
             direction = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
         
-        rigidbody.velocity = new Vector2(direction * speed, 1.0f * speed);
+        rb2d.velocity = new Vector2(direction * speed, 1.0f * speed);
         IsMoving = true;
     }
 
     public void Reset()
     {
-        rigidbody.velocity = Vector2.zero;
+        rb2d.velocity = Vector2.zero;
         // moving = false;
         IsMoving = false;
         // Vector3 ResetPosition = Paddle.transform.position;
