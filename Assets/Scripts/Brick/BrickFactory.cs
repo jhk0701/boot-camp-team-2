@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class BrickFactory : MonoBehaviour
 {
-    // 벽돌 생성 기능
+    [SerializeField] Transform brickContainer;
     [SerializeField] Color[] brickColors;
     [SerializeField] Brick[] prefabs;
     Dictionary<BrickType, Brick> brickDictionary;
@@ -18,14 +18,14 @@ public class BrickFactory : MonoBehaviour
 
     public Brick Create(BrickType type)
     {
-        return Instantiate(brickDictionary[type], transform);
+        return Instantiate(brickDictionary[type], brickContainer);
     }
 
     public Brick Create(PlacementData data)
     {
         Brick instance = Create(data.type);
 
-        instance.transform.position = data.position;
+        instance.transform.localPosition = data.position;
         instance.transform.localScale = data.size;
         instance.type = data.type;
         instance.Durability = data.durability;
