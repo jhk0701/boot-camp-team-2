@@ -7,103 +7,64 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    public Text levelText;
-    public Text timeText;
-    public Text scoreText;
-    public Text livesText;
+    [SerializeField] Transform transFormUI;
 
-    // √ ±‚ ∞™ (øπΩ√ ∞™¿∏∑Œ √ ±‚»≠)
-    private int initialLevel = 1;
-    private float initialTime = 0f;
-    private int initialScore = 0;
-    private int initialLives = 3;
-
-    [SerializeField] Button retryButton;
-    [SerializeField] Button[] homeButtons;
-    [SerializeField] Button nextLevel;
-
-    [SerializeField] GameObject loseGamePanel;
+    [SerializeField] GameObject startGamePanel;
     [SerializeField] GameObject winGamePanel;
+    [SerializeField] GameObject statusDisplay;
+    [SerializeField] GameObject loseGamePanel;
 
     void Start()
     {
-        InitializeUI();
-        loseGamePanel.SetActive(false); // √ ±‚ø°¥¬ ∫Ò»∞º∫»≠
-        winGamePanel.SetActive(false); // √ ±‚ø°¥¬ ∫Ò»∞º∫»≠
-        retryButton.onClick.AddListener(RetryGame);
-        foreach (var button in homeButtons)
+        //Íµ¨ÎèÖ
+        // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
+        StateManager.Instance.OnStateChanged += HandleOnStateChanged;
+
+        //Ï¥àÍ∏∞Ìôî
+        statusDisplay.SetActive(true);
+        loseGamePanel.SetActive(false);     
+        winGamePanel.SetActive(false);
+    }
+
+    private void HandleOnStateChanged(StateManager.GameState newState)
+    {
+        switch (newState)
         {
-            button.onClick.AddListener(LoadHome);
+            case StateManager.GameState.GameScene:
+                ShowStatusUI();
+                break;
+            case StateManager.GameState.Pause:
+                //PauseUI();
+                break;
+            case StateManager.GameState.Start:
+                ShowStartUI();
+                break;
+            case StateManager.GameState.Win:
+                ShowWinGameUI();
+                break;
+            case StateManager.GameState.Lose:
+                ShowLoseGameUI();
+                break;
         }
-        nextLevel.onClick.AddListener(NextLevel);
-
-        //±∏µ∂
-        //ScoreManager.OnScoreUpdate += HandleOnScoreUpdate;
-        float asdf = TimeManager.Instance.GetElapsedTime();
-        Debug.Log($"asdf : {asdf}");
     }
 
-    private void Update()
+    public void ShowStatusUI()
     {
-        //timeText.text = TimeManager.Instance.GetElapsedTime().ToString();
-    }
-
-    // UI √ ±‚»≠ ∏ﬁº≠µÂ
-    public void InitializeUI()
-    {
-        UpdateUI(initialLevel, initialTime, initialScore, initialLives);
-    }
-
-    public void UpdateUI(int level, float playTime, int score, int lives)
-    {
-
-        levelText.text = level.ToString();
-        timeText.text = playTime.ToString("F2");
-        scoreText.text = score.ToString();
-        livesText.text = lives.ToString();
-    }
-
-    public void HandleOnScoreUpdate(int score)
-    {
-        scoreText.text = score.ToString();
+        statusDisplay.SetActive(true); // ???? ???? UI ????
     }
 
     public void ShowLoseGameUI()
     {
-        loseGamePanel.SetActive(true); // ∞‘¿” ø¿πˆ UI »∞º∫»≠
+        loseGamePanel.SetActive(true); // ???? ???? UI ????
     }
 
     public void ShowWinGameUI()
     {
-        winGamePanel.SetActive(true); // WIN UI »∞º∫»≠
+        winGamePanel.SetActive(true); // WIN UI ????
     }
 
-    public void RetryGame()
+    public void ShowStartUI()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        winGamePanel.SetActive(true); // Start UI ????
     }
-
-    public void LoadHome()
-    {
-        SceneManager.LoadScene("StartScene");
-    }
-    public void NextLevel()
-    {
-        // «ˆ¿Á æ¿¿« ∫ÙµÂ ¿Œµ¶Ω∫∏¶ ∞°¡ÆøÕº≠ ¥Ÿ¿Ω æ¿(∑π∫ß)∑Œ ¿Ãµø
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-
-        // TODO: ¥Ÿ¿Ω ∑π∫ß¿Ã ¿÷¥¬¡ˆ »Æ¿Œ »ƒ, ∑ŒµÂ
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(nextSceneIndex);
-            Debug.Log("¥Ÿ¿Ω Ω∫≈◊¿Ã¡ˆ ∑ŒµÂ");
-        }
-        else
-        {
-            Debug.Log("¥ı ¿ÃªÛ Ω∫≈◊¿Ã¡ˆ∞° æ¯Ω¿¥œ¥Ÿ.");
-            // TODO: ∞‘¿” ¡æ∑·≥™ ø£µ˘ »≠∏È µÓ¿ª √≥∏Æ«“ ºˆ ¿÷¿Ω
-        }
-    }
-
 }

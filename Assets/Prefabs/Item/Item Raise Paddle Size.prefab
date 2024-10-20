@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectDuration: 7
   effectValue: 1.3
+  itemEffect: {fileID: 11400000, guid: e67b190136ac64b4c9321163f479abcb, type: 2}
