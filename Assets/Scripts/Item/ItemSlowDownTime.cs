@@ -12,11 +12,11 @@ public class ItemSlowDownTime : Item
 
         UtilItemEffect utilEffect = itemEffect as UtilItemEffect;
 
-        Time.timeScale = 1f / utilEffect.effectValue;
+        Time.timeScale = 1f * utilEffect.effectValue;
         paddle = collidedObject.GetComponent<PaddleController>();
         if(paddle != null)
         {       
-            paddle.Speed *= utilEffect.effectValue;
+            paddle.Speed /= utilEffect.effectValue;
         }
 
         Invoke("EndEffect", utilEffect.effectDuration);
@@ -26,7 +26,7 @@ public class ItemSlowDownTime : Item
     {
         Time.timeScale = 1f;
 
-        paddle.Speed /= (itemEffect as UtilItemEffect).effectValue;
+        paddle.Speed *= (itemEffect as UtilItemEffect).effectValue;
 
         base.EndEffect();
     }
