@@ -18,9 +18,7 @@ public class BrickManager : MonoBehaviour
     public static event Action<Brick> OnBrickHitted;
     public static event Action<Brick> OnBrickBroken;
     public event Action OnAllBrickBroken;
-    
-    // 종료 화면
-    [SerializeField] GameObject gameEnd;
+
     [Header("Item list")]
     [SerializeField] Item[] items;
 
@@ -38,8 +36,6 @@ public class BrickManager : MonoBehaviour
         CurrentCount = 0;
         
         Generate();
-        
-        //OnAllBrickBroken += OpenGameEnd;
     }
 
 
@@ -82,7 +78,6 @@ public class BrickManager : MonoBehaviour
     void CountBrokenBrick()
     {
         CurrentCount--;
-        Debug.Log($"Current count :{CurrentCount}");
 
         // 모든 벽돌이 부서짐.
         if(CurrentCount == 0)
@@ -104,16 +99,4 @@ public class BrickManager : MonoBehaviour
             CountBrokenBrick();
     }
 
-
-    public void OpenGameEnd()
-    {
-        gameEnd.SetActive(true);
-    }
-
-    public void BackToStart()
-    {
-        SceneManager.LoadScene(0);
-        // GameManager.Instance.SetState(GameManager.Instance.lobbyState);
-    }
-    
 }

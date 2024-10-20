@@ -2,19 +2,32 @@ using UnityEngine;
 
 public class ItemAddVelocityToPaddle : Item
 {
-    public override void Use()
+    PaddleController paddle;
+    protected override void Use()
     {
+        if (!Initialize())
+            return;
+            
         Debug.Log("ItemAddVelocityToPaddle used");
 
-        PaddleController paddle = collidedObject.GetComponent<PaddleController>();
+        paddle = collidedObject.GetComponent<PaddleController>();
         
         if (paddle != null)
         {
-            Vector2 velocity = paddle.ballMovement.RigidBody2d.velocity;
-            paddle.ballMovement.RigidBody2d.velocity = velocity * effectValue;
-        }
+            // Vector2 velocity = paddle.ballMovement.RigidBody2d.velocity;
+            // paddle.ballMovement.RigidBody2d.velocity = velocity * effectValue;
 
-        EndEffect();
+            paddle.Speed += (itemEffect as PowerUpItemEffect).effectStat.speed;
+        }
     }
 
+    public override void EndEffect(ItemEffect effect)
+    {
+        if(effect != itemEffect) 
+            return;
+
+        paddle.Speed -= (itemEffect as PowerUpItemEffect).effectStat.speed;
+
+        Destroy(gameObject);
+    }
 }

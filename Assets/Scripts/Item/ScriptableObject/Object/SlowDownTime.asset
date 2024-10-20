@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ced6cfd3110ec48ab3eba9e37d0877, type: 3}
   m_Name: SlowDownTime
   m_EditorClassIdentifier: 
-  target: 0
+  target: 3
   applyingType: 1
   effectDuration: 5
   effectObject: {fileID: 0}

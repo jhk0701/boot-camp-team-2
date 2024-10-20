@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public LevelManager LevelManager { get; private set; }
     public BrickManager BrickManager { get; private set; }
-    public ItemManager ItemManager { get; private set; }
+    public ItemHandler ItemHandler { get; private set; }
 
 
     private BallMovement ballMovement;
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
    
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         stateManager.SetState(StateManager.GameState.Start);
     }
 
@@ -87,6 +89,10 @@ public class GameManager : MonoBehaviour
         Lives += amount;
     }
 
+    public void SetItemHandler(ItemHandler handler)
+    {
+        ItemHandler = handler;
+    }
 
     public void StartGameScene()
     {
