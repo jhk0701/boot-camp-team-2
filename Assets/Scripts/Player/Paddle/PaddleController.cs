@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-    // Àû¿ë ´ë»ó : ½ºÆå
+    // ì ìš© ëŒ€ìƒ : ìŠ¤í™
     // [SerializeField] private float speed = 5f;
     public float Speed { get; set; } = 5f;
     float size = 1f;
@@ -34,7 +33,7 @@ public class PaddleController : MonoBehaviour
     {
         startPosition = transform.position;
 
-        // ÇÃ·¹ÀÌ¾î ¹øÈ£¿¡ µû¶ó ÇÃ·¹ÀÌ¾î ÀÌ¸§ ¼³Á¤
+        // í”Œë ˆì´ì–´ ë²ˆí˜¸ì— ë”°ë¼ í”Œë ˆì´ì–´ ì´ë¦„ ì„¤ì •
         if (playerNumber == 1)
         {
             playerName = ScoreManager.Instance.player1Name;
@@ -47,7 +46,7 @@ public class PaddleController : MonoBehaviour
 
     void Update()
     {
-        // ÇÃ·¹ÀÌ¾î ¹øÈ£¿¡ µû¶ó ´Ù¸¥ ÀÔ·Â Å°¸¦ »ç¿ëÇÏ¿© ÆĞµé ÀÌµ¿
+        // í”Œë ˆì´ì–´ ë²ˆí˜¸ì— ë”°ë¼ ë‹¤ë¥¸ ì…ë ¥ í‚¤ë¥¼ ì‚¬ìš©í•˜ì—¬ íŒ¨ë“¤ ì´ë™
         
         if (playerNumber == 1)
         {
@@ -83,7 +82,7 @@ public class PaddleController : MonoBehaviour
 
     void MovePaddle()
     {
-        // µ¿ÀÏÇÑ ¿µ¿ª¿¡¼­ °ãÃÄ¼­ ÀÌµ¿ÇÏµµ·Ï ¼³Á¤
+        // ë™ì¼í•œ ì˜ì—­ì—ì„œ ê²¹ì³ì„œ ì´ë™í•˜ë„ë¡ ì„¤ì •
         Vector3 movementVector = new Vector3(movement * Speed * Time.deltaTime, 0f, 0f);
         transform.position += movementVector;
 

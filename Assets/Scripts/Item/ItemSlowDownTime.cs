@@ -5,7 +5,7 @@ public class ItemSlowDownTime : Item
     PaddleController paddle;
     public override void Use()
     {
-        // Áßº¹ Àû¿ë Çã¿ëºÒ°¡
+        // ì¤‘ë³µ ì ìš© ë¬¸ì œ
         if(Time.timeScale != 1f)
             return; 
 

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class ItemAddVelocityToBall : Item
+public class ItemAddVelocityToPaddle : Item
 {
     public override void Use()
     {
-        Debug.Log("ItemAddVelocityToBall used");
+        Debug.Log("ItemAddVelocityToPaddle used");
 
         PaddleController paddle = collidedObject.GetComponent<PaddleController>();
         

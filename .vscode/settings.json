@@ -57,5 +57,5 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "boot-camp-team-2.sln",
-    "files.encoding": "euckr"
+    "files.encoding": "utf8"
 }

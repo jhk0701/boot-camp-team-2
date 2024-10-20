@@ -9,10 +9,9 @@ public class BrickManager : MonoBehaviour
 {
     public static BrickManager Instance;
 
-    // Å×½ºÆ®¿ëÀ¸·Î º¯¼ö¸¦ ³²°ÜµÒ. Á÷Á¢ ÇÒ´çÇØ¼­ ¾µ ¼ö ÀÖµµ·Ï
+    // í…ŒìŠ¤íŠ¸ìš©ìœ¼ë¡œ ë³€ìˆ˜ë¥¼ ë‚¨ê²¨ë‘ . ì§ì ‘ í• ë‹¹í•´ì„œ ì“¸ ìˆ˜ ìˆë„ë¡
     [SerializeField] BrickPlacement placement;
     BrickFactory brickFactory;
-    ItemManager itemManager;
 
     public int CurrentCount { get; private set; }
 
@@ -20,7 +19,7 @@ public class BrickManager : MonoBehaviour
     public static event Action<Brick> OnBrickBroken;
     public event Action OnAllBrickBroken;
     
-    // Á¾·á È­¸é
+    // ì¢…ë£Œ í™”ë©´
     [SerializeField] GameObject gameEnd;
     [Header("Item list")]
     [SerializeField] Item[] items;
@@ -39,7 +38,6 @@ public class BrickManager : MonoBehaviour
         }
 
         brickFactory = GetComponent<BrickFactory>();
-        itemManager = GetComponent<ItemManager>();
 
         GameManager.Instance.SetBrickManager(this);
         ScoreManager.Instance.SetBrickManager(this);
@@ -55,7 +53,7 @@ public class BrickManager : MonoBehaviour
     }
 
 
-    // ¹Ş¾Æ¿Â µ¥ÀÌÅÍ·Î º®µ¹ ¸¸µé±â
+    // ë°›ì•„ì˜¨ ë°ì´í„°ë¡œ ë²½ëŒ ë§Œë“¤ê¸°
     void Generate()
     {
         List<Brick> instances = new List<Brick>();
@@ -96,7 +94,7 @@ public class BrickManager : MonoBehaviour
         CurrentCount--;
         Debug.Log($"Current count :{CurrentCount}");
 
-        // ¸ğµç º®µ¹ÀÌ ºÎ¼­Áü.
+        // ëª¨ë“  ë²½ëŒì´ ë¶€ì„œì§.
         if(CurrentCount == 0)
         {   
             OnAllBrickBroken?.Invoke();

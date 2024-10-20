@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    // Àû¿ë ´ë»ó : ½ºÆå
+    // ì ìš© ëŒ€ìƒ : ìŠ¤í™
     [SerializeField] private float speed = 5f;
     public int Damage { get; set; } = 1;
 
@@ -15,12 +15,10 @@ public class BallMovement : MonoBehaviour
     public int playerNumber;
     public string lastHitByPlayerName;
 
-    // ÀÓ½Ã·Î ÆĞ³Î ºÒ·¯¼­ Á¾·áÇÏ±â À§ÇÔ
+    // ì„ì‹œë¡œ íŒ¨ë„ ë¶ˆëŸ¬ì„œ ì¢…ë£Œí•˜ê¸° ìœ„í•¨
     public event Action OnTouchBottom;
     public static event Action<Vector3,int> OnPaddleHit;
     public static event Action<Vector3> OnWallHit;
-
-    private ItemBehaviour currentItemBehaviour;
 
 
     private void Awake()
@@ -32,7 +30,7 @@ public class BallMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
 
-        // ¾î...ºñ¿ëÀÌ ³Ê¹« Å« ¹æ½ÄÀÔ´Ï´Ù.
+        // ì–´...ë¹„ìš©ì´ ë„ˆë¬´ í° ë°©ì‹ì…ë‹ˆë‹¤.
         if(Paddle == null)
         {
             PaddleController[] paddles = FindObjectsOfType<PaddleController>();
@@ -86,14 +84,15 @@ public class BallMovement : MonoBehaviour
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
                 // Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
                 
-                if(brick.type.Equals(BrickType.Flow))
+                if (brick.type.Equals(BrickType.Flow) || brick.type.Equals(BrickType.Penalty))
                 {
                     ContactPoint2D contact = collision.GetContact(0);
                     
-                    Vector2 dir = (contact.point - (Vector2)transform.position).normalized;
-                    Vector2 reflect = Vector2.Reflect(dir, contact.normal);
+                    Vector2 dir = ((Vector2)transform.position - contact.point).normalized; // ë“¤ì–´ì˜¨ ë°©í–¥ìœ¼ë¡œ íŠ•ê²¨ë‚˜ì˜¤ê²Œ
+                    // Vector2 dir = (contact.point - (Vector2)transform.position).normalized; // ì…ì‚¬ê°
+                    // Vector2 reflect = Vector2.Reflect(dir, contact.normal); // ë°˜ì‚¬ê° ê³„ì‚°
 
-                    rigidbody.velocity = new Vector2(reflect.x >= 0 ? speed : -speed, reflect.y >= 0 ? speed : -speed);
+                    rigidbody.velocity = new Vector2(dir.x >= 0 ? speed : -speed, dir.y >= 0 ? speed : -speed);
                 }
 
             }
@@ -126,11 +125,8 @@ public class BallMovement : MonoBehaviour
     private void TouchBottom()
     {
         OnTouchBottom?.Invoke();
-        // ¶óÀÌÇÁ »ı±â¸é ³²Àº ¶óÀÌÇÁ¿¡ µû¶ó ¸®¼Â Á¤µµ¸¸ ½ÃÄÑÁÖ±â
+        // ë¼ì´í”„ ìƒê¸°ë©´ ë‚¨ì€ ë¼ì´í”„ì— ë”°ë¼ ë¦¬ì…‹ ì •ë„ë§Œ ì‹œì¼œì£¼ê¸°
         Reset();
     }
 
-    // TODO : ¸®ÆÑÅä¸µÇÏ±â
-
 }
-

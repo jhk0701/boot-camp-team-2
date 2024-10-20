@@ -5,15 +5,13 @@ using UnityEngine;
 public class ItemRaisePaddleSize : Item
 {
     PaddleController paddle;
-    float originalSize;
 
     public override void Use()
     {
         paddle = collidedObject.GetComponent<PaddleController>();
         if(paddle != null)
         {
-            originalSize = paddle.Size;
-            paddle.Size = originalSize * effectValue;
+            paddle.Size *= effectValue;
         }
 
         Invoke("EndEffect", effectDuration);
@@ -21,7 +19,7 @@ public class ItemRaisePaddleSize : Item
 
     public override void EndEffect()
     {
-        paddle.Size = originalSize;
+        paddle.Size /= effectValue;
         base.EndEffect();
     }
 }
