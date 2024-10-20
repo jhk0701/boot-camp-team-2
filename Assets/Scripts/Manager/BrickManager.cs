@@ -7,22 +7,23 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(BrickFactory))]
 public class BrickManager : MonoBehaviour
 {
-    // Å×½ºÆ®¿ëÀ¸·Î º¯¼ö¸¦ ³²°ÜµÒ. Á÷Á¢ ÇÒ´çÇØ¼­ ¾µ ¼ö ÀÖµµ·Ï
+    public static BrickManager Instance;
+
+    // í…ŒìŠ¤íŠ¸ìš©ìœ¼ë¡œ ë³€ìˆ˜ë¥¼ ë‚¨ê²¨ë‘ . ì§ì ‘ í• ë‹¹í•´ì„œ ì“¸ ìˆ˜ ìˆë„ë¡
     [SerializeField] BrickPlacement placement;
     BrickFactory brickFactory;
-    
+
     public int CurrentCount { get; private set; }
 
     public static event Action<Brick> OnBrickHitted;
     public static event Action<Brick> OnBrickBroken;
     public event Action OnAllBrickBroken;
     
-    // Á¾·á È­¸é
+    // ì¢…ë£Œ í™”ë©´
     [SerializeField] GameObject gameEnd;
     [Header("Item list")]
     [SerializeField] Item[] items;
 
-    public static BrickManager Instance;
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class BrickManager : MonoBehaviour
         }
 
         brickFactory = GetComponent<BrickFactory>();
+
         GameManager.Instance.SetBrickManager(this);
         ScoreManager.Instance.SetBrickManager(this);
     }
@@ -51,7 +53,7 @@ public class BrickManager : MonoBehaviour
     }
 
 
-    // ¹Ş¾Æ¿Â µ¥ÀÌÅÍ·Î º®µ¹ ¸¸µé±â
+    // ë°›ì•„ì˜¨ ë°ì´í„°ë¡œ ë²½ëŒ ë§Œë“¤ê¸°
     void Generate()
     {
         List<Brick> instances = new List<Brick>();
@@ -92,7 +94,7 @@ public class BrickManager : MonoBehaviour
         CurrentCount--;
         Debug.Log($"Current count :{CurrentCount}");
 
-        // ¸ğµç º®µ¹ÀÌ ºÎ¼­Áü.
+        // ëª¨ë“  ë²½ëŒì´ ë¶€ì„œì§.
         if(CurrentCount == 0)
         {   
             OnAllBrickBroken?.Invoke();
@@ -107,7 +109,9 @@ public class BrickManager : MonoBehaviour
     public void CallOnBrickBroken(Brick brick)
     {
         OnBrickBroken?.Invoke(brick);
-        CountBrokenBrick();
+
+        if (!brick.type.Equals(BrickType.Unbreak))
+            CountBrokenBrick();
     }
 
 

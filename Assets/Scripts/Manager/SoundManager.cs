@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource audioSource;
-    // Start is called before the first frame update
+    public AudioSource audioSourceBgm;
+    public AudioSource audioSourceSfx;
+    [Space(10f)]    
+    public AudioClip paddleClip;
+    public AudioClip wallClip;
+    public AudioClip brickClip;
+
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        PlaySound();
     }
 
     // Update is called once per frame
     public void PlaySound()
     {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
+        audioSourceBgm.Play();
+    }
+
+    public void PlaySfx(AudioClip clip)
+    {
+        audioSourceSfx.PlayOneShot(clip);
     }
 }

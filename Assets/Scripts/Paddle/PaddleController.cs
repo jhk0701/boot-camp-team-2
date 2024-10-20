@@ -2,7 +2,22 @@ using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-    public float speed;
+    // ì ìš© ëŒ€ìƒ : ìŠ¤í™
+    // [SerializeField] private float speed = 5f;
+    public float Speed { get; set; } = 5f;
+    float size = 1f;
+    public float Size 
+    {
+        get { return size; }
+        set 
+        {
+            size = value;
+            Vector3 scale = transform.localScale;
+            scale.x = size;
+            transform.localScale = scale;
+        }
+    }
+
 
     public int playerNumber; 
     public string playerName;
@@ -11,12 +26,14 @@ public class PaddleController : MonoBehaviour
     private float movement;
 
     public BallMovement ballMovement;
+    // public event Action OnItemUsed;
+
 
     void Start()
     {
         startPosition = transform.position;
 
-        // ÇÃ·¹ÀÌ¾î ¹øÈ£¿¡ µû¶ó ÇÃ·¹ÀÌ¾î ÀÌ¸§ ¼³Á¤
+        // í”Œë ˆì´ì–´ ë²ˆí˜¸ì— ë”°ë¼ í”Œë ˆì´ì–´ ì´ë¦„ ì„¤ì •
         if (playerNumber == 1)
         {
             playerName = ScoreManager.Instance.player1Name;
@@ -29,29 +46,31 @@ public class PaddleController : MonoBehaviour
 
     void Update()
     {
-        // ÇÃ·¹ÀÌ¾î ¹øÈ£¿¡ µû¶ó ´Ù¸¥ ÀÔ·Â Å°¸¦ »ç¿ëÇÏ¿© ÆĞµé ÀÌµ¿
+        // í”Œë ˆì´ì–´ ë²ˆí˜¸ì— ë”°ë¼ ë‹¤ë¥¸ ì…ë ¥ í‚¤ë¥¼ ì‚¬ìš©í•˜ì—¬ íŒ¨ë“¤ ì´ë™
+        
         if (playerNumber == 1)
         {
             if (Input.GetKey(KeyCode.A))
-            {
-                movement -= 1f;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                movement += 1f;
-            }
+                movement = -1f;
+            else if (Input.GetKey(KeyCode.D))
+                movement = 1f;
         }
         else if (playerNumber == 2)
         {
             if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                movement -= 1f;
-            }
+                movement = -1f;
+            else if (Input.GetKey(KeyCode.RightArrow))
+                movement = 1f;
+        }
 
-            if (Input.GetKey(KeyCode.RightArrow))
+        if (!ballMovement.IsMoving)
+        {
+            ballMovement.transform.position = (Vector2)transform.position + Vector2.up * 0.175f;
+
+            if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
+                (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
             {
-                movement += 1f;
+                ballMovement.Launch(movement);
             }
         }
 
@@ -63,11 +82,10 @@ public class PaddleController : MonoBehaviour
 
     void MovePaddle()
     {
-        // µ¿ÀÏÇÑ ¿µ¿ª¿¡¼­ °ãÃÄ¼­ ÀÌµ¿ÇÏµµ·Ï ¼³Á¤
-        Vector3 movementVector = new Vector3(movement * speed * Time.deltaTime, 0f, 0f);
+        // ë™ì¼í•œ ì˜ì—­ì—ì„œ ê²¹ì³ì„œ ì´ë™í•˜ë„ë¡ ì„¤ì •
+        Vector3 movementVector = new Vector3(movement * Speed * Time.deltaTime, 0f, 0f);
         transform.position += movementVector;
 
-        // ÀÌµ¿ ÈÄ ¿òÁ÷ÀÓ ÃÊ±âÈ­
         movement = 0f;
     }
 

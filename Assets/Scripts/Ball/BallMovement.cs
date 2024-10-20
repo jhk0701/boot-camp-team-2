@@ -3,19 +3,20 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    public float speed;
-    public Rigidbody2D rigidbody;
-    public GameObject Paddle;
-    private bool moving = false;
+    // Ï†ÅÏö© ÎåÄÏÉÅ : Ïä§Ìéô
+    [SerializeField] private float speed = 5f;
+    public int Damage { get; set; } = 1;
 
-    public int playerNumber; 
+    public Rigidbody2D rb2d;
+    public GameObject Paddle;
+    // private bool moving = false;
+    public bool IsMoving { get; set; } = false;
+
+    public int playerNumber;
     public string lastHitByPlayerName;
 
-
-    // ¿”Ω√∑Œ ∆–≥Œ ∫“∑Øº≠ ¡æ∑·«œ±‚ ¿ß«‘
+    // ÏûÑÏãúÎ°ú Ìå®ÎÑê Î∂àÎü¨ÏÑú Ï¢ÖÎ£åÌïòÍ∏∞ ÏúÑÌï®
     public event Action OnTouchBottom;
-
-
     public static event Action<Vector3,int> OnPaddleHit;
     public static event Action<Vector3> OnWallHit;
 
@@ -27,43 +28,54 @@ public class BallMovement : MonoBehaviour
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
 
-        PaddleController[] paddles = FindObjectsOfType<PaddleController>();
-        foreach (var paddle in paddles)
+        if(Paddle == null)
         {
-            if (paddle.playerNumber == playerNumber)
+            PaddleController[] paddles = FindObjectsOfType<PaddleController>();
+            foreach (var paddle in paddles)
             {
-                Paddle = paddle.gameObject;
-                break;
+                if (paddle.playerNumber == playerNumber)
+                {
+                    Paddle = paddle.gameObject;
+                    break;
+                }
             }
         }
+
         lastHitByPlayerName = "";
+
+        OnWallHit += (Vector3 vec) => {
+            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.wallClip);
+        };
+
+        OnPaddleHit += (Vector3 vec, int i) => {
+            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.paddleClip);
+        };
     }
 
-    private void Update()
-    {
-        if (moving is false)
-        {
-            //Local MultiPlay Code
-            if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
-                (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
-            {
-                moving = true;
-                Launch();
-            }
-        }
-    }
+    // private void Update()
+    // {
+    //     if (moving is false)
+    //     {
+    //         //Local MultiPlay Code
+    //         if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
+    //             (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
+    //         {
+    //             moving = true;
+    //             Launch();
+    //         }
+    //     }
+    // }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.CompareTag("DownWall"))
+        if (collision.gameObject.CompareTag("DownWall"))
         {
             TouchBottom();
         }
         else if (collision.gameObject.CompareTag("Paddle"))
         {
-
             PaddleController paddle = collision.gameObject.GetComponent<PaddleController>();
             lastHitByPlayerName = paddle.playerName;
             OnPaddleHit?.Invoke(transform.position, paddle.playerNumber);
@@ -72,24 +84,23 @@ public class BallMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("Brick"))
         {
             Brick brick = collision.gameObject.GetComponent<Brick>();
+
             if (brick != null)
             {
-                brick.Hit(lastHitByPlayerName);
-
-                if (isInvincible)
-                    brick.Break();
+                brick.Hit(lastHitByPlayerName, Damage);
 
                 ScoreManager.Instance.AddScore(lastHitByPlayerName, 10);
-                Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
+                // Debug.Log($"Brick broken by {lastHitByPlayerName}, +10 points");
                 
-                if(brick.type.Equals(BrickType.Flow))
+                if (brick.type.Equals(BrickType.Flow) || brick.type.Equals(BrickType.Penalty))
                 {
                     ContactPoint2D contact = collision.GetContact(0);
                     
-                    Vector2 dir = (contact.point - (Vector2)transform.position).normalized;
-                    Vector2 reflect = Vector2.Reflect(dir, contact.normal);
+                    Vector2 dir = ((Vector2)transform.position - contact.point).normalized; // Îì§Ïñ¥Ïò® Î∞©Ìñ•ÏúºÎ°ú ÌäïÍ≤®ÎÇòÏò§Í≤å
+                    // Vector2 dir = (contact.point - (Vector2)transform.position).normalized; // ÏûÖÏÇ¨Í∞Å
+                    // Vector2 reflect = Vector2.Reflect(dir, contact.normal); // Î∞òÏÇ¨Í∞Å Í≥ÑÏÇ∞
 
-                    rigidbody.velocity = new Vector2(reflect.x >= 0 ? speed : -speed, reflect.y >= 0 ? speed : -speed);
+                    rb2d.velocity = new Vector2(dir.x >= 0 ? speed : -speed, dir.y >= 0 ? speed : -speed);
                 }
 
             }
@@ -101,41 +112,29 @@ public class BallMovement : MonoBehaviour
     }
 
 
-    private void Launch()
+    public void Launch(float direction)
     {
-        float x = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
-
-        rigidbody.velocity = new Vector2(x * speed, 1.0f * speed);
+        if(direction == 0f)
+            direction = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
+        
+        rb2d.velocity = new Vector2(direction * speed, 1.0f * speed);
+        IsMoving = true;
     }
 
     public void Reset()
     {
-        rigidbody.velocity = Vector2.zero;
-        moving = false;
-        Vector3 ResetPosition = Paddle.transform.position;
-        transform.position = new Vector2(ResetPosition.x, ResetPosition.y + 0.175f);
+        rb2d.velocity = Vector2.zero;
+        // moving = false;
+        IsMoving = false;
+        // Vector3 ResetPosition = Paddle.transform.position;
+        // transform.position = new Vector2(ResetPosition.x, ResetPosition.y + 0.175f);
     }
 
     private void TouchBottom()
     {
         OnTouchBottom?.Invoke();
-        // ∂Û¿Ã«¡ ª˝±‚∏È ≥≤¿∫ ∂Û¿Ã«¡ø° µ˚∂Û ∏Æº¬ ¡§µµ∏∏ Ω√ƒ—¡÷±‚
+        // ÎùºÏù¥ÌîÑ ÏÉùÍ∏∞Î©¥ ÎÇ®ÏùÄ ÎùºÏù¥ÌîÑÏóê Îî∞Îùº Î¶¨ÏÖã Ï†ïÎèÑÎßå ÏãúÏºúÏ£ºÍ∏∞
         Reset();
     }
 
-    // TODO : ∏Æ∆—≈‰∏µ«œ±‚
-    private bool isInvincible = false;
-    public void SetInvincibleOn(float time = 5f)
-    {
-        isInvincible = true;
-        if(IsInvoking("SetInvincibleOff"))
-            CancelInvoke("SetInvincibleOff");
-
-        Invoke("SetInvincibleOff", time);
-    }
-
-    void SetInvincibleOff()
-    {
-        isInvincible = false;
-    }
 }

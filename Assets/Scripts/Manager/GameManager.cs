@@ -6,18 +6,32 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; 
 
-
     public event Action OnLifeUpdate;
 
     public LevelManager LevelManager { get; private set; }
     public BrickManager BrickManager { get; private set; }
     private BallMovement ballMovement;
     private StateManager stateManager;
+    public SoundManager soundManager;
 
     public string player1Name;
     public string player2Name;
 
     private int lives = 3;
+    public int Lives 
+    {
+        get { return lives; }
+        private set
+        {
+            lives = value;
+            OnLifeUpdate?.Invoke();
+
+            if (lives <= 0)
+            {
+                stateManager.SetState(StateManager.GameState.Lose);
+            }
+        }
+    }
 
 
     private void Awake()
@@ -34,6 +48,7 @@ public class GameManager : MonoBehaviour
 
         LevelManager = GetComponent<LevelManager>();
         stateManager = StateManager.Instance;
+        soundManager = GetComponent<SoundManager>();
     }
    
     private void Start()
@@ -61,19 +76,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleOnTouchBottom()
     {
-        lives--;
-        OnLifeUpdate?.Invoke();
-
-        if (lives <= 0)
-        {
-            stateManager.SetState(StateManager.GameState.Lose);
-        }
+        Lives--;
     }
 
-    public void AddLife()
+    public void AddLife(int amount)
     {
-        lives++;
-        OnLifeUpdate?.Invoke();
+        Lives += amount;
     }
 
 

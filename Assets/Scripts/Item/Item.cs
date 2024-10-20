@@ -1,28 +1,32 @@
 using UnityEngine;
 
-public enum ItemEffectType
-{
-    AddLife,
-    BreakAnyBrick,
-    AddVelocityToBall,
-    AddVelocityToPaddle,
-}
-
 public abstract class Item : MonoBehaviour
-{
-    // ¾ÆÀÌÅÛ¿¡ µû¶ó ´Ù¸¥ È¿°ú. ÇàÀ§°¡ °¢°¢ ´Ù¸§. 
-    // Ãß»ó ¸Ş¼­µå »ç¿ë -> Ãß»ó ¸Ş¼­µå »ç¿ëÀ» À§ÇÑ Ãß»ó Å¬·¡½º »ç¿ë
-    // ÀÚ½Ä Å¬·¡½º¿¡¼­ ±¸Ã¼ÀûÀÎ »çÇ× ¸í½Ã
-    public abstract void Use(GameObject paddle);
+{    
+    protected GameObject collidedObject;
+    public float effectDuration = 5f;
+    public float effectValue = 1f;
 
-    // ¶³¾îÁö´Â ±â´É : ´ê´Â ´ë»óÀº ÆĞµéÀÌ¶û¸¸ ´ê¾Æ¾ß ÇÑ´Ù : Æ®¸®°Å
-    // ÆĞµé¿¡ ´êÀ¸¸é ¹ßµ¿ : Æ®¸®°Å¿¡¼­ ÆĞµéÀÌ¶û ´êÀ¸¸é ¹ßµ¿ÇÏµµ·Ï
+    // ì•„ì´í…œì— ë”°ë¼ ë‹¤ë¥¸ íš¨ê³¼. í–‰ìœ„ê°€ ê°ê° ë‹¤ë¦„. 
+    // ì¶”ìƒ ë©”ì„œë“œ ì‚¬ìš©í•˜ì—¬ êµ¬ì²´ì ì¸ ì‚¬í•­ì„ ìì‹ í´ë˜ìŠ¤ì—ì„œ êµ¬í˜„
+    public abstract void Use();
+
+    // ë–¨ì–´ì§€ëŠ” ê¸°ëŠ¥ : ë‹¿ëŠ” ëŒ€ìƒì€ íŒ¨ë“¤ì´ë‘ë§Œ ë‹¿ì•„ì•¼ í•œë‹¤ : íŠ¸ë¦¬ê±°
+    // íŒ¨ë“¤ì— ë‹¿ìœ¼ë©´ ë°œë™ : íŠ¸ë¦¬ê±°ì—ì„œ íŒ¨ë“¤ì´ë‘ ë‹¿ìœ¼ë©´ ë°œë™í•˜ë„ë¡
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Paddle"))
         {
-            Use(collision.gameObject); // ÀÚ½Ä¿¡¼­ ±¸ÇöµÈ ¸Ş¼­µå È£Ãâ
-            Destroy(gameObject); // »ç¿ë ÈÄ ÆÄ±«
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().Sleep();
+
+            collidedObject = collision.gameObject;
+            Use(); // ìì‹ì—ì„œ êµ¬í˜„ëœ ë©”ì„œë“œ í˜¸ì¶œ
         }
+    }
+
+    public virtual void EndEffect()
+    {
+        Destroy(gameObject);
     }
 }

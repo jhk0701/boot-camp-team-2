@@ -32,9 +32,7 @@ public class BrickFactory : MonoBehaviour
 
         SpriteRenderer sprite = instance.GetComponentInChildren<SpriteRenderer>();
 
-        if(data.type.Equals(BrickType.Unbreak))
-            sprite.color = Color.gray;
-        else
+        if (!data.type.Equals(BrickType.Unbreak))
             sprite.color = brickColors[Random.Range(0, brickColors.Length)];
 
         return instance;

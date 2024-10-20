@@ -8,7 +8,7 @@ public enum BrickType
     Flow,
     Penalty,
 }
-// º®µ¹ÀÇ ±â´É : °ø¿¡ ¸Â¾Æ ºÎ¼­Áö±â
+// ë²½ëŒì˜ ê¸°ëŠ¥ : ê³µì— ë§ì•„ ë¶€ì„œì§€ê¸°
 [RequireComponent(typeof(BrickAnimation))]
 public class Brick : MonoBehaviour
 {
@@ -33,21 +33,30 @@ public class Brick : MonoBehaviour
     public event Action OnBrickHit;
     public event Action OnBrickBreak;
 
+    void Start()
+    {
+        OnBrickHit += ()=>{ GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.brickClip); };
+    }
+
     /// <summary>
-    /// º®µ¹ Ã¼·Â ±ğ´Â ¸Ş¼­µå
+    /// ë²½ëŒ ì²´ë ¥ ê¹ëŠ” ë©”ì„œë“œ
     /// </summary>
-    public void Hit(string playerName)
+    public void Hit (string playerName, int damage = 1, bool forceBreak = false)
     {
         this.playerName = playerName;
 
         BrickManager.Instance.CallOnBrickHitted(this);
         OnBrickHit?.Invoke();
         
-
-        if (type.Equals(BrickType.Unbreak)) 
+        if (forceBreak)
+        {
+            Durability -= Durability;
+            return;
+        }
+        else if (type.Equals(BrickType.Unbreak))
             return;
 
-        Durability--;
+        Durability -= damage;
     }
 
     public void Break()
@@ -57,9 +66,6 @@ public class Brick : MonoBehaviour
         BrickManager.Instance.CallOnBrickBroken(this);
         OnBrickBreak?.Invoke();
 
-        // 1ÃÊ µÚ Á¦°Å
-        Destroy(gameObject, 1f);
-
-        // TODO : ÆÄ±« ½Ã ÀÌÆåÆ® Ãß°¡
+        Destroy(gameObject);
     }
 }
