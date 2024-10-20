@@ -328,7 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d417e0882b5f941ba2703ee35b9490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 60
 --- !u!114 &824616797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f2ee3c2a1bf7645a2a0424e4a0752b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeManager: {fileID: 824616796}
+  soundManager: {fileID: 0}
+  player1Name: 
+  player2Name: 
 --- !u!1 &1208896608
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEngine.SceneManagement;
 
 [Serializable]
 public class StageScore

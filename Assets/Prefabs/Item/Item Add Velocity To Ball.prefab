@@ -161,4 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5bca9cd62883a47ab11678640c0054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 1.5
+  effectDuration: 5
+  effectValue: 1
+  itemEffect: {fileID: 11400000, guid: 2c1bdb6f2416e554589337f41dd793c0, type: 2}

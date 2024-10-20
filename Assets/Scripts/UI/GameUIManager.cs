@@ -16,13 +16,13 @@ public class GameUIManager : MonoBehaviour
 
     void Start()
     {
-        //±∏µ∂
-        ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
+        //Íµ¨ÎèÖ
+        // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
-        //√ ±‚»≠
+        //Ï¥àÍ∏∞Ìôî
         statusDisplay.SetActive(true);
-        loseGamePanel.SetActive(false);     //LOSE∆–≥Œ ∫Ò»∞º∫»≠
+        loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
     }
 
@@ -50,21 +50,21 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowStatusUI()
     {
-        statusDisplay.SetActive(true); // ∞‘¿” ø¿πˆ UI »∞º∫»≠
+        statusDisplay.SetActive(true); // ???? ???? UI ????
     }
 
     public void ShowLoseGameUI()
     {
-        loseGamePanel.SetActive(true); // ∞‘¿” ø¿πˆ UI »∞º∫»≠
+        loseGamePanel.SetActive(true); // ???? ???? UI ????
     }
 
     public void ShowWinGameUI()
     {
-        winGamePanel.SetActive(true); // WIN UI »∞º∫»≠
+        winGamePanel.SetActive(true); // WIN UI ????
     }
 
     public void ShowStartUI()
     {
-        winGamePanel.SetActive(true); // Start UI »∞º∫»≠
+        winGamePanel.SetActive(true); // Start UI ????
     }
 }
