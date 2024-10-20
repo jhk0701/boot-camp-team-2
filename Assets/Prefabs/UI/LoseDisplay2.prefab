@@ -701,7 +701,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreBoard
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6179203560029864680, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779359521662336923, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779359521662336923, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514596236026060677, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7779359521662336923, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
+    - {fileID: 8514596236026060677, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
+    - {fileID: 6179203560029864680, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
