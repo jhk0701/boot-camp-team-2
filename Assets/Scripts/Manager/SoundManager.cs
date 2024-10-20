@@ -11,17 +11,19 @@ public class SoundManager : MonoBehaviour
     public AudioClip wallClip;
     public AudioClip brickClip;
 
+    void Start()
+    {
+        PlaySound();
+    }
+
     // Update is called once per frame
     public void PlaySound()
     {
-        if (audioSourceBgm != null)
-        {
-            audioSourceBgm.Play();
-        }
+        audioSourceBgm.Play();
     }
 
     public void PlaySfx(AudioClip clip)
     {
-        audioSourceSfx.PlayOneShot(paddleClip);
+        audioSourceSfx.PlayOneShot(clip);
     }
 }

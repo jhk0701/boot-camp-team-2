@@ -44,6 +44,14 @@ public class BallMovement : MonoBehaviour
         }
 
         lastHitByPlayerName = "";
+
+        OnWallHit += (Vector3 vec) => {
+            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.wallClip);
+        };
+
+        OnPaddleHit += (Vector3 vec, int i) => {
+            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.paddleClip);
+        };
     }
 
     // private void Update()
@@ -62,15 +70,6 @@ public class BallMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Wall"))
-        {
-            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.wallClip);
-        }
-        else if(collision.gameObject.CompareTag("Brick"))
-        {
-            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.brickClip);
-        }
-
         if (collision.gameObject.CompareTag("DownWall"))
         {
             TouchBottom();
@@ -85,6 +84,7 @@ public class BallMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("Brick"))
         {
             Brick brick = collision.gameObject.GetComponent<Brick>();
+
             if (brick != null)
             {
                 brick.Hit(lastHitByPlayerName, Damage);
