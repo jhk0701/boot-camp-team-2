@@ -62,6 +62,15 @@ public class BallMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.wallClip);
+        }
+        else if(collision.gameObject.CompareTag("Brick"))
+        {
+            GameManager.Instance.soundManager.PlaySfx(GameManager.Instance.soundManager.brickClip);
+        }
+
         if (collision.gameObject.CompareTag("DownWall"))
         {
             TouchBottom();
