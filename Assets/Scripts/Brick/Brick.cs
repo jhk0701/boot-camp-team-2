@@ -31,7 +31,7 @@ public class Brick : MonoBehaviour
     }
 
     public event Action OnBrickHit;
-    public event Action OnBrickBreak;
+    public event Action<Vector3> OnBrickBreak;
 
     void Start()
     {
@@ -67,7 +67,7 @@ public class Brick : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
         GameManager.Instance.BrickManager.CallOnBrickBroken(this);
-        OnBrickBreak?.Invoke();
+        OnBrickBreak?.Invoke(transform.position);
 
         Destroy(gameObject);
     }

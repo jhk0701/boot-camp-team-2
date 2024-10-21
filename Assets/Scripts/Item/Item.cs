@@ -14,7 +14,7 @@ public abstract class Item : MonoBehaviour
     // 패들에 닿으면 발동 : 트리거에서 패들이랑 닿으면 발동하도록
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Paddle"))
+        if (collision.gameObject.CompareTag("Paddle"))
         {
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<Collider2D>().enabled = false;
@@ -23,13 +23,26 @@ public abstract class Item : MonoBehaviour
             collidedObject = collision.gameObject;
             Use(); // 자식에서 구현된 메서드 호출
         }
+        else if(collision.gameObject.CompareTag("DownWall"))
+        {
+            DestoryItem();
+        }
     }
 
     public virtual bool Initialize()
     {
-        GameManager.Instance.ItemHandler.OnEffectEnded += EndEffect;
-        return GameManager.Instance.ItemHandler.ActivateEffect(itemEffect);
+        bool isAdded = GameManager.Instance.ItemHandler.ActivateEffect(itemEffect);
+
+        if (isAdded)
+            GameManager.Instance.ItemHandler.OnEffectEnded += EndEffect;
+
+        return isAdded;
     }
 
+    public virtual void DestoryItem()
+    {
+        GameManager.Instance.ItemHandler.OnEffectEnded -= EndEffect;
+        Destroy(gameObject); 
+    }
     
 }

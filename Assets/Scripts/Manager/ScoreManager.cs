@@ -54,6 +54,8 @@ public class ScoreManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             filePath = Application.persistentDataPath + "/scores.json";
+            Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
+
 
             LoadScores();
 
@@ -62,19 +64,6 @@ public class ScoreManager : MonoBehaviour
 
             player1Name = "Player1";
             player2Name = "Player2";
-
-            // if (gameManager != null)
-            // {
-            //     //player1Name = gameManager.player1Name;
-            //     //player2Name = gameManager.player2Name;
-            //     player1Name = "Player1";
-            //     player2Name = "Player2";
-            // }
-            // else
-            // {
-            //     player1Name = "Player1";
-            //     player2Name = "Player2";
-            // }
 
             // 각 플레이어의 데이터를 로드하거나 생성
             LoadOrCreatePlayerData(player1Name);

@@ -12,7 +12,7 @@ public class StartUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreListButton.onClick.AddListener(ScoreList);
+        //scoreListButton.onClick.AddListener(ScoreList);
     }
 
     public void ScoreList()

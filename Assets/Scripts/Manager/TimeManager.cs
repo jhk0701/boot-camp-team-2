@@ -58,11 +58,13 @@ public class TimeManager : MonoBehaviour
     {
         elapsedTime = 0f;
         isPlaying = true;
+        Time.timeScale = 1f;
     }
 
     public void StopTimer()
     {
         isPlaying = false;
+        Time.timeScale = 0f;
     }
 
     public void PauseTimer()
