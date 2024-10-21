@@ -7,7 +7,7 @@ public class ScoreBoardUI : MonoBehaviour
     public Text player1ScoreText;
     public Text player2ScoreText;
 
-    //ÃÊ±â ¼ÂÆÃ
+    //ì´ˆê¸° ì…‹íŒ…
     private void Start()
     {
         int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
@@ -15,7 +15,7 @@ public class ScoreBoardUI : MonoBehaviour
 
         LevelAndStageText.text = $"Level: {currentLevel + 1} - Stage: {currentStage + 1}";
 
-        ScoreManager.Instance.OnUpdateScore += HandleUpdateScoreUI;
+        //ScoreManager.Instance.OnUpdateScore += HandleUpdateScoreUI;
 
         string player1Name = ScoreManager.Instance.player1Name;
         string player2Name = ScoreManager.Instance.player2Name;
@@ -30,22 +30,22 @@ public class ScoreBoardUI : MonoBehaviour
         player2ScoreText.text = $"Player 2 Score: {player2CurrentScore} (High: {player2HighScore})";
     }
 
-    //OnScoreUpdateÀÌ µÉ¶§¸¶´Ù ¾÷µ¥ÀÌÆ® 
-    private void HandleUpdateScoreUI(string playerName, int score)
-    {
-        int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
-        int currentStage = GameManager.Instance.LevelManager.SelectedStage;
+    ////OnScoreUpdateï¿½ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® 
+    //private void HandleUpdateScoreUI(string playerName, int score)
+    //{
+    //    int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
+    //    int currentStage = GameManager.Instance.LevelManager.SelectedStage;
 
-        int highScore = ScoreManager.Instance.GetHighScore(playerName);
+    //    int highScore = ScoreManager.Instance.GetHighScore(playerName);
 
-        // ½ºÄÚ¾î ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
-        if (playerName == ScoreManager.Instance.player1Name)
-        {
-            player1ScoreText.text = $"Player 1 Score: {score} (High: {highScore})";
-        }
-        else if (playerName == ScoreManager.Instance.player2Name)
-        {
-            player2ScoreText.text = $"Player 2 Score: {score} (High: {highScore})";
-        }
-    }
+    //    // ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    //    if (playerName == ScoreManager.Instance.player1Name)
+    //    {
+    //        player1ScoreText.text = $"Player 1 Score: {score} (High: {highScore})";
+    //    }
+    //    else if (playerName == ScoreManager.Instance.player2Name)
+    //    {
+    //        player2ScoreText.text = $"Player 2 Score: {score} (High: {highScore})";
+    //    }
+    //}
 }

@@ -20,6 +20,8 @@ public abstract class Item : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Rigidbody2D>().Sleep();
 
+            GameManager.Instance.soundManager.PlaySfx(SfxType.ItemUsage);
+
             collidedObject = collision.gameObject;
             Use(); // 자식에서 구현된 메서드 호출
         }

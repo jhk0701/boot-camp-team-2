@@ -380,6 +380,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 0
   soundManager: {fileID: 824616800}
+  Paddle_Player2: {fileID: 4177855656540254436, guid: 88299d6aa3cf57648a7a49870ede4c17, type: 3}
+  Ball_Player2: {fileID: 72676317250140979, guid: f77d81164a741064c925f6984716c71b, type: 3}
   player1Name: 
   player2Name: 
 --- !u!114 &824616798
@@ -459,9 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f73406a49aa964aa0f0046e49bb434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreBoardUIPrefab: {fileID: 5890497514960149445, guid: 223da60fa8ec90e47a02f6a04ea813b8, type: 3}
-  player1Name: 
-  player2Name: 
+  scoreBoardUIPrefab: {fileID: 5890497514960149445, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
 --- !u!1 &832776189
 GameObject:
   m_ObjectHideFlags: 0

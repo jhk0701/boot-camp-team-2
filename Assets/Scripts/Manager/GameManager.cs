@@ -25,10 +25,14 @@ public class GameManager : MonoBehaviour
     private StateManager stateManager;
     public SoundManager soundManager;
 
+    public GameObject Paddle_Player2;
+    public GameObject Ball_Player2;
+
     public string player1Name;
     public string player2Name;
 
-    private int lives = 5;
+    const int INITIALLIFE = 5;
+    private int lives = INITIALLIFE;
     public int Lives 
     {
         get { return lives; }
@@ -66,32 +70,11 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        stateManager.OnStateChanged += HandleStateChanged;
         stateManager.SetState(StateManager.GameState.Start);
+        SceneManager.sceneLoaded += OnSceneLoaded; 
+
     }
 
-    public void HandleStateChanged(StateManager.GameState gameState )
-    {
-        switch( gameState )
-        {
-            case StateManager.GameState.Start:
-                break;
-
-            case StateManager.GameState.GameScene:
-                lives = 5;
-                break;
-
-            case StateManager.GameState.Pause:
-                break;
-
-            case StateManager.GameState.Win:
-                break;
-
-            case StateManager.GameState.Lose:
-                break;  
-
-        }
-    }
 
     public void SetSinglePlayMode()
     {
@@ -103,6 +86,23 @@ public class GameManager : MonoBehaviour
     {
         gameMode = GameMode.Multi;
         Debug.Log("Start MultiPlayMode");
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GameScene")
+        {
+            if (gameMode == GameMode.Multi)
+            {
+                GameObject paddle2 = Instantiate(Paddle_Player2);
+                GameObject ball2 = Instantiate(Ball_Player2);
+
+                PaddleController paddleController2 = paddle2.GetComponent<PaddleController>();
+                BallMovement ballMovement2 = ball2.GetComponent<BallMovement>();
+                
+                paddleController2.ballMovement = ballMovement2;
+            }
+        }
     }
 
     public void SetBallMovement(BallMovement ball)
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         Lives += amount;
     }
-
+    
     public void SetItemHandler(ItemHandler handler)
     {
         ItemHandler = handler;
@@ -139,14 +139,16 @@ public class GameManager : MonoBehaviour
 
     public void StartGameScene()
     {
-        stateManager.SetState(StateManager.GameState.GameScene);
         SceneManager.LoadScene(1);
+        stateManager.SetState(StateManager.GameState.GameScene);
+
+        Lives = INITIALLIFE;
     }
 
     public void BackToLobby()
     {   
-        stateManager.SetState(StateManager.GameState.Start);
         SceneManager.LoadScene(0);
+        stateManager.SetState(StateManager.GameState.Start);
     }
 
     public int GetLives()

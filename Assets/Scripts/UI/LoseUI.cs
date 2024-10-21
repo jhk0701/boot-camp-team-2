@@ -17,8 +17,10 @@ public class LoseUI : MonoBehaviour
     // Update is called once per frame
     public void Retry()
     {
+        GameManager.Instance.StartGameScene();
+        return;
         gameObject.SetActive(false);
-        // SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void LoadHome()

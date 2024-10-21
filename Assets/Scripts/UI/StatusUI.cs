@@ -22,21 +22,24 @@ public class StatusUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeUI();//ÃÊ±âÈ­
+        InitializeUI();//ì˜ˆì‹œê°’
 
-        //Á¡¼ö ¾÷µ¥ÀÌÆ®
         ScoreManager.Instance.OnUpdateScore += HandleOnScoreUpdate;
 
-        //¸ñ¼û ¾÷µ¥ÀÌÆ®
         GameManager.Instance.OnLifeUpdate += HandleOnLifeUpdate;
         livesText.text = GameManager.Instance.GetLives().ToString();
 
-        //·¹º§,½ºÅ×ÀÌÁö ¾÷µ¥ÀÌÆ®
         int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
         int currentStage = GameManager.Instance.LevelManager.SelectedStage;
 
         levelText.text = $"{currentLevel + 1}";
         stageText.text = $"{currentStage + 1}";
+    }
+
+    void OnDisable()
+    {
+        ScoreManager.Instance.OnUpdateScore -= HandleOnScoreUpdate;
+        GameManager.Instance.OnLifeUpdate -= HandleOnLifeUpdate;
     }
 
     public void InitializeUI()
