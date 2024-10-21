@@ -18,6 +18,6 @@ public class StartUI : MonoBehaviour
     public void ScoreList()
     {
         //scoreList
-        Debug.Log("½ºÄÚ¾î¸®½ºÆ® ±¸ÇöÇÊ¿ä");
+        Debug.Log("ìŠ¤ì½”ì–´ë¦¬ìŠ¤íŠ¸ êµ¬í˜„í•„ìš”");
     }
 }

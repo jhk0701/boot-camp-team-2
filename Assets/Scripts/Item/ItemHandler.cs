@@ -54,7 +54,9 @@ public class ItemHandler : MonoBehaviour
                 
                 if (ActiveEffects[key] <= 0f)
                 {
+                    Debug.Log("Effect ended");
                     OnEffectEnded?.Invoke(key);
+
                     ActiveEffects.Remove(key);
                 }
             }
