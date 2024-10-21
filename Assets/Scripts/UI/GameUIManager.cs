@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -16,11 +15,11 @@ public class GameUIManager : MonoBehaviour
 
     void Start()
     {
-        //±∏µ∂
+        //Íµ¨ÎèÖ
         // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
-        //√ ±‚»≠
+        //Ï¥àÍ∏∞Ìôî
         statusDisplay.SetActive(true);
         loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
