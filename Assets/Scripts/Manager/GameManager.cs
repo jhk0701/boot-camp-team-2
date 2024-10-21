@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public string player1Name;
     public string player2Name;
 
-    private int lives = 3;
+    private int lives = 5;
     public int Lives 
     {
         get { return lives; }
