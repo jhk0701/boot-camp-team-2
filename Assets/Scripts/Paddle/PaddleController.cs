@@ -93,6 +93,15 @@ public class PaddleController : MonoBehaviour
         Vector3 movementVector = new Vector3(movement * Speed * Time.deltaTime, 0f, 0f);
         transform.position += movementVector;
 
+        if (transform.position.x > 2.26f)
+        {
+            transform.position = new Vector3(2.26f, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x < -2.26f)
+        {
+            transform.position = new Vector3(-2.26f, transform.position.y, transform.position.z);
+        }
+
         movement = 0f;
     }
 

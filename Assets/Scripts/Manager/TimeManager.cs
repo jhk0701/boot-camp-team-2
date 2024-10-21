@@ -60,13 +60,6 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    public void StartTimer()
-    {
-        elapsedTime = 0f;
-        isPlaying = true;
-        Time.timeScale = 1f;
-    }
-
     public void StopTimer()
     {
         isPlaying = false;
@@ -81,6 +74,7 @@ public class TimeManager : MonoBehaviour
 
     public void ResumeTimer()
     {
+        elapsedTime = 0f;
         Time.timeScale = 1f;
         isPlaying = true;
     }

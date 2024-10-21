@@ -23,18 +23,16 @@ public class ScoreData
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    private LevelManager levelManager;
+
+    public string player1Name { get; set; }
+    public string player2Name { get; set; }
+
     private GameManager gameManager;
-    private BrickManager brickManager;
-    private BallMovement ballMovement;
 
     private string filePath;
 
     private int currentLevel;
     private int currentStage;
-
-    public string player1Name { get; set; }
-    public string player2Name { get; set; }
 
     private List<ScoreData> playerScores = new List<ScoreData>();
 
@@ -50,9 +48,6 @@ public class ScoreManager : MonoBehaviour
             filePath = Application.persistentDataPath + "/scores.json";
             Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
 
-            LoadScores();
-
-           
         }
         else
         {
@@ -63,25 +58,25 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
-
         gameManager = GameManager.Instance;
 
         player1Name = "Player1";
         player2Name = "Player2";
 
-        LoadOrCreatePlayerData(player1Name);
-
-        // 게임 모드가 멀티 플레이일 때만 플레이어 2의 데이터 로드 또는 생성
-        if (gameManager.gameMode == GameManager.GameMode.Multi)
+        if (GameManager.Instance.BrickManager != null)
         {
-            LoadOrCreatePlayerData(player2Name);
+            GameManager.Instance.BrickManager.OnBrickBroken += HandleOnBrickBroken;
         }
+        else
+        {
+            // BrickManager가 아직 설정되지 않았다면, 설정되었을 때 구독하도록 이벤트 등록
+            GameManager.Instance.OnBrickManagerSet += HandleOnBrickManagerSet;
+        }
+
+        LoadScores();
     }
 
-    void OnDisable()
-    {
-        StateManager.Instance.OnStateChanged -= HandleOnStateChanged;
-    }
+
 
     private void HandleOnStateChanged(StateManager.GameState gameState)
     {
@@ -90,6 +85,12 @@ public class ScoreManager : MonoBehaviour
             case StateManager.GameState.Start:
                 break;
             case StateManager.GameState.GameScene:
+
+                LoadOrCreatePlayerData(player1Name);
+                if (gameManager.gameMode == GameManager.GameMode.Multi)
+                {
+                    LoadOrCreatePlayerData(player2Name);
+                }
 
                 LevelManager levelManager = GameManager.Instance.LevelManager;
                 currentLevel = levelManager.SelectedLevel;
@@ -115,25 +116,18 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void SetBrickManager(BrickManager manager)
+    private void HandleOnBrickManagerSet()
     {
-        brickManager = manager;
-        BrickManager.OnBrickBroken -= HandleBrickBroken;
-        BrickManager.OnBrickBroken += HandleBrickBroken;
+        if (GameManager.Instance.BrickManager != null)
+        {
+            GameManager.Instance.BrickManager.OnBrickBroken += HandleOnBrickBroken;
+        }
     }
 
-    private void HandleBrickBroken(Brick brick)
+    private void HandleOnBrickBroken(Brick brick, string playerName)
     {
-        string playerName = brick.playerName;
-
-        // 플레이어 이름이 없거나, 싱글 플레이 모드에서 player2의 점수를 무시
-        if (string.IsNullOrEmpty(playerName))
-            return;
-
-        if (playerName == player2Name && gameManager.gameMode != GameManager.GameMode.Multi)
-            return;
-
         AddScore(playerName, 10);
+        Debug.Log($"Brick broken by {playerName}, +10 points");
     }
 
     public void AddScore(string playerName, int points)
@@ -167,20 +161,16 @@ public class ScoreManager : MonoBehaviour
 
         // 현재 스코어 업데이트
         stageScore.currentScore += points;
+        Debug.Log(playerName);
+        Debug.Log(stageScore.currentScore);
 
         // 스코어 업데이트 이벤트 호출
         OnUpdateScore?.Invoke(playerName, stageScore.currentScore);
     }
 
-
     public int GetCurrentScore(string playerName)
     {
         return GetCurrentScore(playerName, currentLevel, currentStage);
-    }
-
-    public int GetHighScore(string playerName)
-    {
-        return GetHighScore(playerName, currentLevel, currentStage);
     }
 
     public int GetCurrentScore(string playerName, int level, int stage)
@@ -198,6 +188,11 @@ public class ScoreManager : MonoBehaviour
         return 0;
     }
 
+    public int GetHighScore(string playerName)
+    {
+        return GetHighScore(playerName, currentLevel, currentStage);
+    }
+
     public int GetHighScore(string playerName, int level, int stage)
     {
         ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
@@ -212,7 +207,6 @@ public class ScoreManager : MonoBehaviour
 
         return 0;
     }
-
 
     private void CheckAndUpdateHighScore(string playerName)
     {
@@ -233,7 +227,6 @@ public class ScoreManager : MonoBehaviour
             }
         }
     }
-
 
     private void LoadOrCreatePlayerData(string playerName)
     {
@@ -267,7 +260,16 @@ public class ScoreManager : MonoBehaviour
         {
             string json = File.ReadAllText(filePath);
             playerScores = JsonConvert.DeserializeObject<List<ScoreData>>(json);
-            Debug.Log("Scores loaded from " + filePath);
+
+            if (playerScores == null)
+            {
+                Debug.LogWarning("Failed to deserialize scores.json, initializing empty scores");
+                playerScores = new List<ScoreData>();
+            }
+            else
+            {
+                Debug.Log("Scores loaded from " + filePath);
+            }
         }
         else
         {
@@ -275,6 +277,7 @@ public class ScoreManager : MonoBehaviour
             playerScores = new List<ScoreData>();
         }
     }
+
 
     // 현재 스코어를 초기화 (새 게임 시작 시)
     public void ResetCurrentScores()

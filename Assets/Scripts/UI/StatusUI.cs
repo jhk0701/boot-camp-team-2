@@ -18,22 +18,28 @@ public class StatusUI : MonoBehaviour
     private int initialLives = 0;
     private int initialStage = 0;
 
+    private string playerName;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerName = ScoreManager.Instance.player1Name; // 싱글 플레이어 이름 설정
+
         InitializeUI();//예시값
 
         ScoreManager.Instance.OnUpdateScore += HandleOnScoreUpdate;
-
         GameManager.Instance.OnLifeUpdate += HandleOnLifeUpdate;
-        livesText.text = GameManager.Instance.GetLives().ToString();
+
+        livesText.text = GameManager.Instance.GetLives(playerName).ToString();
 
         int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
         int currentStage = GameManager.Instance.LevelManager.SelectedStage;
 
         levelText.text = $"{currentLevel + 1}";
         stageText.text = $"{currentStage + 1}";
+
+        scoreText.text = ScoreManager.Instance.GetCurrentScore(playerName).ToString();
+
     }
 
     void OnDisable()
@@ -62,13 +68,19 @@ public class StatusUI : MonoBehaviour
     {
         timeText.text = TimeManager.Instance.GetElapsedTime().ToString("F2");
     }
-    public void HandleOnLifeUpdate(int lives)
+    public void HandleOnLifeUpdate(string updatedPlayerName, int lives)
     {
-        livesText.text = lives.ToString();
+        if (updatedPlayerName == playerName)
+        {
+            livesText.text = lives.ToString();
+        }
     }
 
-    public void HandleOnScoreUpdate(string playerName, int score)
+    public void HandleOnScoreUpdate(string updatedPlayerName, int score)
     {
-        scoreText.text = score.ToString();
+        if (updatedPlayerName == playerName)
+        {
+            scoreText.text = score.ToString();
+        }
     }
 }

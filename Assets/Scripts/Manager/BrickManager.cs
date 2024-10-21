@@ -16,7 +16,7 @@ public class BrickManager : MonoBehaviour
     public int CurrentCount { get; private set; }
 
     public static event Action<Brick> OnBrickHitted;
-    public static event Action<Brick> OnBrickBroken;
+    public event Action<Brick, string> OnBrickBroken;
     public event Action OnAllBrickBroken;
 
     [Header("Item list")]
@@ -31,7 +31,6 @@ public class BrickManager : MonoBehaviour
         brickFactory = GetComponent<BrickFactory>();
 
         GameManager.Instance.SetBrickManager(this);
-        ScoreManager.Instance.SetBrickManager(this);
     }
 
     void Start()
@@ -69,7 +68,7 @@ public class BrickManager : MonoBehaviour
             int id = UnityEngine.Random.Range(0, instances.Count);
             int itemId = fixedItemId >= 0 ? fixedItemId : UnityEngine.Random.Range(0, items.Length);
             
-            instances[id].OnBrickBreak += (Vector3 position) => {
+            instances[id].OnBrickBreak += (Vector3 position, string playerName) => {
                 Instantiate(items[itemId], position, Quaternion.identity);
             };
             
@@ -93,10 +92,10 @@ public class BrickManager : MonoBehaviour
         OnBrickHitted?.Invoke(brick);
     }
 
-    public void CallOnBrickBroken(Brick brick)
+    public void CallOnBrickBroken(Brick brick, string playerName)
     {
-        OnBrickBroken?.Invoke(brick);
-
+        OnBrickBroken?.Invoke(brick, playerName);
+        Debug.Log($"brik was broken by {playerName}");
         if (!brick.type.Equals(BrickType.Unbreak))
             CountBrokenBrick();
     }

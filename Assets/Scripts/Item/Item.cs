@@ -8,6 +8,8 @@ public abstract class Item : MonoBehaviour
     // 아이템에 따라 다른 효과. 행위가 각각 다름. 
     // 구체적인 사항을 자식 클래스에서 구현
     protected abstract void Use();
+    protected string playerName; 
+
     public abstract void EndEffect(ItemEffect effect);
 
     // 떨어지는 기능 : 닿는 대상은 패들이랑만 닿아야 한다 : 트리거
@@ -23,6 +25,12 @@ public abstract class Item : MonoBehaviour
             GameManager.Instance.soundManager.PlaySfx(SfxType.ItemUsage);
 
             collidedObject = collision.gameObject;
+
+            PaddleController paddle = collidedObject.GetComponent<PaddleController>();
+            if (paddle != null)
+            {
+                playerName = paddle.playerName;
+            }
             Use(); // 자식에서 구현된 메서드 호출
         }
         else if(collision.gameObject.CompareTag("DownWall"))
