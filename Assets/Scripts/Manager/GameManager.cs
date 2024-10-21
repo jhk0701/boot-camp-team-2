@@ -4,9 +4,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameMode
+    {
+        Single =0,
+        Multi =1,
+    }
+
+    public GameMode gameMode = GameMode.Single;
+
     public static GameManager Instance; 
 
-    public event Action OnLifeUpdate;
+    public event Action<int> OnLifeUpdate;
 
     public LevelManager LevelManager { get; private set; }
     public BrickManager BrickManager { get; private set; }
@@ -28,7 +36,7 @@ public class GameManager : MonoBehaviour
         private set
         {
             lives = value;
-            OnLifeUpdate?.Invoke();
+            OnLifeUpdate?.Invoke(lives);
 
             if (lives <= 0)
             {
@@ -59,9 +67,44 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
+        stateManager.OnStateChanged += HandleStateChanged;
         stateManager.SetState(StateManager.GameState.Start);
     }
 
+    public void HandleStateChanged(StateManager.GameState gameState )
+    {
+        switch( gameState )
+        {
+            case StateManager.GameState.Start:
+                break;
+
+            case StateManager.GameState.GameScene:
+                lives = 5;
+                break;
+
+            case StateManager.GameState.Pause:
+                break;
+
+            case StateManager.GameState.Win:
+                break;
+
+            case StateManager.GameState.Lose:
+                break;  
+
+        }
+    }
+
+    public void SetSinglePlayMode()
+    {
+        gameMode = GameMode.Single;
+        Debug.Log("Start SingPlayMode");
+    }
+
+    public void SetMultiPlayMode()
+    {
+        gameMode = GameMode.Multi;
+        Debug.Log("Start MultiPlayMode");
+    }
 
     public void SetBallMovement(BallMovement ball)
     {
@@ -110,6 +153,11 @@ public class GameManager : MonoBehaviour
     {   
         stateManager.SetState(StateManager.GameState.Start);
         SceneManager.LoadScene(0);
+    }
+
+    public int GetLives()
+    {
+        return lives;
     }
 
 }
