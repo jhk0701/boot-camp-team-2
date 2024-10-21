@@ -23,6 +23,10 @@ public abstract class Item : MonoBehaviour
             collidedObject = collision.gameObject;
             Use(); // 자식에서 구현된 메서드 호출
         }
+        else if(collision.gameObject.CompareTag("DownWall"))
+        {
+            DestoryItem();
+        }
     }
 
     public virtual bool Initialize()

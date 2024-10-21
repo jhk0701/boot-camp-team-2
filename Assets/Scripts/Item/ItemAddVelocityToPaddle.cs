@@ -20,7 +20,7 @@ public class ItemAddVelocityToPaddle : Item
             // Vector2 velocity = paddle.ballMovement.RigidBody2d.velocity;
             // paddle.ballMovement.RigidBody2d.velocity = velocity * effectValue;
 
-            paddle.Speed += (itemEffect as PowerUpItemEffect).effectStat.speed;
+            paddle.Speed *= (itemEffect as PowerUpItemEffect).effectStat.speed;
         }
     }
 
@@ -31,7 +31,7 @@ public class ItemAddVelocityToPaddle : Item
 
         GameManager.Instance.ItemHandler.OnEffectEnded -= EndEffect;
 
-        paddle.Speed -= (itemEffect as PowerUpItemEffect).effectStat.speed;
+        paddle.Speed /= (itemEffect as PowerUpItemEffect).effectStat.speed;
 
         DestoryItem();
     }

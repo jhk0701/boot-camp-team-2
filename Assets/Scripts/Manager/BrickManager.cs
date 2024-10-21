@@ -68,9 +68,8 @@ public class BrickManager : MonoBehaviour
         {
             int id = UnityEngine.Random.Range(0, instances.Count);
             int itemId = fixedItemId >= 0 ? fixedItemId : UnityEngine.Random.Range(0, items.Length);
-            Vector3 position = instances[id].transform.position;
-
-            instances[id].OnBrickBreak += () => {
+            
+            instances[id].OnBrickBreak += (Vector3 position) => {
                 Instantiate(items[itemId], position, Quaternion.identity);
             };
             
