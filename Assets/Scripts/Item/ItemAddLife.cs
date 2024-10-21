@@ -13,6 +13,6 @@ public class ItemAddLife : Item
 
     public override void EndEffect(ItemEffect effect)
     {
-        Destroy(gameObject);
+        DestoryItem();
     }
 }

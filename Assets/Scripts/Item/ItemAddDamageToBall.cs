@@ -6,7 +6,10 @@ public class ItemAddDamageToBall : Item
     protected override void Use()
     {
         if (!Initialize())
+        {
+            DestoryItem();
             return;
+        }
         
         Debug.Log("ItemAddDamageToBall used");
 
@@ -24,6 +27,6 @@ public class ItemAddDamageToBall : Item
 
         paddle.ballMovement.Stat.damage -= (itemEffect as PowerUpItemEffect).effectStat.damage;
 
-        Destroy(gameObject);
+        DestoryItem();
     }
 }

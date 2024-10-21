@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: 1
   applyingType: 0
-  effectDuration: 7
-  effectObject: {fileID: 0}
+  effectDuration: 10
+  vfxObject: {fileID: 0}
   effectStat:
     speed: 0
     damage: 5

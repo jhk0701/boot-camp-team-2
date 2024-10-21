@@ -6,7 +6,10 @@ public class ItemAddVelocityToPaddle : Item
     protected override void Use()
     {
         if (!Initialize())
+        {
+            DestoryItem();
             return;
+        }
             
         Debug.Log("ItemAddVelocityToPaddle used");
 
@@ -26,8 +29,10 @@ public class ItemAddVelocityToPaddle : Item
         if(effect != itemEffect) 
             return;
 
+        GameManager.Instance.ItemHandler.OnEffectEnded -= EndEffect;
+
         paddle.Speed -= (itemEffect as PowerUpItemEffect).effectStat.speed;
 
-        Destroy(gameObject);
+        DestoryItem();
     }
 }

@@ -22,6 +22,9 @@ public class BrickManager : MonoBehaviour
     [Header("Item list")]
     [SerializeField] Item[] items;
 
+    [Header("Test")]
+    [SerializeField] int fixedItemId = -1;
+
 
     void Awake()
     {
@@ -64,9 +67,9 @@ public class BrickManager : MonoBehaviour
         for (int i = 0; i < itemCount; i++)
         {
             int id = UnityEngine.Random.Range(0, instances.Count);
-            int itemId = UnityEngine.Random.Range(0, items.Length);
+            int itemId = fixedItemId >= 0 ? fixedItemId : UnityEngine.Random.Range(0, items.Length);
             Vector3 position = instances[id].transform.position;
-            // Debug.Log("Create Item holded brick " + id);
+
             instances[id].OnBrickBreak += () => {
                 Instantiate(items[itemId], position, Quaternion.identity);
             };

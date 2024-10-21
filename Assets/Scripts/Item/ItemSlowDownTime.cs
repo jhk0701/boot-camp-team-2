@@ -7,7 +7,10 @@ public class ItemSlowDownTime : Item
     protected override void Use()
     {
         if (!Initialize())
+        {
+            DestoryItem();
             return;
+        }
 
         UtilItemEffect utilEffect = itemEffect as UtilItemEffect;
 
@@ -26,9 +29,8 @@ public class ItemSlowDownTime : Item
             return;
 
         Time.timeScale = 1f;
-
         paddle.Speed *= (itemEffect as UtilItemEffect).effectValue;
-
-        Destroy(gameObject);
+        
+        DestoryItem();
     }
 }

@@ -85,7 +85,7 @@ public class BallMovement : MonoBehaviour
             PaddleController paddle = collision.gameObject.GetComponent<PaddleController>();
             lastHitByPlayerName = paddle.playerName;
             OnPaddleHit?.Invoke(transform.position, paddle.playerNumber);
-            Debug.Log($"Ball was hit by {lastHitByPlayerName}");
+            // Debug.Log($"Ball was hit by {lastHitByPlayerName}");
         }
         else if (collision.gameObject.CompareTag("Brick"))
         {
