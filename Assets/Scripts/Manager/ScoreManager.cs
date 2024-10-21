@@ -90,7 +90,6 @@ public class ScoreManager : MonoBehaviour
                 if (gameManager.gameMode == GameManager.GameMode.Multi)
                 {
                     LoadOrCreatePlayerData(player2Name);
-                    Debug.Log("player2 create?");
                 }
 
                 LevelManager levelManager = GameManager.Instance.LevelManager;

@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public string player1Name;
     public string player2Name;
 
-    const int INITIALLIFE = 5;
+    const int INITIALLIFE = 3;
     private Dictionary<string, int> playerLives = new Dictionary<string, int>();
     public event Action OnBrickManagerSet;
 
@@ -66,14 +66,8 @@ public class GameManager : MonoBehaviour
 
 
 
-        // 각 플레이어의 라이프 초기화
-        playerLives[player1Name] = INITIALLIFE;
-
-        if (gameMode == GameMode.Multi)
-        {
-            playerLives[player1Name] = 3;
-            playerLives[player2Name] = 3;
-        }
+        playerLives[player1Name] = 3;
+        playerLives[player2Name] = 3;
     }
 
     public void SetSinglePlayMode()

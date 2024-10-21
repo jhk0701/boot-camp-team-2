@@ -28,16 +28,7 @@ public class GameUIManager : MonoBehaviour
         loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
 
-        if (gameManager.gameMode == GameManager.GameMode.Single)
-        {
-            statusDisplay.SetActive(true);
-            multiStatusDisplay.SetActive(false);
-        }
-        else if (gameManager.gameMode == GameManager.GameMode.Multi)
-        {
-            statusDisplay.SetActive(false);
-            multiStatusDisplay.SetActive(true);
-        }
+
     }
 
     void OnDisable()
@@ -50,7 +41,16 @@ public class GameUIManager : MonoBehaviour
         switch (newState)
         {
             case StateManager.GameState.GameScene:
-                //ShowStatusUI();
+                if (gameManager.gameMode == GameManager.GameMode.Single)
+                {
+                    statusDisplay.SetActive(true);
+                    multiStatusDisplay.SetActive(false);
+                }
+                else if (gameManager.gameMode == GameManager.GameMode.Multi)
+                {
+                    statusDisplay.SetActive(false);
+                    multiStatusDisplay.SetActive(true);
+                }
                 break;
             case StateManager.GameState.Pause:
                 //PauseUI();

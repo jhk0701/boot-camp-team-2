@@ -27,6 +27,7 @@ public class WinUI : MonoBehaviour
     public void LoadHome()
     {
         //Startæ¿¿∏∑Œ
-        SceneManager.LoadScene("StartScene");
+        GameManager.Instance.BackToLobby();
+
     }
 }
