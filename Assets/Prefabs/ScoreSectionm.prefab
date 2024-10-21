@@ -160,7 +160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2519745504298967053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -259,11 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelGroup: {fileID: 4517935251167759681, guid: 5e1dcc6f5b9693b4e8660e8f67fdb04d, type: 3}
   contents: {fileID: 3964472348361272953}
-  LevelText: {fileID: 4889706020321724311}
-  StageText: {fileID: 2570154531725953629}
-  player1NameText: {fileID: 5292591373637379587}
+  LevelAndStageText: {fileID: 0}
   player1ScoreText: {fileID: 7001556162119187161}
-  player2NameText: {fileID: 2690636638389532148}
   player2ScoreText: {fileID: 8612207952397906432}
   Scoreboard: {fileID: 3866543893186958469}
 --- !u!1 &3629913269504118926

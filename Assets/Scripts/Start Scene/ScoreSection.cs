@@ -8,14 +8,11 @@ public class ScoreSelection : MonoBehaviour
     [SerializeField] LevelGroup levelGroup;
     [SerializeField] Transform contents;
 
-    [SerializeField] Text LevelText;
-    [SerializeField] Text StageText;
+    public Text LevelAndStageText;
+    public Text player1ScoreText;
+    public Text player2ScoreText;
 
-    [SerializeField] Text player1NameText;
-    [SerializeField] Text player1ScoreText;
-
-    [SerializeField] Text player2NameText;
-    [SerializeField] Text player2ScoreText;
+    private GameManager gameManger;
 
     [SerializeField] GameObject Scoreboard;
 
@@ -27,7 +24,7 @@ public class ScoreSelection : MonoBehaviour
     void SetStages()
     {
         LevelManager levelManager = GameManager.Instance.LevelManager;
-
+        gameManger = GameManager.Instance;
         // 레벨과 스테이지 버튼을 설정
         for (int i = 0; i < levelManager.levels.Length; i++)
         {
@@ -73,20 +70,17 @@ public class ScoreSelection : MonoBehaviour
     {
         Scoreboard.SetActive(true);
 
+        LevelAndStageText.text = $"Level: {level + 1} - Stage: {stage + 1}";
+
         string player1Name = ScoreManager.Instance.player1Name;
+
+        int player1HighScore = ScoreManager.Instance.GetHighScore(player1Name);
+
+        player1ScoreText.text = $"Player 1 HighScore: {player1HighScore}";
+
         string player2Name = ScoreManager.Instance.player2Name;
-
-        int player1Score = ScoreManager.Instance.GetCurrentScore(player1Name, level, stage);
-        int player2Score = ScoreManager.Instance.GetCurrentScore(player2Name, level, stage);
-
-        LevelText.text = $"Level {level + 1}";
-        StageText.text = $"Stage {stage + 1}";
-
-        player1NameText.text = $"{player1Name}";
-        player1ScoreText.text = $"{player1Score}";
-
-        player2NameText.text = $"{player2Name}";
-        player2ScoreText.text = $"{player1Score}";
+        int player2HighScore = ScoreManager.Instance.GetHighScore(player2Name);
+        player2ScoreText.text = $"Player 2 HighScore:  {player2HighScore}";
 
         Button closedButton = GetComponentInChildren<Button>();
         closedButton.onClick.AddListener(() =>

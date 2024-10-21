@@ -13,10 +13,13 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] GameObject statusDisplay;
     [SerializeField] GameObject loseGamePanel;
     [SerializeField] GameObject multiStatusDisplay;
+    private GameManager gameManager;
+
 
     void Start()
     {
         //구독
+        gameManager = GameManager.Instance;
         // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
@@ -24,6 +27,17 @@ public class GameUIManager : MonoBehaviour
         statusDisplay.SetActive(true);
         loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
+
+        if (gameManager.gameMode == GameManager.GameMode.Single)
+        {
+            statusDisplay.SetActive(true);
+            multiStatusDisplay.SetActive(false);
+        }
+        else if (gameManager.gameMode == GameManager.GameMode.Multi)
+        {
+            statusDisplay.SetActive(false);
+            multiStatusDisplay.SetActive(true);
+        }
     }
 
     void OnDisable()
@@ -75,6 +89,6 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowStartUI()
     {
-        winGamePanel.SetActive(true); // Start UI ????
+        startGamePanel.SetActive(true); // Start UI ????
     }
 }

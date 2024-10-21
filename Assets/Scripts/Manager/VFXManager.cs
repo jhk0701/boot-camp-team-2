@@ -31,6 +31,13 @@ public class VFXManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        BrickManager.OnBrickHitted += HandleBrickHit;
+        GameManager.Instance.BrickManager.OnBrickBroken += HandleBrickBroken;
+        BallMovement.OnPaddleHit += HandlePaddleHit;
+        BallMovement.OnWallHit += HandleWallHit;
+    }
     // 풀 초기화
     private void InitializePool()
     {
@@ -132,13 +139,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        BrickManager.OnBrickHitted += HandleBrickHit;
-        BrickManager.OnBrickBroken += HandleBrickBroken;
-        BallMovement.OnPaddleHit += HandlePaddleHit;
-        BallMovement.OnWallHit += HandleWallHit;
-    }
+
 
     // 각 이벤트에 따라 VFX 재생
     private void HandleBrickHit(Brick brick)
@@ -147,7 +148,7 @@ public class VFXManager : MonoBehaviour
         // Debug.Log("BrickHitVFX");
     }
 
-    private void HandleBrickBroken(Brick brick)
+    private void HandleBrickBroken(Brick brick, string playerName)
     {
         SpawnFromPool("BrickBrokenVFX", brick.transform.position);
     }
@@ -161,6 +162,18 @@ public class VFXManager : MonoBehaviour
 
     private void HandleWallHit(Vector3 position)
     {
-        SpawnFromPool("WallHitVFX", position);
+        SpawnFromPool("WallHitVFX", position); 
+    }
+
+    private void OnDisable()
+    {
+        // 이벤트 구독 해제
+        BrickManager.OnBrickHitted -= HandleBrickHit;
+
+        if (GameManager.Instance != null && GameManager.Instance.BrickManager != null)
+            GameManager.Instance.BrickManager.OnBrickBroken -= HandleBrickBroken;
+
+        BallMovement.OnPaddleHit -= HandlePaddleHit;
+        BallMovement.OnWallHit -= HandleWallHit;
     }
 }

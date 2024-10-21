@@ -12,9 +12,9 @@ public enum BrickType
 [RequireComponent(typeof(BrickAnimation))]
 public class Brick : MonoBehaviour
 {
-    public string playerName;
+    public string PlayerName;
     public BrickType type;
-    [SerializeField] int durability;  
+    [SerializeField] int durability;
     public int Durability
     { 
         get { return durability; }
@@ -31,7 +31,7 @@ public class Brick : MonoBehaviour
     }
 
     public event Action OnBrickHit;
-    public event Action<Vector3> OnBrickBreak;
+    public event Action<Vector3, string> OnBrickBreak;
 
     void Start()
     {
@@ -46,7 +46,7 @@ public class Brick : MonoBehaviour
     /// </summary>
     public void Hit (string playerName, int damage = 1, bool forceBreak = false)
     {
-        this.playerName = playerName;
+        this.PlayerName = playerName;
 
         GameManager.Instance.BrickManager.CallOnBrickHitted(this);
         OnBrickHit?.Invoke();
@@ -66,8 +66,8 @@ public class Brick : MonoBehaviour
     {
         GetComponent<Collider2D>().enabled = false;
 
-        GameManager.Instance.BrickManager.CallOnBrickBroken(this);
-        OnBrickBreak?.Invoke(transform.position);
+        GameManager.Instance.BrickManager.CallOnBrickBroken(this, PlayerName);
+        OnBrickBreak?.Invoke(transform.position, PlayerName);
 
         Destroy(gameObject);
     }
