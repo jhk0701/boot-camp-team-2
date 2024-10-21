@@ -134,11 +134,14 @@ public class ScoreManager : MonoBehaviour
         // 어떤 플레이어가 벽돌을 깼는지 식별
         AddScore(playerName, 10);
 
-        Debug.Log($"AddScore +10 for {playerName}, Current Score: {GetCurrentScore(playerName)}");
+        // Debug.Log($"AddScore +10 for {playerName}, Current Score: {GetCurrentScore(playerName)}");
     }
 
     public void AddScore(string playerName, int points)
     {
+        if (playerName == "")
+            return;
+
         if (points <= 0)
             return;
 
