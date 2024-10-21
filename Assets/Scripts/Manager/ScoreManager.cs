@@ -55,18 +55,7 @@ public class ScoreManager : MonoBehaviour
 
             LoadScores();
 
-            gameManager = GameManager.Instance;
-
-            player1Name = "Player1";
-            player2Name = "Player2";
-
-            LoadOrCreatePlayerData(player1Name);
-
-            // 게임 모드가 멀티 플레이일 때만 플레이어 2의 데이터 로드 또는 생성
-            if (gameManager.gameMode == GameManager.GameMode.Multi)
-            {
-                LoadOrCreatePlayerData(player2Name);
-            }
+           
         }
         else
         {
@@ -77,6 +66,19 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
+
+        gameManager = GameManager.Instance;
+
+        player1Name = "Player1";
+        player2Name = "Player2";
+
+        LoadOrCreatePlayerData(player1Name);
+
+        // 게임 모드가 멀티 플레이일 때만 플레이어 2의 데이터 로드 또는 생성
+        if (gameManager.gameMode == GameManager.GameMode.Multi)
+        {
+            LoadOrCreatePlayerData(player2Name);
+        }
     }
 
     private void HandleOnStateChanged(StateManager.GameState gameState)

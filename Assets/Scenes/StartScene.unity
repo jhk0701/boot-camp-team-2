@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f73406a49aa964aa0f0046e49bb434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreBoardUIPrefab: {fileID: 5890497514960149445, guid: 223da60fa8ec90e47a02f6a04ea813b8, type: 3}
+  scoreBoardUIPrefab: {fileID: 5890497514960149445, guid: dbf723a7b9a528f44a90238ea3058d63, type: 3}
 --- !u!1 &832776189
 GameObject:
   m_ObjectHideFlags: 0
