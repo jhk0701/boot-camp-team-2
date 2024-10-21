@@ -113,8 +113,10 @@ public class ScoreManager : MonoBehaviour
     public void SetBrickManager(BrickManager manager)
     {
         brickManager = manager;
+        BrickManager.OnBrickBroken -= HandleBrickBroken;
         BrickManager.OnBrickBroken += HandleBrickBroken;
     }
+
 
     // HandleBrickBroken 메서드 수정: string playerName -> Brick brick
     private void HandleBrickBroken(Brick brick)

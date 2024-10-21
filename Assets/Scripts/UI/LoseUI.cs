@@ -18,7 +18,6 @@ public class LoseUI : MonoBehaviour
     public void Retry()
     {
         GameManager.Instance.StartGameScene();
-        
         return;
         gameObject.SetActive(false);
         SceneManager.LoadScene("GameScene");
