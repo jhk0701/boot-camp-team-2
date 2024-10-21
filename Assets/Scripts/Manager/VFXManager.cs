@@ -38,6 +38,45 @@ public class VFXManager : MonoBehaviour
         BallMovement.OnPaddleHit += HandlePaddleHit;
         BallMovement.OnWallHit += HandleWallHit;
     }
+
+    // 각 이벤트에 따라 VFX 재생
+    private void HandleBrickHit(Brick brick)
+    {
+        SpawnFromPool("BrickHitVFX", brick.transform.position);
+        // Debug.Log("BrickHitVFX");
+    }
+
+    private void HandleBrickBroken(Brick brick, string playerName)
+    {
+        SpawnFromPool("BrickBrokenVFX", brick.transform.position);
+    }
+
+    private void HandlePaddleHit(Vector3 position, int playerNumber)
+    {
+        string playerVfxTag = $"PaddleHitVFX_Player{playerNumber}";
+
+        SpawnFromPool(playerVfxTag, position);
+    }
+
+    private void HandleWallHit(Vector3 position)
+    {
+        SpawnFromPool("WallHitVFX", position);
+    }
+
+    private void OnDisable()
+    {
+        // 이벤트 구독 해제
+        BrickManager.OnBrickHitted -= HandleBrickHit;
+
+        if (GameManager.Instance != null && GameManager.Instance.BrickManager != null)
+            GameManager.Instance.BrickManager.OnBrickBroken -= HandleBrickBroken;
+
+        BallMovement.OnPaddleHit -= HandlePaddleHit;
+        BallMovement.OnWallHit -= HandleWallHit;
+    }
+
+
+    #region VFX Pool
     // 풀 초기화
     private void InitializePool()
     {
@@ -103,14 +142,12 @@ public class VFXManager : MonoBehaviour
             }
             else
             {
-                //Debug.LogWarning($"Prefab for tag {tag} not found.");
                 return null;
             }
         }
 
         if (objToSpawn == null)
         {
-            //Debug.LogError("Failed to spawn VFX object.");
             return null;
         }
 
@@ -139,41 +176,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
+    #endregion
 
 
-    // 각 이벤트에 따라 VFX 재생
-    private void HandleBrickHit(Brick brick)
-    {
-        SpawnFromPool("BrickHitVFX", brick.transform.position);
-        // Debug.Log("BrickHitVFX");
-    }
-
-    private void HandleBrickBroken(Brick brick, string playerName)
-    {
-        SpawnFromPool("BrickBrokenVFX", brick.transform.position);
-    }
-
-    private void HandlePaddleHit(Vector3 position, int playerNumber)
-    {
-        string playerVfxTag = $"PaddleHitVFX_Player{playerNumber}";
-        
-        SpawnFromPool(playerVfxTag, position);
-    }
-
-    private void HandleWallHit(Vector3 position)
-    {
-        SpawnFromPool("WallHitVFX", position); 
-    }
-
-    private void OnDisable()
-    {
-        // 이벤트 구독 해제
-        BrickManager.OnBrickHitted -= HandleBrickHit;
-
-        if (GameManager.Instance != null && GameManager.Instance.BrickManager != null)
-            GameManager.Instance.BrickManager.OnBrickBroken -= HandleBrickBroken;
-
-        BallMovement.OnPaddleHit -= HandlePaddleHit;
-        BallMovement.OnWallHit -= HandleWallHit;
-    }
 }

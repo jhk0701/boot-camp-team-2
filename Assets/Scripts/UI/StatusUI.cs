@@ -41,11 +41,9 @@ public class StatusUI : MonoBehaviour
         scoreText.text = ScoreManager.Instance.GetCurrentScore(playerName).ToString();
 
     }
-
-    void OnDisable()
+    void Update()
     {
-        ScoreManager.Instance.OnUpdateScore -= HandleOnScoreUpdate;
-        GameManager.Instance.OnLifeUpdate -= HandleOnLifeUpdate;
+        timeText.text = TimeManager.Instance.GetElapsedTime().ToString("F2");
     }
 
     public void InitializeUI()
@@ -63,11 +61,6 @@ public class StatusUI : MonoBehaviour
         stageText.text = stage.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        timeText.text = TimeManager.Instance.GetElapsedTime().ToString("F2");
-    }
     public void HandleOnLifeUpdate(string updatedPlayerName, int lives)
     {
         if (updatedPlayerName == playerName)
@@ -83,4 +76,10 @@ public class StatusUI : MonoBehaviour
             scoreText.text = score.ToString();
         }
     }
+    void OnDisable()
+    {
+        ScoreManager.Instance.OnUpdateScore -= HandleOnScoreUpdate;
+        GameManager.Instance.OnLifeUpdate -= HandleOnLifeUpdate;
+    }
+
 }

@@ -85,28 +85,28 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowStatusUI()
     {
-        statusDisplay.SetActive(true); // ???? ???? UI ????
+        statusDisplay.SetActive(true); 
     }
 
     public void ShowMultiStatusUI()
     {
-        multiStatusDisplay.SetActive(true); // ???? ???? UI ????
+        multiStatusDisplay.SetActive(true); 
     }
 
     public void ShowLoseGameUI()
     {
-        loseGamePanel.SetActive(true); // ???? ???? UI ????
+        loseGamePanel.SetActive(true); 
     }
 
     public void ShowWinGameUI()
     {
-        winGamePanel.SetActive(true); // WIN UI ????
+        winGamePanel.SetActive(true); 
     }
 
     public void ShowStartUI()
     {
 
-        startGamePanel.SetActive(true); // Start UI ????
+        startGamePanel.SetActive(true); 
     }
 
     public void ShowPasueUI()
