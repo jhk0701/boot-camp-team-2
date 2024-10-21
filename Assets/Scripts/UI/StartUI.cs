@@ -12,12 +12,12 @@ public class StartUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreListButton.onClick.AddListener(ScoreList);
+        //scoreListButton.onClick.AddListener(ScoreList);
     }
 
     public void ScoreList()
     {
         //scoreList
-        Debug.Log("½ºÄÚ¾î¸®½ºÆ® ±¸ÇöÇÊ¿ä");
+        Debug.Log("ìŠ¤ì½”ì–´ë¦¬ìŠ¤íŠ¸ êµ¬í˜„í•„ìš”");
     }
 }

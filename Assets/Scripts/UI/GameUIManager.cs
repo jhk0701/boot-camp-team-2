@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -13,17 +12,23 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] GameObject winGamePanel;
     [SerializeField] GameObject statusDisplay;
     [SerializeField] GameObject loseGamePanel;
+    [SerializeField] GameObject multiStatusDisplay;
 
     void Start()
     {
-        //±∏µ∂
+        //Íµ¨ÎèÖ
         // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
-        //√ ±‚»≠
+        //Ï¥àÍ∏∞Ìôî
         statusDisplay.SetActive(true);
         loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        StateManager.Instance.OnStateChanged -= HandleOnStateChanged;
     }
 
     private void HandleOnStateChanged(StateManager.GameState newState)
@@ -31,7 +36,7 @@ public class GameUIManager : MonoBehaviour
         switch (newState)
         {
             case StateManager.GameState.GameScene:
-                ShowStatusUI();
+                //ShowStatusUI();
                 break;
             case StateManager.GameState.Pause:
                 //PauseUI();
@@ -51,6 +56,11 @@ public class GameUIManager : MonoBehaviour
     public void ShowStatusUI()
     {
         statusDisplay.SetActive(true); // ???? ???? UI ????
+    }
+
+    public void ShowMultiStatusUI()
+    {
+        multiStatusDisplay.SetActive(true); // ???? ???? UI ????
     }
 
     public void ShowLoseGameUI()

@@ -28,22 +28,16 @@ public class ScoreManager : MonoBehaviour
     private BrickManager brickManager;
     private BallMovement ballMovement;
 
-    public GameObject scoreBoardUIPrefab;
-    private GameObject instantiatedScoreBoardUI;
-
     private string filePath;
 
-    // 현재 레벨과 스테이지
     private int currentLevel;
     private int currentStage;
 
-    public string player1Name;
-    public string player2Name;
+    public string player1Name { get; set; }
+    public string player2Name { get; set; }
 
-    //각 플레이어의 점수를 저장하는 리스트
     private List<ScoreData> playerScores = new List<ScoreData>();
 
-    // 스코어 업데이트 이벤트 (플레이어 이름과 새로운 스코어 전달)
     public event Action<string, int> OnUpdateScore;
 
     private void Awake()
@@ -54,31 +48,11 @@ public class ScoreManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             filePath = Application.persistentDataPath + "/scores.json";
+            Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
 
             LoadScores();
 
-            levelManager = GetComponent<LevelManager>();
-            gameManager = GetComponent<GameManager>();
-
-            player1Name = "Player1";
-            player2Name = "Player2";
-
-            // if (gameManager != null)
-            // {
-            //     //player1Name = gameManager.player1Name;
-            //     //player2Name = gameManager.player2Name;
-            //     player1Name = "Player1";
-            //     player2Name = "Player2";
-            // }
-            // else
-            // {
-            //     player1Name = "Player1";
-            //     player2Name = "Player2";
-            // }
-
-            // 각 플레이어의 데이터를 로드하거나 생성
-            LoadOrCreatePlayerData(player1Name);
-            LoadOrCreatePlayerData(player2Name);
+           
         }
         else
         {
@@ -89,6 +63,24 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
+
+        gameManager = GameManager.Instance;
+
+        player1Name = "Player1";
+        player2Name = "Player2";
+
+        LoadOrCreatePlayerData(player1Name);
+
+        // 게임 모드가 멀티 플레이일 때만 플레이어 2의 데이터 로드 또는 생성
+        if (gameManager.gameMode == GameManager.GameMode.Multi)
+        {
+            LoadOrCreatePlayerData(player2Name);
+        }
+    }
+
+    void OnDisable()
+    {
+        StateManager.Instance.OnStateChanged -= HandleOnStateChanged;
     }
 
     private void HandleOnStateChanged(StateManager.GameState gameState)
@@ -110,10 +102,14 @@ public class ScoreManager : MonoBehaviour
             case StateManager.GameState.Win:
             case StateManager.GameState.Lose:
 
-                // 각 플레이어의 최고 스코어 갱신
                 CheckAndUpdateHighScore(player1Name);
-                CheckAndUpdateHighScore(player2Name);
-                
+
+                // 멀티 플레이 모드일 때만 플레이어 2의 스코어 처리
+                if (gameManager.gameMode == GameManager.GameMode.Multi)
+                {
+                    CheckAndUpdateHighScore(player2Name);
+                }
+
                 SaveScores();
                 break;
         }
@@ -122,28 +118,38 @@ public class ScoreManager : MonoBehaviour
     public void SetBrickManager(BrickManager manager)
     {
         brickManager = manager;
+        BrickManager.OnBrickBroken -= HandleBrickBroken;
         BrickManager.OnBrickBroken += HandleBrickBroken;
     }
 
-    // HandleBrickBroken 메서드 수정: string playerName -> Brick brick
     private void HandleBrickBroken(Brick brick)
     {
         string playerName = brick.playerName;
-        //TODO: 점수 차등으로 주기
 
-        // 어떤 플레이어가 벽돌을 깼는지 식별
+        // 플레이어 이름이 없거나, 싱글 플레이 모드에서 player2의 점수를 무시
+        if (string.IsNullOrEmpty(playerName))
+            return;
+
+        if (playerName == player2Name && gameManager.gameMode != GameManager.GameMode.Multi)
+            return;
+
         AddScore(playerName, 10);
-
-        Debug.Log($"AddScore +10 for {playerName}, Current Score: {GetCurrentScore(playerName)}");
     }
 
     public void AddScore(string playerName, int points)
     {
+        if (string.IsNullOrEmpty(playerName))
+            return;
+
         if (points <= 0)
             return;
 
         // 플레이어 데이터 찾기
         ScoreData playerData = playerScores.Find(p => p.playerName == playerName);
+
+        // 플레이어 데이터가 없는 경우 (싱글 플레이 모드에서 player2의 점수를 처리하지 않기 위해)
+        if (playerData == null)
+            return;
 
         // 현재 레벨과 스테이지에 해당하는 StageScore 찾기 또는 생성
         StageScore stageScore = playerData.stageScores.Find(s => s.levelNumber == currentLevel && s.stageNumber == currentStage);
@@ -275,6 +281,10 @@ public class ScoreManager : MonoBehaviour
     {
         foreach (var playerData in playerScores)
         {
+            // 멀티 플레이 모드가 아니고, 플레이어가 player2인 경우 무시
+            if (gameManager.gameMode != GameManager.GameMode.Multi && playerData.playerName == player2Name)
+                continue;
+
             StageScore stageScore = playerData.stageScores.Find(s => s.levelNumber == currentLevel && s.stageNumber == currentStage);
             if (stageScore != null)
             {

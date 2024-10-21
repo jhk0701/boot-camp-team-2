@@ -4,9 +4,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameMode
+    {
+        Single =0,
+        Multi =1,
+    }
+
+    public GameMode gameMode = GameMode.Single;
+
     public static GameManager Instance; 
 
-    public event Action OnLifeUpdate;
+    public event Action<int> OnLifeUpdate;
 
     public LevelManager LevelManager { get; private set; }
     public BrickManager BrickManager { get; private set; }
@@ -17,17 +25,21 @@ public class GameManager : MonoBehaviour
     private StateManager stateManager;
     public SoundManager soundManager;
 
+    public GameObject Paddle_Player2;
+    public GameObject Ball_Player2;
+
     public string player1Name;
     public string player2Name;
 
-    private int lives = 3;
+    const int INITIALLIFE = 5;
+    private int lives = INITIALLIFE;
     public int Lives 
     {
         get { return lives; }
         private set
         {
             lives = value;
-            OnLifeUpdate?.Invoke();
+            OnLifeUpdate?.Invoke(lives);
 
             if (lives <= 0)
             {
@@ -59,8 +71,39 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
 
         stateManager.SetState(StateManager.GameState.Start);
+        SceneManager.sceneLoaded += OnSceneLoaded; 
+
     }
 
+
+    public void SetSinglePlayMode()
+    {
+        gameMode = GameMode.Single;
+        Debug.Log("Start SingPlayMode");
+    }
+
+    public void SetMultiPlayMode()
+    {
+        gameMode = GameMode.Multi;
+        Debug.Log("Start MultiPlayMode");
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GameScene")
+        {
+            if (gameMode == GameMode.Multi)
+            {
+                GameObject paddle2 = Instantiate(Paddle_Player2);
+                GameObject ball2 = Instantiate(Ball_Player2);
+
+                PaddleController paddleController2 = paddle2.GetComponent<PaddleController>();
+                BallMovement ballMovement2 = ball2.GetComponent<BallMovement>();
+                
+                paddleController2.ballMovement = ballMovement2;
+            }
+        }
+    }
 
     public void SetBallMovement(BallMovement ball)
     {
@@ -88,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         Lives += amount;
     }
-
+    
     public void SetItemHandler(ItemHandler handler)
     {
         ItemHandler = handler;
@@ -96,14 +139,21 @@ public class GameManager : MonoBehaviour
 
     public void StartGameScene()
     {
-        stateManager.SetState(StateManager.GameState.GameScene);
         SceneManager.LoadScene(1);
+        stateManager.SetState(StateManager.GameState.GameScene);
+
+        Lives = INITIALLIFE;
     }
 
     public void BackToLobby()
     {   
-        stateManager.SetState(StateManager.GameState.Start);
         SceneManager.LoadScene(0);
+        stateManager.SetState(StateManager.GameState.Start);
+    }
+
+    public int GetLives()
+    {
+        return lives;
     }
 
 }

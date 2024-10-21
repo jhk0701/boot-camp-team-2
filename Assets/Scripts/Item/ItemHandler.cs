@@ -51,14 +51,16 @@ public class ItemHandler : MonoBehaviour
             foreach (ItemEffect key in keys)
             {
                 ActiveEffects[key] -= updateTime;
+                // Debug.Log($"{key.name} : {ActiveEffects[key]}");
                 
                 if (ActiveEffects[key] <= 0f)
                 {
+                    // Debug.Log("Effect ended");
                     OnEffectEnded?.Invoke(key);
+
                     ActiveEffects.Remove(key);
                 }
             }
-
             yield return waitingTime;
         }
     }
@@ -67,12 +69,15 @@ public class ItemHandler : MonoBehaviour
     {
         if (ActiveEffects.ContainsKey(effect) && ActiveEffects[effect] > 0f)
         {
+            // 이미 효과 적용 중
             ActiveEffects[effect] += effect.effectDuration;
+            // Debug.Log("ActivateEffect : already using");
             return false;
         }
         else
         {
             ActiveEffects.Add(effect, effect.effectDuration);
+            // Debug.Log("ActivateEffect : add new effect");
             return true;
         }
     }

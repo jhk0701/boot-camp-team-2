@@ -75,7 +75,7 @@ public class PaddleController : MonoBehaviour
             ballMovement.transform.position = (Vector2)transform.position + Vector2.up * 0.175f;
 
             if ((playerNumber == 1 && Input.GetKeyDown(KeyCode.Space)) ||
-                (playerNumber == 2 && Input.GetKeyDown(KeyCode.Return)))
+                (playerNumber == 2 && (Input.GetKeyDown(KeyCode.Return))))
             {
                 ballMovement.Launch(movement);
             }
