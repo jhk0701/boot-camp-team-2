@@ -59,18 +59,22 @@ public class ScoreManager : MonoBehaviour
 
             levelManager = GetComponent<LevelManager>();
             gameManager = GetComponent<GameManager>();
-            if (gameManager != null)
-            {
-                //player1Name = gameManager.player1Name;
-                //player2Name = gameManager.player2Name;
-                player1Name = "Player1";
-                player2Name = "Player2";
-            }
-            else
-            {
-                player1Name = "Player1";
-                player2Name = "Player2";
-            }
+
+            player1Name = "Player1";
+            player2Name = "Player2";
+
+            // if (gameManager != null)
+            // {
+            //     //player1Name = gameManager.player1Name;
+            //     //player2Name = gameManager.player2Name;
+            //     player1Name = "Player1";
+            //     player2Name = "Player2";
+            // }
+            // else
+            // {
+            //     player1Name = "Player1";
+            //     player2Name = "Player2";
+            // }
 
             // 각 플레이어의 데이터를 로드하거나 생성
             LoadOrCreatePlayerData(player1Name);
@@ -109,9 +113,7 @@ public class ScoreManager : MonoBehaviour
                 // 각 플레이어의 최고 스코어 갱신
                 CheckAndUpdateHighScore(player1Name);
                 CheckAndUpdateHighScore(player2Name);
-
-                instantiatedScoreBoardUI = Instantiate(scoreBoardUIPrefab);
-
+                
                 SaveScores();
                 break;
         }

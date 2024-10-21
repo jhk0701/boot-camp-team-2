@@ -1,25 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemRaisePaddleSize : Item
 {
     PaddleController paddle;
 
-    public override void Use()
+    protected override void Use()
     {
-        paddle = collidedObject.GetComponent<PaddleController>();
-        if(paddle != null)
-        {
-            paddle.Size *= (itemEffect as PowerUpItemEffect).effectStat.size;
-        }
+        if (!Initialize())
+            return;
 
-        Invoke("EndEffect", itemEffect.effectDuration);
+        Debug.Log("ItemRaisePaddleSize used");
+
+        paddle = collidedObject.GetComponent<PaddleController>();
+
+        if(paddle != null)
+            paddle.Size *= (itemEffect as PowerUpItemEffect).effectStat.size;
     }
 
-    public override void EndEffect()
+    public override void EndEffect(ItemEffect effect)
     {
+        if(effect != itemEffect) 
+            return;
+            
         paddle.Size /= (itemEffect as PowerUpItemEffect).effectStat.size;
-        base.EndEffect();
+
+        Destroy(gameObject);
     }
 }

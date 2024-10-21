@@ -3,22 +3,27 @@ using UnityEngine;
 public class ItemAddDamageToBall : Item
 {
     PaddleController paddle;
-    int originalDamage = 0;
-    public override void Use()
+    protected override void Use()
     {
-        paddle = collidedObject.GetComponent<PaddleController>();
-        if(paddle != null)
-        {
-            originalDamage = paddle.ballMovement.Stat.damage;
-            paddle.ballMovement.Stat.damage += (int)effectValue;
-        }
+        if (!Initialize())
+            return;
+        
+        Debug.Log("ItemAddDamageToBall used");
 
-        Invoke("EndEffect", effectDuration);
+        paddle = collidedObject.GetComponent<PaddleController>();
+
+        if(paddle != null)
+            paddle.ballMovement.Stat.damage += (itemEffect as PowerUpItemEffect).effectStat.damage;
+
     }
 
-    public override void EndEffect()
+    public override void EndEffect(ItemEffect effect)
     {
-        paddle.ballMovement.Stat.damage = originalDamage;
-        base.EndEffect();
+        if(effect != itemEffect) 
+            return;
+
+        paddle.ballMovement.Stat.damage -= (itemEffect as PowerUpItemEffect).effectStat.damage;
+
+        Destroy(gameObject);
     }
 }

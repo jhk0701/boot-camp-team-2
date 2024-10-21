@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// 사실상 플레이어 역할
 public class PaddleController : MonoBehaviour
 {
     // 적용 대상 : 스펙
