@@ -75,11 +75,9 @@ public class GameManager : MonoBehaviour
         switch( gameState )
         {
             case StateManager.GameState.Start:
-                BackToLobby();
                 break;
 
             case StateManager.GameState.GameScene:
-                StartGameScene();
                 lives = 5;
                 break;
 
