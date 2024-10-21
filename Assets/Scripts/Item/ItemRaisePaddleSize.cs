@@ -7,7 +7,10 @@ public class ItemRaisePaddleSize : Item
     protected override void Use()
     {
         if (!Initialize())
+        {
+            DestoryItem();
             return;
+        }
 
         Debug.Log("ItemRaisePaddleSize used");
 
@@ -21,10 +24,11 @@ public class ItemRaisePaddleSize : Item
     {
         if(effect != itemEffect) 
             return;
-        
+
         Debug.Log("ItemRaisePaddleSize ended");
+        
         paddle.Size /= (itemEffect as PowerUpItemEffect).effectStat.size;
 
-        Destroy(gameObject);
+        DestoryItem();
     }
 }

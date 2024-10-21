@@ -144,7 +144,7 @@ public class VFXManager : MonoBehaviour
     private void HandleBrickHit(Brick brick)
     {
         SpawnFromPool("BrickHitVFX", brick.transform.position);
-        Debug.Log("BrickHitVFX");
+        // Debug.Log("BrickHitVFX");
     }
 
     private void HandleBrickBroken(Brick brick)

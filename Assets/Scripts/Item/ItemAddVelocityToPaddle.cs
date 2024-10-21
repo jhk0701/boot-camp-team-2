@@ -6,7 +6,10 @@ public class ItemAddVelocityToPaddle : Item
     protected override void Use()
     {
         if (!Initialize())
+        {
+            DestoryItem();
             return;
+        }
             
         Debug.Log("ItemAddVelocityToPaddle used");
 
@@ -17,7 +20,7 @@ public class ItemAddVelocityToPaddle : Item
             // Vector2 velocity = paddle.ballMovement.RigidBody2d.velocity;
             // paddle.ballMovement.RigidBody2d.velocity = velocity * effectValue;
 
-            paddle.Speed += (itemEffect as PowerUpItemEffect).effectStat.speed;
+            paddle.Speed *= (itemEffect as PowerUpItemEffect).effectStat.speed;
         }
     }
 
@@ -26,8 +29,10 @@ public class ItemAddVelocityToPaddle : Item
         if(effect != itemEffect) 
             return;
 
-        paddle.Speed -= (itemEffect as PowerUpItemEffect).effectStat.speed;
+        GameManager.Instance.ItemHandler.OnEffectEnded -= EndEffect;
 
-        Destroy(gameObject);
+        paddle.Speed /= (itemEffect as PowerUpItemEffect).effectStat.speed;
+
+        DestoryItem();
     }
 }
