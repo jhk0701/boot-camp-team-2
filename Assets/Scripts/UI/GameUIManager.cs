@@ -25,6 +25,11 @@ public class GameUIManager : MonoBehaviour
         winGamePanel.SetActive(false);
     }
 
+    void OnDisable()
+    {
+        StateManager.Instance.OnStateChanged -= HandleOnStateChanged;
+    }
+
     private void HandleOnStateChanged(StateManager.GameState newState)
     {
         switch (newState)

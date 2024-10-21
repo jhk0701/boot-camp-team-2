@@ -28,9 +28,6 @@ public class ScoreManager : MonoBehaviour
     private BrickManager brickManager;
     private BallMovement ballMovement;
 
-    public GameObject scoreBoardUIPrefab;
-    private GameObject instantiatedScoreBoardUI;
-
     private string filePath;
 
     // 현재 레벨과 스테이지
@@ -89,6 +86,11 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
+    }
+
+    void OnDisable()
+    {
+        StateManager.Instance.OnStateChanged -= HandleOnStateChanged;
     }
 
     private void HandleOnStateChanged(StateManager.GameState gameState)

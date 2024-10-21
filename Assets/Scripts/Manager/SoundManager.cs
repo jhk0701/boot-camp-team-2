@@ -7,6 +7,7 @@ public enum SfxType
     PaddleHit = 0,
     WallHit,
     BrickHit,
+    ItemUsage,
 }
 
 public class SoundManager : MonoBehaviour

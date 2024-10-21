@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     public string player1Name;
     public string player2Name;
 
-    private int lives = 5;
+    const int INITIAL_LIFE = 5;
+    private int lives = INITIAL_LIFE;
     public int Lives 
     {
         get { return lives; }
@@ -87,6 +88,11 @@ public class GameManager : MonoBehaviour
     public void AddLife(int amount)
     {
         Lives += amount;
+    }
+
+    public void InitLife()
+    {
+        Lives = INITIAL_LIFE;
     }
 
     public void SetItemHandler(ItemHandler handler)

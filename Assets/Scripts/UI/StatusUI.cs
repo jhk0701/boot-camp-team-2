@@ -10,7 +10,7 @@ public class StatusUI : MonoBehaviour
     public Text scoreText;
     public Text livesText;
     
-    // ÃÊ±â °ª (¿¹½Ã °ªÀ¸·Î ÃÊ±âÈ­)
+    // ì´ˆê¸° ê°’ (ì˜ˆì‹œ ê°’ìœ¼ë¡œ ì´ˆê¸°í™”)
     private int initialLevel = 5;
     private float initialTime = 99f;
     private int initialScore = 5;
@@ -20,10 +20,15 @@ public class StatusUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeUI();//¿¹½Ã°ª
+        InitializeUI();//ì˜ˆì‹œê°’
 
         ScoreManager.Instance.OnUpdateScore += HandleOnScoreUpdate;
         //TimeManager.Instance.
+    }
+
+    void OnDisable()
+    {
+        ScoreManager.Instance.OnUpdateScore -= HandleOnScoreUpdate;
     }
 
     public void InitializeUI()

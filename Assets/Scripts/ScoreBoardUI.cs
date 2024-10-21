@@ -7,7 +7,7 @@ public class ScoreBoardUI : MonoBehaviour
     public Text player1ScoreText;
     public Text player2ScoreText;
 
-    //ÃÊ±â ¼ÂÆÃ
+    //ì´ˆê¸° ì…‹íŒ…
     private void Start()
     {
         int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
@@ -30,7 +30,12 @@ public class ScoreBoardUI : MonoBehaviour
         player2ScoreText.text = $"Player 2 Score: {player2CurrentScore} (High: {player2HighScore})";
     }
 
-    //OnScoreUpdateÀÌ µÉ¶§¸¶´Ù ¾÷µ¥ÀÌÆ® 
+    void OnDisable()
+    {
+        ScoreManager.Instance.OnUpdateScore -= HandleUpdateScoreUI;
+    }
+
+    //OnScoreUpdateì´ ë ë•Œë§ˆë‹¤ ì—…ë°ì´íŠ¸ 
     private void HandleUpdateScoreUI(string playerName, int score)
     {
         int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
@@ -38,7 +43,7 @@ public class ScoreBoardUI : MonoBehaviour
 
         int highScore = ScoreManager.Instance.GetHighScore(playerName);
 
-        // ½ºÄÚ¾î ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+        // ìŠ¤ì½”ì–´ í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
         if (playerName == ScoreManager.Instance.player1Name)
         {
             player1ScoreText.text = $"Player 1 Score: {score} (High: {highScore})";
