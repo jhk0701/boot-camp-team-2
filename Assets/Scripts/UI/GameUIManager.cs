@@ -50,7 +50,6 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowStatusUI()
     {
-        Debug.Log("ShowStatusUI지나감?");
         statusDisplay.SetActive(true); // ???? ???? UI ????
     }
 
