@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance;
 
     private float elapsedTime = 0f;
-    private bool isPlaying; 
+    private bool isPlaying;
+
+    public event Action<float> OnUpdateTime;
 
     private void Awake()
     {
@@ -47,6 +50,7 @@ public class TimeManager : MonoBehaviour
         if (isPlaying)
         {
             elapsedTime += Time.deltaTime;
+            OnUpdateTime?.Invoke(elapsedTime);
         }
     }
 

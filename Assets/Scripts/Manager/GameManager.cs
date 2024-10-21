@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance; 
 
-    public event Action OnLifeUpdate;
+    public event Action<int> OnLifeUpdate;
 
     public LevelManager LevelManager { get; private set; }
     public BrickManager BrickManager { get; private set; }
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         private set
         {
             lives = value;
-            OnLifeUpdate?.Invoke();
+            OnLifeUpdate?.Invoke(lives);
 
             if (lives <= 0)
             {
@@ -146,6 +146,11 @@ public class GameManager : MonoBehaviour
     {   
         SceneManager.LoadScene(0);
         stateManager.SetState(StateManager.GameState.Start);
+    }
+
+    public int GetLives()
+    {
+        return lives;
     }
 
 }
