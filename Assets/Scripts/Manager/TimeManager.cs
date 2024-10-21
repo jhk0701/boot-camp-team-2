@@ -6,7 +6,7 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Instance;
 
     private float elapsedTime = 0f;
-    private bool isPlaying;
+    public bool isPlaying;
 
     public event Action<float> OnUpdateTime;
 
@@ -38,10 +38,7 @@ public class TimeManager : MonoBehaviour
         switch (newState)
         {
             case StateManager.GameState.GameScene:
-                ResumeTimer();
-                break;
-            case StateManager.GameState.Pause:
-                PauseTimer();
+                StartTimer();
                 break;
             case StateManager.GameState.Start:
             case StateManager.GameState.Win:
@@ -58,23 +55,29 @@ public class TimeManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             OnUpdateTime?.Invoke(elapsedTime);
         }
+        
     }
 
     public void StopTimer()
     {
+        elapsedTime = 0f;
         isPlaying = false;
         Time.timeScale = 0f;
     }
-
-    public void PauseTimer()
+    public void PauseTime()
     {
         isPlaying = false;
         Time.timeScale = 0f;
+    }
+    public void StartTimer()
+    {
+        elapsedTime = 0f;
+        Time.timeScale = 1f;
+        isPlaying = true;
     }
 
     public void ResumeTimer()
     {
-        elapsedTime = 0f;
         Time.timeScale = 1f;
         isPlaying = true;
     }

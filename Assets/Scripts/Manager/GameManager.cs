@@ -70,6 +70,12 @@ public class GameManager : MonoBehaviour
         playerLives[player2Name] = 3;
     }
 
+    private void Update()
+    {
+
+    }
+
+
     public void SetSinglePlayMode()
     {
         gameMode = GameMode.Single;
@@ -100,7 +106,7 @@ public class GameManager : MonoBehaviour
             paddleController1.playerNumber = 1;
 
             ballMovement1.playerName = player1Name;
-            ballMovement1.playerNumber = 1; // 추가된 부분
+            ballMovement1.playerNumber = 1; 
 
             SetBallMovement(ballMovement1);
 
@@ -120,9 +126,7 @@ public class GameManager : MonoBehaviour
                 paddleController2.playerNumber = 2;
 
                 ballMovement2.playerName = player2Name;
-                ballMovement2.playerNumber = 2; // 추가된 부분
-
-
+                ballMovement2.playerNumber = 2; 
 
                 SetBallMovement(ballMovement2);
             }
@@ -138,9 +142,22 @@ public class GameManager : MonoBehaviour
         return INITIALLIFE; // 기본 라이프 반환
     }
 
+    //공이 떨어지면 공 소유자(플레이어)의 목숨 차감
+    private void HandleOnTouchBottom(int playerNumber)
+    {
+        string playerName = GetPlayerNameByNumber(playerNumber);
+        if (playerName != null)
+        {
+            int currentLives = GetLives(playerName);
+            if (currentLives > 0)
+            {
+                currentLives--;
+                SetLives(playerName, currentLives);
+            }
+        }
+    }
     private void SetLives(string playerName, int lives)
     {
-        // 라이프가 음수가 되지 않도록 0으로 제한
         lives = Mathf.Max(0, lives);
 
         playerLives[playerName] = lives;
@@ -181,8 +198,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     public void SetBallMovement(BallMovement ball)
     {
         ball.OnTouchBottom += HandleOnTouchBottom;
@@ -191,20 +206,6 @@ public class GameManager : MonoBehaviour
     private void HandleAllBricksBroken()
     {
         stateManager.SetState(StateManager.GameState.Win);
-    }
-
-    private void HandleOnTouchBottom(int playerNumber)
-    {
-        string playerName = GetPlayerNameByNumber(playerNumber);
-        if (playerName != null)
-        {
-            int currentLives = GetLives(playerName);
-            if (currentLives > 0)
-            {
-                currentLives--;
-                SetLives(playerName, currentLives);
-            }
-        }
     }
 
     private string GetPlayerNameByNumber(int playerNumber)

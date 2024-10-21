@@ -54,7 +54,6 @@ public class PaddleController : MonoBehaviour
     void Update()
     {
         // 플레이어 번호에 따라 다른 입력 키를 사용하여 패들 이동
-        
         if (playerNumber == 1)
         {
             if (Input.GetKey(KeyCode.A))

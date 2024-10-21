@@ -9,7 +9,6 @@ public class StateManager : MonoBehaviour
     {
         Start,
         GameScene,
-        Pause,
         Win,
         Lose
     }
