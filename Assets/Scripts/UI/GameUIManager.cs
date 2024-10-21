@@ -31,7 +31,7 @@ public class GameUIManager : MonoBehaviour
         switch (newState)
         {
             case StateManager.GameState.GameScene:
-                ShowStatusUI();
+                //ShowStatusUI();
                 break;
             case StateManager.GameState.Pause:
                 //PauseUI();
