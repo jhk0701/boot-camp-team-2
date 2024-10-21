@@ -24,10 +24,21 @@ public class GameUIManager : MonoBehaviour
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
         //초기화
-        statusDisplay.SetActive(true);
+        //statusDisplay.SetActive(true);
         loseGamePanel.SetActive(false);     
         winGamePanel.SetActive(false);
 
+        if (gameManager.gameMode == GameManager.GameMode.Single)
+        {
+            statusDisplay.SetActive(true);
+            multiStatusDisplay.SetActive(false);
+        }
+        else if (gameManager.gameMode == GameManager.GameMode.Multi)
+        {
+            statusDisplay.SetActive(false);
+            multiStatusDisplay.SetActive(true);
+            Debug.Log(multiStatusDisplay.gameObject.activeInHierarchy);
+        }
 
     }
 
@@ -41,16 +52,6 @@ public class GameUIManager : MonoBehaviour
         switch (newState)
         {
             case StateManager.GameState.GameScene:
-                if (gameManager.gameMode == GameManager.GameMode.Single)
-                {
-                    statusDisplay.SetActive(true);
-                    multiStatusDisplay.SetActive(false);
-                }
-                else if (gameManager.gameMode == GameManager.GameMode.Multi)
-                {
-                    statusDisplay.SetActive(false);
-                    multiStatusDisplay.SetActive(true);
-                }
                 break;
             case StateManager.GameState.Pause:
                 //PauseUI();

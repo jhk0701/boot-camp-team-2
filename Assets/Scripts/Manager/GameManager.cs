@@ -140,6 +140,9 @@ public class GameManager : MonoBehaviour
 
     private void SetLives(string playerName, int lives)
     {
+        // 라이프가 음수가 되지 않도록 0으로 제한
+        lives = Mathf.Max(0, lives);
+
         playerLives[playerName] = lives;
         OnLifeUpdate?.Invoke(playerName, lives);
 
@@ -149,12 +152,25 @@ public class GameManager : MonoBehaviour
 
             // 모든 플레이어의 라이프가 소진되었는지 확인
             bool allPlayersLost = true;
-            foreach (var life in playerLives.Values)
+
+            if (gameMode == GameMode.Single)
             {
-                if (life > 0)
+                // 싱글 플레이 모드에서는 플레이어 1만 체크
+                if (playerLives[player1Name] > 0)
                 {
                     allPlayersLost = false;
-                    break;
+                }
+            }
+            else
+            {
+                // 멀티 플레이 모드에서는 모든 플레이어 체크
+                foreach (var player in playerLives.Keys)
+                {
+                    if (playerLives[player] > 0)
+                    {
+                        allPlayersLost = false;
+                        break;
+                    }
                 }
             }
 
@@ -164,6 +180,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
 
     public void SetBallMovement(BallMovement ball)
@@ -182,10 +199,14 @@ public class GameManager : MonoBehaviour
         if (playerName != null)
         {
             int currentLives = GetLives(playerName);
-            currentLives--;
-            SetLives(playerName, currentLives);
+            if (currentLives > 0)
+            {
+                currentLives--;
+                SetLives(playerName, currentLives);
+            }
         }
     }
+
     private string GetPlayerNameByNumber(int playerNumber)
     {
         if (playerNumber == 1)
@@ -224,7 +245,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
         stateManager.SetState(StateManager.GameState.GameScene);
 
-        // 게임 시작 시 각 플레이어의 라이프를 초기화
+        playerLives.Clear();
         playerLives[player1Name] = INITIALLIFE;
 
         if (gameMode == GameMode.Multi)

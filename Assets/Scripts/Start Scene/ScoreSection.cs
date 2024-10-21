@@ -49,22 +49,15 @@ public class ScoreSelection : MonoBehaviour
         }
     }
 
-    // 각 스테이지의 점수를 ScoreManager에서 가져와 버튼에 텍스트로 설정
-    void SetStageScoreText(Button button, int level, int stage)
-    {
-        string player1Name = ScoreManager.Instance.player1Name;
-        string player2Name = ScoreManager.Instance.player2Name;
+    //// 각 스테이지의 점수를 ScoreManager에서 가져와 버튼에 텍스트로 설정
+    //void SetStageScoreText(Button button, int level, int stage)
+    //{
+    //    string player1Name = ScoreManager.Instance.player1Name;
+    //    string player2Name = ScoreManager.Instance.player2Name;
 
-        int player1Score = ScoreManager.Instance.GetCurrentScore(player1Name, level, stage);
-        int player2Score = ScoreManager.Instance.GetCurrentScore(player2Name, level, stage);
-
-        Text buttonText = button.GetComponentInChildren<Text>();
-
-        //// 버튼 텍스트를 각 스테이지의 플레이어 점수로 설정
-        //buttonText.text = $"Level {level + 1}, Stage {stage + 1}\n" +
-        //                  $"{player1Name}: {player1Score}\n" +
-        //                  $"{player2Name}: {player2Score}";
-    }
+    //    int player1Score = ScoreManager.Instance.GetCurrentScore(player1Name, level, stage);
+    //    int player2Score = ScoreManager.Instance.GetCurrentScore(player2Name, level, stage);
+    //}
 
     void DisplayStageScore(int level, int stage)
     {
@@ -74,12 +67,12 @@ public class ScoreSelection : MonoBehaviour
 
         string player1Name = ScoreManager.Instance.player1Name;
 
-        int player1HighScore = ScoreManager.Instance.GetHighScore(player1Name);
+        int player1HighScore = ScoreManager.Instance.GetHighScore(player1Name, level, stage);
 
         player1ScoreText.text = $"Player 1 HighScore: {player1HighScore}";
 
         string player2Name = ScoreManager.Instance.player2Name;
-        int player2HighScore = ScoreManager.Instance.GetHighScore(player2Name);
+        int player2HighScore = ScoreManager.Instance.GetHighScore(player2Name, level, stage);
         player2ScoreText.text = $"Player 2 HighScore:  {player2HighScore}";
 
         Button closedButton = GetComponentInChildren<Button>();
