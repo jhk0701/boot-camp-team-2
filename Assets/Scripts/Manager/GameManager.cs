@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     public string player1Name;
     public string player2Name;
 
-    const int INITIAL_LIFE = 5;
-    private int lives = INITIAL_LIFE;
+    const int INITIALLIFE = 5;
+    private int lives = INITIALLIFE;
     public int Lives 
     {
         get { return lives; }
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
 
         stateManager.SetState(StateManager.GameState.Start);
-        SceneManager.sceneLoaded += OnSceneLoaded; // ?? ?ех? ???? ????
+        SceneManager.sceneLoaded += OnSceneLoaded; 
 
     }
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "GameScene") // ???? ???? ????? "GameScene"???? ????
+        if (scene.name == "GameScene")
         {
             if (gameMode == GameMode.Multi)
             {
@@ -141,6 +141,8 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         stateManager.SetState(StateManager.GameState.GameScene);
+
+        Lives = INITIALLIFE;
     }
 
     public void BackToLobby()
