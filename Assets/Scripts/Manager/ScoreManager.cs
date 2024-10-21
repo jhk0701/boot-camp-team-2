@@ -98,8 +98,6 @@ public class ScoreManager : MonoBehaviour
                 ResetCurrentScores();
 
                 break;
-            case StateManager.GameState.Pause:
-                break;
             case StateManager.GameState.Win:
             case StateManager.GameState.Lose:
 

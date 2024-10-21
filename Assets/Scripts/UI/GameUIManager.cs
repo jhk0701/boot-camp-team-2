@@ -13,6 +13,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] GameObject statusDisplay;
     [SerializeField] GameObject loseGamePanel;
     [SerializeField] GameObject multiStatusDisplay;
+    [SerializeField] GameObject PasuePanel;
     private GameManager gameManager;
 
 
@@ -20,12 +21,12 @@ public class GameUIManager : MonoBehaviour
     {
         //구독
         gameManager = GameManager.Instance;
-        // ScoreManager.Instance.OnShowScoreBoard += ShowLoseGameUI;
+        
         StateManager.Instance.OnStateChanged += HandleOnStateChanged;
 
         //초기화
         //statusDisplay.SetActive(true);
-        loseGamePanel.SetActive(false);     
+        loseGamePanel.SetActive(false);
         winGamePanel.SetActive(false);
 
         if (gameManager.gameMode == GameManager.GameMode.Single)
@@ -47,14 +48,28 @@ public class GameUIManager : MonoBehaviour
         StateManager.Instance.OnStateChanged -= HandleOnStateChanged;
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (TimeManager.Instance.isPlaying)
+            {
+                TimeManager.Instance.PauseTime();
+                ShowPasueUI();
+            }
+            else
+            {
+                TimeManager.Instance.ResumeTimer();
+                ClosePaseUI();
+            }
+        }
+    }
+
     private void HandleOnStateChanged(StateManager.GameState newState)
     {
         switch (newState)
         {
             case StateManager.GameState.GameScene:
-                break;
-            case StateManager.GameState.Pause:
-                //PauseUI();
                 break;
             case StateManager.GameState.Start:
                 ShowStartUI();
@@ -90,6 +105,17 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowStartUI()
     {
+
         startGamePanel.SetActive(true); // Start UI ????
+    }
+
+    public void ShowPasueUI()
+    {
+        PasuePanel.SetActive(true);
+    }
+
+    public void ClosePaseUI()
+    {
+        PasuePanel.SetActive(false);
     }
 }
