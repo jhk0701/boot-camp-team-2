@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class MultiStatusUI : MonoBehaviour
 {
-    //°øÅë
+    //ê³µí†µ
     public Text levelStageText;
     public Text timeText;
     
-    //ÇÃ·¹ÀÌ¾î1
+    //í”Œë ˆì´ì–´1
     public Text py1ScoreText;
     public Text py1LivesText;
 
-    //ÇÃ·¹ÀÌ¾î2
+    //í”Œë ˆì´ì–´2
     public Text py2ScoreText;
     public Text py2LivesText;
 
@@ -30,20 +30,26 @@ public class MultiStatusUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeUI();//ÃÊ±âÈ­
+        InitializeUI();//ì´ˆê¸°í™”
 
-        //Á¡¼ö ¾÷µ¥ÀÌÆ®
+        //ì ìˆ˜ ì—…ë°ì´íŠ¸
         ScoreManager.Instance.OnUpdateScore += HandleOnScoreUpdate;
 
-        //¸ñ¼û ¾÷µ¥ÀÌÆ®
+        //ëª©ìˆ¨ ì—…ë°ì´íŠ¸
         GameManager.Instance.OnLifeUpdate += HandleOnLifeUpdate;
         py1LivesText.text = GameManager.Instance.GetLives().ToString();
 
-        //·¹º§,½ºÅ×ÀÌÁö ¾÷µ¥ÀÌÆ®
+        //ë ˆë²¨,ìŠ¤í…Œì´ì§€ ì—…ë°ì´íŠ¸
         int currentLevel = GameManager.Instance.LevelManager.SelectedLevel;
         int currentStage = GameManager.Instance.LevelManager.SelectedStage;
 
         levelStageText.text = $"{currentLevel + 1}-{currentStage + 1}";
+    }
+
+    void OnDisable()
+    {
+        ScoreManager.Instance.OnUpdateScore -= HandleOnScoreUpdate;
+        GameManager.Instance.OnLifeUpdate -= HandleOnLifeUpdate;
     }
 
     public void InitializeUI()

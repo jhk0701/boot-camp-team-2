@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case StateManager.GameState.GameScene:
-                lives = 5;
+                lives = INITIAL_LIFE;
                 break;
 
             case StateManager.GameState.Pause:
@@ -132,12 +132,7 @@ public class GameManager : MonoBehaviour
     {
         Lives += amount;
     }
-
-    public void InitLife()
-    {
-        Lives = INITIAL_LIFE;
-    }
-
+    
     public void SetItemHandler(ItemHandler handler)
     {
         ItemHandler = handler;

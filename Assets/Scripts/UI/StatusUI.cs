@@ -22,7 +22,7 @@ public class StatusUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeUI();//¿¹½Ã°ª
+        InitializeUI();//ì˜ˆì‹œê°’
 
         ScoreManager.Instance.OnUpdateScore += HandleOnScoreUpdate;
 
@@ -39,6 +39,7 @@ public class StatusUI : MonoBehaviour
     void OnDisable()
     {
         ScoreManager.Instance.OnUpdateScore -= HandleOnScoreUpdate;
+        GameManager.Instance.OnLifeUpdate -= HandleOnLifeUpdate;
     }
 
     public void InitializeUI()
