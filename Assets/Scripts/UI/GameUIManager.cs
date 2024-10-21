@@ -12,6 +12,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] GameObject winGamePanel;
     [SerializeField] GameObject statusDisplay;
     [SerializeField] GameObject loseGamePanel;
+    [SerializeField] GameObject multiStatusDisplay;
 
     void Start()
     {
@@ -49,7 +50,13 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowStatusUI()
     {
+        Debug.Log("ShowStatusUI지나감?");
         statusDisplay.SetActive(true); // ???? ???? UI ????
+    }
+
+    public void ShowMultiStatusUI()
+    {
+        multiStatusDisplay.SetActive(true); // ???? ???? UI ????
     }
 
     public void ShowLoseGameUI()
