@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DownWall
+  - Paddle
+  - Brick
+  - Ball
+  - Wall
+  - Item
   layers:
   - Default
   - TransparentFX

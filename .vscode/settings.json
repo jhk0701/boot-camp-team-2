@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "project-BrickBreaker.sln"
+    "dotnet.defaultSolution": "boot-camp-team-2.sln",
+    "files.encoding": "utf8"
 }
