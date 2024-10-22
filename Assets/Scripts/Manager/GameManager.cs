@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public GameMode gameMode = GameMode.Single;
 
+
+
     public static GameManager Instance;
 
     public event Action<string, int> OnLifeUpdate; // 플레이어 이름과 라이프 수 전달
@@ -70,12 +72,6 @@ public class GameManager : MonoBehaviour
         playerLives[player2Name] = 3;
     }
 
-    private void Update()
-    {
-
-    }
-
-
     public void SetSinglePlayMode()
     {
         gameMode = GameMode.Single;
@@ -87,6 +83,7 @@ public class GameManager : MonoBehaviour
         gameMode = GameMode.Multi;
         Debug.Log("Start MultiPlayMode");
     }
+
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -140,6 +137,39 @@ public class GameManager : MonoBehaviour
             return playerLives[playerName];
         }
         return INITIALLIFE; // 기본 라이프 반환
+    }
+
+
+
+
+    private string GetPlayerNameByNumber(int playerNumber)
+    {
+        if (playerNumber == 1)
+            return player1Name;
+        else if (playerNumber == 2)
+            return player2Name;
+        else
+        {
+            Debug.LogError($"Invalid playerNumber: {playerNumber}");
+            return null;
+        }
+    }
+    public void SetBallMovement(BallMovement ball)
+    {
+        ball.OnTouchBottom += HandleOnTouchBottom;
+    }
+
+    private void HandleAllBricksBroken()
+    {
+        stateManager.SetState(StateManager.GameState.Win);
+    }
+
+    public void SetBrickManager(BrickManager manager)
+    {
+        BrickManager = manager;
+        BrickManager.OnAllBrickBroken += HandleAllBricksBroken;
+
+        OnBrickManagerSet?.Invoke();
     }
 
     //공이 떨어지면 공 소유자(플레이어)의 목숨 차감
@@ -196,37 +226,6 @@ public class GameManager : MonoBehaviour
                 stateManager.SetState(StateManager.GameState.Lose);
             }
         }
-    }
-
-    public void SetBallMovement(BallMovement ball)
-    {
-        ball.OnTouchBottom += HandleOnTouchBottom;
-    }
-
-    private void HandleAllBricksBroken()
-    {
-        stateManager.SetState(StateManager.GameState.Win);
-    }
-
-    private string GetPlayerNameByNumber(int playerNumber)
-    {
-        if (playerNumber == 1)
-            return player1Name;
-        else if (playerNumber == 2)
-            return player2Name;
-        else
-        {
-            Debug.LogError($"Invalid playerNumber: {playerNumber}");
-            return null;
-        }
-    }
-
-    public void SetBrickManager(BrickManager manager)
-    {
-        BrickManager = manager;
-        BrickManager.OnAllBrickBroken += HandleAllBricksBroken;
-
-        OnBrickManagerSet?.Invoke(); // BrickManager가 설정되었음을 알림
     }
 
     public void AddLife(string playerName, int amount)

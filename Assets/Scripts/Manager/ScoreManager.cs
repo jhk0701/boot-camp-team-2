@@ -119,7 +119,7 @@ public class ScoreManager : MonoBehaviour
         if (GameManager.Instance.BrickManager != null)
         {
             GameManager.Instance.BrickManager.OnBrickBroken += HandleOnBrickBroken;
-        }
+        } 
     }
 
     private void HandleOnBrickBroken(Brick brick, string playerName)
@@ -144,7 +144,8 @@ public class ScoreManager : MonoBehaviour
             return;
 
         // 현재 레벨과 스테이지에 해당하는 StageScore 찾기 또는 생성
-        StageScore stageScore = playerData.stageScores.Find(s => s.levelNumber == currentLevel && s.stageNumber == currentStage);
+        StageScore stageScore = playerData.stageScores.Find
+            (s => s.levelNumber == currentLevel && s.stageNumber == currentStage);
         if (stageScore == null)
         {
             stageScore = new StageScore
